@@ -9,7 +9,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 // Import Screens
 import SplashScreen from './Screen/SplashScreen';
-import LoginScreen from './Screen/LoginScreen';
+import LoginScreen from './Screen/LoginScreen.js';
 import RegisterScreen from './Screen/RegisterScreen';
 import DrawerNavigationRoutes from './Screen/DrawerNavigationRoutes';
 
