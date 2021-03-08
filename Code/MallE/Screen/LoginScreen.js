@@ -1,14 +1,19 @@
 // Import React and Component
 import React from 'react';
 import {
-  View,Text,StyleSheet
+  View,Text,StyleSheet,Button,
 } from 'react-native';
 
-const LoginScreen = () => {
+const LoginScreen = ({navigation}) => {
+
+  const LoginButtonPressed = () =>{
+    navigation.navigate("HomeScreen")
+  }
 
   return (
     <View style={styles.container}>
         <Text>Login Screen</Text>
+        <Button title="Login" onPress={LoginButtonPressed} />
     </View>
   );
 };
@@ -20,6 +25,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#307ecc',
+    backgroundColor: '#fff',
   },
 });

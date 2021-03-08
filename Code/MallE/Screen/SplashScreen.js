@@ -4,7 +4,8 @@ import {
   ActivityIndicator,
   View,
   StyleSheet,
-  Image
+  Image,
+  Text,
 } from 'react-native';
 
 import AsyncStorage from '@react-native-community/async-storage';
@@ -24,7 +25,7 @@ const SplashScreen = ({navigation}) => {
           value === null ? 'Auth' : 'DrawerNavigationRoutes'
         ),
       );
-    }, 5000);
+    }, 3000);
   }, []);
 
   return (
@@ -33,6 +34,7 @@ const SplashScreen = ({navigation}) => {
         source={require('../Image/aboutreact.png')}
         style={{width: '90%', resizeMode: 'contain', margin: 30}}
       /> */}
+      <Text>Splash Image</Text>
       <ActivityIndicator
         animating={animating}
         color="#FFFFFF"
@@ -50,7 +52,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#307ecc',
+    backgroundColor: '#fff',
   },
   activityIndicator: {
     alignItems: 'center',

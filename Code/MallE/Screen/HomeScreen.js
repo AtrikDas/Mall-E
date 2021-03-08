@@ -4,22 +4,22 @@ import {
   View,Text,StyleSheet
 } from 'react-native';
 
-const DrawerNavigationRoutes = () => {
+const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
-        <Text>DrawerNavigationRoutes</Text>
+        <Text>HomeScreen</Text>
     </View>
   );
 };
 
-export default DrawerNavigationRoutes;
+export default HomeScreen;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#307ecc',
+    backgroundColor: '#fff',
   },
 });
