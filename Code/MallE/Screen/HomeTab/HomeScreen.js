@@ -5,7 +5,7 @@ import {
 } from 'react-native';
 
 // import Header from "../Sample/Header"
-import Body from "../Sample/Body"
+import Body from "../MallsTab/Body"
 
 const HomeScreen = () => {
 

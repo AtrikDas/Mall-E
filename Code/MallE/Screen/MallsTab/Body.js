@@ -2,6 +2,7 @@ import React from 'react';
 import {Animated, StyleSheet, Text, View, TouchableOpacity, ScrollView, Dimensions} from 'react-native';
 
 import MallOverview from './MallOverview';
+import RestarantsFragment from "./RestarantsFragment"
 
 const { width } = Dimensions.get("window");
 
@@ -80,10 +81,10 @@ export default class Body extends React.Component {
                                 onLayout = {event => this.setState({
                                     translateY: event.nativeEvent.layout.height
                                 })}> 
-                                    <MallOverview />
+                                    <MallOverview  />
                                 </Animated.View>
                                 <Animated.View style = {{flex: 1, justifyContent:'center', alignItems:'center', transform: [{translateX: translateXTabTwo}, {translateY: -translateY}]}}>
-                                    <Text>code here</Text>
+                                    <RestarantsFragment />
                                 </Animated.View>
                             </ScrollView>
                         </View>

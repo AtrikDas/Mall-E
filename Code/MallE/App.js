@@ -9,9 +9,11 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 // Import Screens
 import SplashScreen from './Screen/SplashScreen';
-import LoginScreen from './Screen/LoginScreen.js';
-import RegisterScreen from './Screen/RegisterScreen';
-import HomeScreen from './Screen/HomeScreen';
+import LoginScreen from './Screen/loginScreens/LoginScreen.js';
+import RegisterScreen from './Screen/loginScreens/RegisterScreen';
+import HomeScreen from './Screen/HomeTab/HomeScreen';
+
+
 
 const Stack = createStackNavigator();
 
