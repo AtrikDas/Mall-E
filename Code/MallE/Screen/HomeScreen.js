@@ -4,10 +4,15 @@ import {
   View,Text,StyleSheet
 } from 'react-native';
 
+// import Header from "../Sample/Header"
+import Body from "../Sample/Body"
+
 const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
+      {/* <Header/> */}
+        <Body/>
         <Text>HomeScreen</Text>
     </View>
   );

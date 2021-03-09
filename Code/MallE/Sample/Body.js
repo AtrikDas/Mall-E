@@ -83,7 +83,7 @@ export default class Body extends React.Component {
                                     <MallOverview />
                                 </Animated.View>
                                 <Animated.View style = {{flex: 1, justifyContent:'center', alignItems:'center', transform: [{translateX: translateXTabTwo}, {translateY: -translateY}]}}>
-                                    <Text>Tab Two</Text>
+                                    <Text>code here</Text>
                                 </Animated.View>
                             </ScrollView>
                         </View>

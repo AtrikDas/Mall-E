@@ -1,13 +1,13 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {LinearGradient} from 'expo-linear-gradient';
+// import {LinearGradient} from 'expo-linear-gradient';
 import {Icon, SearchBar} from 'react-native-elements';
 
 export default class Header extends React.Component {
     render() {
         return(
             <View style = {styles.header}>
-                <LinearGradient colors={['#047580', '#A5F2F9']}
+                <View
                 style={styles.headerBackground}>
                     <Text style={{fontFamily: 'monospace' ,fontSize: 30, fontWeight: 'bold', color: 'white'}}>Mall</Text>
                     <View style = {styles.search}>
@@ -22,7 +22,7 @@ export default class Header extends React.Component {
                             containerStyle={{backgroundColor: ['#047580', '#A5F2F9'], borderWidth: 0, width: "85%"}}>
                         </SearchBar>
                     </View>
-                </LinearGradient>
+                </View>
             </View>
             )
     }
