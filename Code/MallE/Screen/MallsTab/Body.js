@@ -3,6 +3,7 @@ import {Animated, StyleSheet, Text, View, TouchableOpacity, ScrollView, Dimensio
 
 import MallOverview from './MallOverview';
 import RestarantsFragment from "./RestarantsFragment"
+import RestaurantsDetail from "./RestaurantsDetail"
 
 const { width } = Dimensions.get("window");
 
@@ -14,7 +15,7 @@ export default class Body extends React.Component {
         translateX: new Animated.Value(0),
         translateXTabOne: new Animated.Value(0),
         translateXTabTwo: new Animated.Value(width),
-        translateY: -1000
+        translateY: -width
     };
 
     handleSlide = type => {
@@ -84,7 +85,7 @@ export default class Body extends React.Component {
                                     <MallOverview  />
                                 </Animated.View>
                                 <Animated.View style = {{flex: 1, justifyContent:'center', alignItems:'center', transform: [{translateX: translateXTabTwo}, {translateY: -translateY}]}}>
-                                    <RestarantsFragment />
+                                    <RestaurantsDetail />
                                 </Animated.View>
                             </ScrollView>
                         </View>
