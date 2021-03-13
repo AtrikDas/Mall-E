@@ -11,8 +11,10 @@ import {createStackNavigator} from '@react-navigation/stack';
 import SplashScreen from './Screen/SplashScreen';
 import LoginScreen from './Screen/loginScreens/LoginScreen.js';
 import RegisterScreen from './Screen/loginScreens/RegisterScreen';
-import HomeScreen from './Screen/HomeTab/HomeScreen';
-import RestaurantsDetail from "./Screen/MallsTab/RestaurantsDetail"
+import DrawerNavigationRoutes from './Screen/DrawerNavigationRoutes';
+
+// import HomeScreen from './Screen/DrawerScreens/HomeScreen';
+// import RestaurantsDetail from "./Screen/MallsTab/RestaurantsDetail";
 
 
 
@@ -64,11 +66,17 @@ const App = () => {
         />
         {/* Navigation Drawer as a landing page */}
         <Stack.Screen
+          name="DrawerNavigationRoutes"
+          component={DrawerNavigationRoutes}
+          // Hiding header for Navigation Drawer
+          options={{headerShown: false}}
+        />
+        {/* <Stack.Screen
           name="HomeScreen"
           component={HomeScreen}
           // Hiding header for Navigation Drawer
           options={{headerShown: false}}
-        />
+        /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
