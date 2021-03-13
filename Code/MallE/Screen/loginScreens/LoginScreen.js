@@ -14,7 +14,7 @@ import {
 
 import AsyncStorage from '@react-native-community/async-storage';
 
-import Loader from './Components/Loader';
+import Loader from '../Components/Loader';
 
 const LoginScreen = ({navigation}) => {
   const [userEmail, setUserEmail] = useState('');
@@ -89,7 +89,7 @@ const LoginScreen = ({navigation}) => {
           <KeyboardAvoidingView enabled>
             <View style={{alignItems: 'center'}}>
               <Image
-                source={require('../Image/aboutreact.png')}
+                source={require('../../Image/aboutreact.png')}
                 style={{
                   width: '50%',
                   height: 100,
