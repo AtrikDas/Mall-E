@@ -13,7 +13,7 @@ import LoginScreen from './Screen/loginScreens/LoginScreen.js';
 import RegisterScreen from './Screen/loginScreens/RegisterScreen';
 import DrawerNavigationRoutes from './Screen/DrawerNavigationRoutes';
 
-// import HomeScreen from './Screen/DrawerScreens/HomeScreen';
+import HomeScreen from './Screen/DrawerScreens/HomeScreen';
 // import RestaurantsDetail from "./Screen/MallsTab/RestaurantsDetail";
 
 
@@ -52,18 +52,18 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="SplashScreen">
         {/* SplashScreen which will come once for 5 Seconds */}
-        <Stack.Screen
+        {/* <Stack.Screen
           name="SplashScreen"
           component={SplashScreen}
           // Hiding header for Splash Screen
           options={{headerShown: false}}
-        />
+        /> */}
         {/* Auth Navigator: Include Login and Signup */}
-        <Stack.Screen
+        {/* <Stack.Screen
           name="Auth"
           component={Auth}
           options={{headerShown: false}}
-        />
+        /> */}
         {/* Navigation Drawer as a landing page */}
         <Stack.Screen
           name="DrawerNavigationRoutes"
@@ -71,12 +71,12 @@ const App = () => {
           // Hiding header for Navigation Drawer
           options={{headerShown: false}}
         />
-        {/* <Stack.Screen
+        <Stack.Screen
           name="HomeScreen"
           component={HomeScreen}
           // Hiding header for Navigation Drawer
           options={{headerShown: false}}
-        /> */}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
