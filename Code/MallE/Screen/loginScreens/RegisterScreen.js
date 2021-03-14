@@ -10,7 +10,7 @@ import {
   Keyboard,
   TouchableOpacity,
   ScrollView,
-} from 'react-native';
+} from 'react-native'; 
 
 import Loader from '../Components/Loader';
 
