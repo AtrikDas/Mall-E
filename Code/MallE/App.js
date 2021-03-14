@@ -12,6 +12,7 @@ import SplashScreen from './Screen/SplashScreen';
 import LoginScreen from './Screen/loginScreens/LoginScreen.js';
 import RegisterScreen from './Screen/loginScreens/RegisterScreen';
 import HomeScreen from './Screen/HomeTab/HomeScreen';
+import RestaurantsDetail from "./Screen/MallsTab/RestaurantsDetail"
 
 
 

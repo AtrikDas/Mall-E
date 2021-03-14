@@ -1,6 +1,7 @@
 import React ,{useState}from 'react';
 import { StyleSheet, Text, View ,FlatList,Image} from 'react-native';
 
+import RatingsComponent from "./ratingsComponent";
 
 
 export default function RestarantItemList(props) {
@@ -24,7 +25,7 @@ export default function RestarantItemList(props) {
                     </View>
                     <View style={layoutStyles.descriptionRow} >
                         <Text style= {textStyles.descriptionHeader}>Ratings: </Text> 
-                        <Text>{props.restaurantitem.crowdDensity}</Text>
+                        <RatingsComponent ratings = {props.restaurantitem.crowdDensity}/>
                     </View>
                 
                 </View>
