@@ -110,7 +110,7 @@ const RegisterScreen = (props) => {
           justifyContent: 'center',
         }}>
         <Image
-          source={require('../Image/success.png')}
+          source={require('../../Image/success.png')}
           style={{
             height: 150,
             resizeMode: 'contain',
@@ -140,7 +140,7 @@ const RegisterScreen = (props) => {
         }}>
         <View style={{alignItems: 'center'}}>
           <Image
-            source={require('../Image/aboutreact.png')}
+            source={require('../../Image/aboutreact.png')}
             style={{
               width: '50%',
               height: 100,
