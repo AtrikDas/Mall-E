@@ -1,13 +1,22 @@
 import React ,{useState}from 'react';
 import { StyleSheet, Text, View ,FlatList,Image} from 'react-native';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Entypo';
 
 import StarGenerator from "./ratingsComponent"
 
 export default function RestarantItemList(props) {
+
+    const navigation = useNavigation();
     
+    const onPressFunction = ()=>{
+    
+        navigation.navigate('RestaurantDetail',props.restaurantitem)
+        console.log(`${props.restaurantitem.key} button is pressed`)
+    }
         return(
-            <View style={layoutStyles.itemContainer}>
+            <TouchableWithoutFeedback style={layoutStyles.itemContainer} onPress= {onPressFunction}>
                 <Image source={{uri:'https://images.unsplash.com/flagged/photo-1562503542-2a1e6f03b16b?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8c2luZ2Fwb3JlfGVufDB8fDB8&ixlib=rb-1.2.1&w=1000&q=80'}} style={layoutStyles.image}/>
                 <View style = {layoutStyles.textContainer}>
                     <View style={layoutStyles.headerRow} >
@@ -28,7 +37,7 @@ export default function RestarantItemList(props) {
                     </View>
                 
                 </View>
-            </View>
+            </TouchableWithoutFeedback>
             
         );
 }

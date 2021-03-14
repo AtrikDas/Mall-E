@@ -14,7 +14,7 @@ import RegisterScreen from './Screen/loginScreens/RegisterScreen';
 import DrawerNavigationRoutes from './Screen/DrawerNavigationRoutes';
 
 import HomeScreen from './Screen/DrawerScreens/HomeScreen';
-// import RestaurantsDetail from "./Screen/MallsTab/RestaurantsDetail";
+import RestaurantsDetail from "./Screen/MallsTab/RestaurantsDetail";
 
 
 
@@ -74,6 +74,12 @@ const App = () => {
         <Stack.Screen
           name="HomeScreen"
           component={HomeScreen}
+          // Hiding header for Navigation Drawer
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="RestaurantDetail"
+          component={RestaurantsDetail}
           // Hiding header for Navigation Drawer
           options={{headerShown: false}}
         />
