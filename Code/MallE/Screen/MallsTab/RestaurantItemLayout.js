@@ -1,11 +1,10 @@
 import React ,{useState}from 'react';
 import { StyleSheet, Text, View ,FlatList,Image} from 'react-native';
+import Icon from 'react-native-vector-icons/Entypo';
 
-import RatingsComponent from "./ratingsComponent";
-
+import StarGenerator from "./ratingsComponent"
 
 export default function RestarantItemList(props) {
-    
     
         return(
             <View style={layoutStyles.itemContainer}>
@@ -25,7 +24,7 @@ export default function RestarantItemList(props) {
                     </View>
                     <View style={layoutStyles.descriptionRow} >
                         <Text style= {textStyles.descriptionHeader}>Ratings: </Text> 
-                        <RatingsComponent ratings = {props.restaurantitem.crowdDensity}/>
+                        <StarGenerator rating = {props.restaurantitem.crowdDensity}/>
                     </View>
                 
                 </View>
@@ -33,6 +32,9 @@ export default function RestarantItemList(props) {
             
         );
 }
+
+
+
 
 const layoutStyles = StyleSheet.create({
     itemContainer: {
