@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {LinearGradient} from 'react-native-linear-gradient';
+import LinearGradient from 'react-native-linear-gradient';
 import {Icon, SearchBar} from 'react-native-elements';
 
 export default class Header extends React.Component {
@@ -24,7 +24,7 @@ export default class Header extends React.Component {
                     </View>
                 </LinearGradient>
             </View>
-            )
+        );
     }
 }
 
