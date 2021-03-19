@@ -1,15 +1,33 @@
 import React from 'react';
-import {StyleSheet, Text, View, Image} from 'react-native';
+import {StyleSheet, Text, View, Image, ScrollView} from 'react-native';
 
 import {globalStyles} from '../../ThemesAndFonts';
+import Graph from "./Graph"
 
 const Separator = () => <View style={styles.separator} />;
 
 export default class RestarantsFragment extends React.Component {
+
+  componentDidMount(){
+      // var myHeaders = new Headers();
+      // myHeaders.append("Cookie", "__cfduid=dc1330063cebaf9c65b9be7a32f19a1651615999201");
+      
+      // var requestOptions = {
+      //   method: 'POST',
+      //   headers: myHeaders,
+      //   redirect: 'follow'
+      // };
+      
+      // fetch("https://BestTime.app/api/v1/forecasts?api_key_private=pri_ec5e87efe7174865a4b557e9c175058e&venue_name=McDonalds&venue_address=Ocean Ave, San Fransisco", requestOptions)
+      //   .then(response => response.text())
+      //   .then(result => console.log(result))
+      //   .catch(error => console.log('error', error));
+  }
+
   render() {
     return (
       <View style={styles.ContainerOne}>
-        <View>
+        <ScrollView>
           {/* restaurant image */}
           <Image
             source={{
@@ -56,8 +74,10 @@ export default class RestarantsFragment extends React.Component {
             <Separator />
 
             <Text style={globalStyles.titleText}>Weekly Crowd Density</Text>
+
+            <Graph/>
           </View>
-        </View>
+        </ScrollView>
       </View>
     );
   }

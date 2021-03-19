@@ -1,19 +1,17 @@
 // Import React and Component
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,Text,StyleSheet
 } from 'react-native';
 
-// import Header from "../Sample/Header"
+import Header from "../../layouts/Header"
 import Body from "../MallsTab/Body"
 
 const HomeScreen = () => {
-
   return (
     <View style={styles.container}>
-      {/* <Header/> */}
-        <Body/>
-        <Text>HomeScreen</Text>
+      <Header/>
+      <Body/>
     </View>
   );
 };

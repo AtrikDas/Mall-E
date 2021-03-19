@@ -18,7 +18,6 @@ import RestaurantsDetail from "./Screen/MallsTab/RestaurantsDetail";
 // import HomeScreen from './Screen/DrawerScreens/HomeScreen';
 // import RestaurantsDetail from "./Screen/MallsTab/RestaurantsDetail";
 import Header from "./Screen/MallsTab/Header";
-import Body from "./Screen/MallsTab/Body";
 import {View} from 'react-native';
 
 
@@ -86,7 +85,13 @@ const App = () => {
           name="RestaurantDetail"
           component={RestaurantsDetail}
           // Hiding header for Navigation Drawer
-          options={{headerShown: false}}
+          options={{headerShown: true, title: 'Restaurants Details',headerStyle: {
+            backgroundColor: '#047580',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },}}
         />
       </Stack.Navigator>
     </NavigationContainer>
