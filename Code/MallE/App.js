@@ -11,14 +11,13 @@ import {createStackNavigator} from '@react-navigation/stack';
 import SplashScreen from './Screen/SplashScreen';
 import LoginScreen from './Screen/loginScreens/LoginScreen.js';
 import RegisterScreen from './Screen/loginScreens/RegisterScreen';
-import DrawerNavigationRoutes from './Screen/DrawerNavigationRoutes';
 
-import HomeScreen from './Screen/DrawerScreens/HomeScreen';
-import RestaurantsDetail from "./Screen/MallsTab/RestaurantsDetail";
 // import HomeScreen from './Screen/DrawerScreens/HomeScreen';
 // import RestaurantsDetail from "./Screen/MallsTab/RestaurantsDetail";
 import Header from "./Screen/MallsTab/Header";
 import {View} from 'react-native';
+
+import NavBar from './layouts/NavBar';
 
 
 
@@ -53,48 +52,10 @@ const Stack = createStackNavigator();
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="SplashScreen">
-        {/* SplashScreen which will come once for 5 Seconds */}
-        {/* <Stack.Screen
-          name="SplashScreen"
-          component={SplashScreen}
-          // Hiding header for Splash Screen
-          options={{headerShown: false}}
-        /> */}
-        {/* Auth Navigator: Include Login and Signup */}
-        {/* <Stack.Screen
-          name="Auth"
-          component={Auth}
-          options={{headerShown: false}}
-        /> */}
-        {/* Navigation Drawer as a landing page */}
-        <Stack.Screen
-          name="DrawerNavigationRoutes"
-          component={DrawerNavigationRoutes}
-          // Hiding header for Navigation Drawer
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="HomeScreen"
-          component={HomeScreen}
-          // Hiding header for Navigation Drawer
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="RestaurantDetail"
-          component={RestaurantsDetail}
-          // Hiding header for Navigation Drawer
-          options={{headerShown: true, title: 'Restaurants Details',headerStyle: {
-            backgroundColor: '#047580',
-          },
-          headerTintColor: '#fff',
-          headerTitleStyle: {
-            fontWeight: 'bold',
-          },}}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+      <NavigationContainer independent={true}>
+        <NavBar />
+      </NavigationContainer>
+    
   );
 };
 
