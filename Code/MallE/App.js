@@ -53,9 +53,9 @@ const Stack = createStackNavigator();
 const App = () => {
   return (
       <NavigationContainer independent={true}>
+        <Header></Header>
         <NavBar />
       </NavigationContainer>
-    
   );
 };
 

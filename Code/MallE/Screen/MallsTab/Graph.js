@@ -7,7 +7,7 @@ import {VictoryBar, VictoryChart, VictoryGroup} from "victory-native";
 const data = {
     labels: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
     datasets: [
-        { data: [20, 45, 28, 80, 99, 43], },
+        { data: [20, 45, 28, 80, 99, 43, 50], },
     ]
 }
 
@@ -18,11 +18,11 @@ export default class MallOverview extends React.Component {
                 <BarChart
                     data={data}
                     width={Dimensions.get('window').width}
-                    height={300}
+                    height={400}
                     chartConfig={{
-                        backgroundColor: 'white',
-                        backgroundGradientFrom: 'white',
-                        backgroundGradientTo: 'white',
+                        // backgroundColor: 'grey',
+                        backgroundGradientFrom: '#ffffff',
+                        backgroundGradientTo: '#ffffff',
                         decimalPlaces: 0,
                         color: (opacity = 0) => `rgba(90, 90, 90, ${opacity})`,
                         style: {borderRadius: 0},
@@ -33,13 +33,13 @@ export default class MallOverview extends React.Component {
                     }}
                     style={{
                         width: Dimensions.get('window').width,
-                        marginLeft: -70,
-                        marginVertical: 8,
+                        marginLeft: Dimensions.get('window').width * -0.15,
+                        marginVertical: 10,
                         borderRadius: 10,
                         justifyContent: 'center',
                         alignItems: 'center'
                     }}
-                    verticalLabelRotation={45}
+                    verticalLabelRotation={75}
                     withHorizontalLabels={false}
                     />
             </View>
