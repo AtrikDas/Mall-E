@@ -10,6 +10,7 @@ import DrawerNavigationRoutes from '../Screen/DrawerNavigationRoutes';
 import HomeScreen from '../Screen/DrawerScreens/HomeScreen';
 import RestaurantsDetail from "../Screen/MallsTab/RestaurantsDetail";
 import Body from "../Screen/MallsTab/Body";
+import MallOverview from "../Screen/MallsTab/MallOverview"
 
 const Stack = createStackNavigator();
 
@@ -23,9 +24,15 @@ function Home() {
 
 function Malls() {
     return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Body/>
-        </View>
+        <NavigationContainer independent={true}>
+            <Stack.Navigator initialRouteName="Body" screenOptions={{
+                        headerShown: false
+                    }}>
+                <Stack.Screen name="Body" component={Body} />
+                <Stack.Screen name="RestaurantsDetail" component={RestaurantsDetail} />
+            </Stack.Navigator>
+        </NavigationContainer>
+        
     );
 }
 

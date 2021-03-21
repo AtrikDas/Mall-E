@@ -13,12 +13,12 @@ import LoginScreen from './Screen/loginScreens/LoginScreen.js';
 import RegisterScreen from './Screen/loginScreens/RegisterScreen';
 
 // import HomeScreen from './Screen/DrawerScreens/HomeScreen';
-// import RestaurantsDetail from "./Screen/MallsTab/RestaurantsDetail";
+import RestaurantsDetail from "./Screen/MallsTab/RestaurantsDetail";
 import Header from "./Screen/MallsTab/Header";
 import {View} from 'react-native';
 
 import NavBar from './layouts/NavBar';
-
+// import RestaurantDetail from "./Screen/MallsTab/RestaurantsDetail"
 
 
 const Stack = createStackNavigator();
@@ -53,8 +53,9 @@ const Stack = createStackNavigator();
 const App = () => {
   return (
       <NavigationContainer independent={true}>
-        <Header></Header>
+        <Header/>
         <NavBar />
+        
       </NavigationContainer>
   );
 };

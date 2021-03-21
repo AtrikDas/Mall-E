@@ -14,7 +14,7 @@ export default function RestarantItemList(props) {
     
     const onPressFunction = ()=>{
     
-        navigation.navigate('RestaurantDetail',props.restaurantitem)
+        navigation.navigate('RestaurantsDetail',props.restaurantitem)
         console.log(`${props.restaurantitem.key} button is pressed`)
     }
 
