@@ -87,11 +87,11 @@ const styles = StyleSheet.create({
   ContainerOne: {
     width: '100%',
     height: '100%',
-    padding: 10,
   },
   TextDetailContainer: {
-    marginVertical: 5,
-    paddingHorizontal: 10,
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    padding: 5,
   },
   separator: {
     marginVertical: 8,
