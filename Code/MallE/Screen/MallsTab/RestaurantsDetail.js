@@ -68,7 +68,7 @@ export default class RestarantsFragment extends React.Component {
 
             <Text style={globalStyles.titleText}>
               Estimated Waiting Time:{' '}
-              <Text style={globalStyles.normalText}> 200-30 Minutes</Text>
+              <Text style={globalStyles.normalText}> 20-30 Minutes</Text>
             </Text>
 
             <Separator />

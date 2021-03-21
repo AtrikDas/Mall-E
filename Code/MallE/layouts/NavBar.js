@@ -11,14 +11,20 @@ import HomeScreen from '../Screen/DrawerScreens/HomeScreen';
 import RestaurantsDetail from "../Screen/MallsTab/RestaurantsDetail";
 import Body from "../Screen/MallsTab/Body";
 import MallOverview from "../Screen/MallsTab/MallOverview"
+import MapScreen from '../Screen/MapScreens/MapScreen'
 
 const Stack = createStackNavigator();
 
 function Home() {
     return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-               <Text>HomeScreen</Text>
-        </View>
+        <NavigationContainer independent={true}>
+            <Stack.Navigator initialRouteName="MapScreen" screenOptions={{
+                headerShown: false
+            }}>
+                <Stack.Screen name="MapScreen" component={MapScreen} />
+            </Stack.Navigator>
+        </NavigationContainer>
+
     );
 }
 

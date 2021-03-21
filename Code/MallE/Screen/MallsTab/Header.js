@@ -9,7 +9,7 @@ export default class Header extends React.Component {
             <View style = {styles.header}>
                 <LinearGradient colors={['#047580', '#A5F2F9']}
                 style={styles.headerBackground}>
-                    <Text style={{fontFamily: 'monospace' ,fontSize: 30, fontWeight: 'bold', color: 'white'}}>Mall</Text>
+                    <Text style={{fontFamily: 'monospace' ,fontSize: 24, fontWeight: 'bold', color: 'white', marginTop: 10}}>Mall-E</Text>
                     <View style = {styles.search}>
                         <Icon name="list"
                             type="feather"
