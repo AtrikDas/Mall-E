@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Alert, View, ActivityIndicator } from 'react-native';
 import { Container, Content, List, Text } from 'native-base';
 
-import DataItem from '../../component/dataItem';
-import Modal from '../../component/modal';
+import DataItem from '../Components/dataItem';
+import Modal from '../Components/modal';
 
 import { getArticles } from '../../service/news';
 
