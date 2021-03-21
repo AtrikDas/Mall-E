@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Alert, View, ActivityIndicator } from 'react-native';
 import { Container, Content, List, Text } from 'native-base';
 
-import DataItem from '../../Screen/Components/dataItem';
-import Modal from '../../Screen/Components/modal';
+import DataItem from '../../component/dataItem';
+import Modal from '../../component/modal';
 
 import { getArticles } from '../../service/news';
 
@@ -35,7 +35,7 @@ export default class ListThumbnailExample extends Component {
     }
 
     componentDidMount() {
-        getArticles('general').then(data => {
+        getArticles().then(data => {
             this.setState({
                 isLoading: false,
                 data: data

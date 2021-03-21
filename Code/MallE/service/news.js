@@ -1,9 +1,12 @@
-import { articles_url, _api_key, country_code } from '../config/rest_consfig';
+import { articles_url, _api_key, query } from '../config/rest_consfig';
 
-export async function getArticles(category = 'general') {
+//https://newsapi.org/v2/everything?q=Malls%20in%20Singapore&from=2021-02-21&sortBy=relevancy&apiKey=cf22593c82034d3a97e6e47af2d4196c
+
+
+export async function getArticles() {
 
     try {
-        let articles = await fetch(`${articles_url}?country=${country_code}&category=${category}`, {
+        let articles = await fetch(`${articles_url}?q=${query}&from=2021-02-21&sortBy=relevancy`, {
             headers: {
                 'X-API-KEY': _api_key
             }
