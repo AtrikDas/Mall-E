@@ -6,13 +6,13 @@ import RestaurantItemList from "./RestaurantItemLayout"
 export default function RestarantsFragment() {
     
      const [restaurantsList] = useState([
-                {name:"kelvin",key:"1",openTiming:123,closingTimeing:2,crowdDensity:3},
-                {name:"a",key:"2",openTiming:23,closingTimeing:34,crowdDensity:2},
-                {name:"asd",key:"3",openTiming:1,closingTimeing:51,crowdDensity:1},
-                {name:"weqg",key:"4",openTiming:32,closingTimeing:5,crowdDensity:2},
-                {name:"qwesvz",key:"5",openTiming:24,closingTimeing:13,crowdDensity:1},
-                {name:"esdgs",key:"6",openTiming:23,closingTimeing:32,crowdDensity:2},
-                {name:"qwasd",key:"7",openTiming:124,closingTimeing:123,crowdDensity:2},
+                {name:"Mc Donalds",key:"1",openTiming:"9:00 am",closingTimeing:"11:00 pm",crowdDensity:3},
+                {name:"KFC",key:"2",openTiming:"9:00 am",closingTimeing:"10:30 pm",crowdDensity:2},
+                {name:"Burger King",key:"3",openTiming:"9:00 am",closingTimeing:"11:00 pm",crowdDensity:1},
+                {name:"Wing Stop",key:"4",openTiming:"9:00 am",closingTimeing:"10:30 pm",crowdDensity:2},
+                {name:"Sushi Tei",key:"5",openTiming:"9:00 am",closingTimeing:"11:00 pm",crowdDensity:1},
+                {name:"Itacho",key:"6",openTiming:"9:00 am",closingTimeing:"10:30 pm",crowdDensity:2},
+                {name:"Itaewon",key:"7",openTiming:"9:00 am",closingTimeing:"11:00 pm",crowdDensity:2},
             ])
         return(
             <View style={styles.ContainerOne}>
