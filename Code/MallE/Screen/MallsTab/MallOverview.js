@@ -25,7 +25,7 @@ export default class MallOverview extends React.Component {
                     </Text>
 
                     <Text style={[globalStyles.titleText, styles.customText]}>
-                    Location: 
+                        Address: 
                     <Text style={globalStyles.normalText}> 1 Jurong West Central 2, Singapore 648886</Text>
                     </Text>
 

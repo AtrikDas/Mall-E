@@ -22,7 +22,11 @@ export default function MapScreen() {
         labels: ["9 am", "12 pm", "3 pm", "6 pm", "9 pm"],
         datasets: [
             {
-                data: [60, 40, 80, 75, 85],
+                data: [70 + Math.random() * (100 - 70),
+                       50 + Math.random() * (80 - 50),
+                       20 + Math.random() * (50 - 20),
+                       80 + Math.random() * (100 - 80),
+                       60 + Math.random() * (95 - 60)],
                 color: (opacity = 1) => `rgba(0, 128, 255, ${opacity})`,
                 strokeWidth: 2
             }
