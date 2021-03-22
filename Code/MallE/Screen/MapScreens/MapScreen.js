@@ -123,7 +123,7 @@ export default function MapScreen() {
                                 title="More Information..."
                                 onPress={() => { 
                                     setPopupStatus(false)
-                                    navigation.navigate("Malls")
+                                    navigation.navigate("Malls", chosenMall)
                                  }}
                             >
                             </Button>

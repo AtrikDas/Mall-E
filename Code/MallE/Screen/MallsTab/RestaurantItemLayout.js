@@ -108,7 +108,7 @@ export default function RestarantItemList(props) {
     }
         return(
             <TouchableWithoutFeedback style={layoutStyles.itemContainer} onPress= {onPressFunction}>
-                <Image source={{uri:'https://images.unsplash.com/flagged/photo-1562503542-2a1e6f03b16b?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8c2luZ2Fwb3JlfGVufDB8fDB8&ixlib=rb-1.2.1&w=1000&q=80'}} style={layoutStyles.image}/>
+                <Image source={{uri:props.restaurantitem.imageURL}} style={layoutStyles.image}/>
                 <View style = {layoutStyles.textContainer}>
                     <View style={layoutStyles.headerRow} >
                         <Text style= {textStyles.header}>{props.restaurantitem.name}</Text> 
@@ -124,7 +124,7 @@ export default function RestarantItemList(props) {
                     </View>
                     <View style={layoutStyles.descriptionRow} >
                         <Text style= {textStyles.descriptionHeader}>Ratings: </Text> 
-                        <StarGenerator rating = {props.restaurantitem.crowdDensity}/>
+                        <StarGenerator rating = {props.restaurantitem.rating}/>
                     </View>
                 
                 </View>

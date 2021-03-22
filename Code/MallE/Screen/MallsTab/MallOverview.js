@@ -6,6 +6,7 @@ import Graph from './Graph';
 import AnotherGraph from './AnotherGraph';
 
 export default class MallOverview extends React.Component {
+
     render() {
         return(
             <View style={styles.ContainerOne}>
@@ -14,6 +15,7 @@ export default class MallOverview extends React.Component {
                     height: 500,
                     uri:'https://images.unsplash.com/flagged/photo-1562503542-2a1e6f03b16b?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8c2luZ2Fwb3JlfGVufDB8fDB8&ixlib=rb-1.2.1&w=1000&q=80'}}>
                 </Image>
+                {/* <Text style={globalStyles.titleText}>{MallDetails.name? MallDetails.name: "no mall selected"}</Text> */}
                 <View style={styles.TextDetailContainer}>
                     <Text style={globalStyles.titleText}>
                     Website:
@@ -44,8 +46,6 @@ export default class MallOverview extends React.Component {
                     </Text>
 
                     <Graph/>
-
-                    <Separator />
 
                     <Text style={globalStyles.titleText}>Floor Crowd Density</Text>
 

@@ -3,7 +3,7 @@ import {StyleSheet, Text, View, Image, ScrollView} from 'react-native';
 
 import {globalStyles} from '../../ThemesAndFonts';
 import Graph from "./Graph"
-
+import RatingsComponent from "../MallsTab/ratingsComponent";
 const Separator = () => <View style={styles.separator} />;
 
 export default class RestarantsFragment extends React.Component {
@@ -26,18 +26,15 @@ export default class RestarantsFragment extends React.Component {
       //   .then(result => console.log(result))
       //   .catch(error => console.log('error', error));
   }
-
+  imageURL = "../../Image/" + this.restaurantDetails.imageURL
   render() {
     return (
       <View style={styles.ContainerOne}>
         <ScrollView>
           {/* restaurant image */}
           <Image
-            source={{
-              width: '100%',
-              height: 200,
-              uri: 'https://picsum.photos/200/300',
-            }}
+            style={{width: '100%',height: 200,}}
+            source={{uri:this.restaurantDetails.imageURL}}
           />
           {/* restaurant details */}
           <Text style={globalStyles.titleText}>
@@ -69,7 +66,7 @@ export default class RestarantsFragment extends React.Component {
             </Text>
 
             <Text style={globalStyles.titleText}>
-              Ratings: <Text style={globalStyles.normalText}>4/5</Text>
+              Ratings: <RatingsComponent rating={this.restaurantDetails.rating}/>
             </Text>
 
             <Text style={globalStyles.titleText}>
