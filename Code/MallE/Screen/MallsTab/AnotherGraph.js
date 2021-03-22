@@ -28,8 +28,8 @@ export default class AnotherGraph extends React.Component {
                         style: {borderRadius: 0},
                         propsForBackgroundLines:{stroke:"#ffffff"},
                         barRadius: 16,
-                        fillShadowGradient: 'blue',
-                        fillShadowGradientOpacity: '4'
+                        fillShadowGradient: 'red',
+                        fillShadowGradientOpacity: '8'
                     }}
                     style={{
                         width: Dimensions.get('window').width,

@@ -14,19 +14,19 @@ export default class MallOverview extends React.Component {
                 <Image source={{
                     width: '100%',
                     height: 300,
-                    uri:'https://images.unsplash.com/flagged/photo-1562503542-2a1e6f03b16b?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8c2luZ2Fwb3JlfGVufDB8fDB8&ixlib=rb-1.2.1&w=1000&q=80'}}>
+                    uri:'https://upload.wikimedia.org/wikipedia/commons/a/a0/JP2entrance2.jpg'}}>
                 </Image>
                 {/* <Text style={globalStyles.titleText}>{MallDetails.name? MallDetails.name: "no mall selected"}</Text> */}
                 <View style={styles.TextDetailContainer}>
                 <Text style={[globalStyles.titleText, styles.popupHeading]}>Jurong Point</Text>
                     <Text style={[globalStyles.titleText, styles.customText]}>
                     Website: 
-                    <Text style={globalStyles.normalText}> http://foodrepublic.com.sg</Text>
+                    <Text style={globalStyles.normalText}> www.jurongpoint.com.sg</Text>
                     </Text>
 
                     <Text style={[globalStyles.titleText, styles.customText]}>
                     Location: 
-                    <Text style={globalStyles.normalText}> #B2-63/64/65/66/70/71/72</Text>
+                    <Text style={globalStyles.normalText}> 1 Jurong West Central 2, Singapore 648886</Text>
                     </Text>
 
                     <Text style={[globalStyles.titleText, styles.customText]}>
@@ -43,11 +43,11 @@ export default class MallOverview extends React.Component {
                     Ratings: <Text style={globalStyles.normalText}> 4/5</Text>
                     </Text>
 
-                    <Text style={[globalStyles.titleText, styles.customText]}>Mall Crowd Density</Text>
+                    <Text style={[globalStyles.titleText, styles.popupHeading1]}>Mall Crowd Density</Text>
 
-                    <View><Graph/></View>
+                    <View style={{paddingBottom:10}}><Graph/></View>
                 
-                    <Text style={globalStyles.titleText}>Floor Crowd Density</Text>
+                    <Text style={[globalStyles.titleText, styles.popupHeading2]}>Floor Crowd Density</Text>
                     
                     <View style={[{
                         transform: [{ rotate: "90deg" },]}]}>  
@@ -83,9 +83,24 @@ const styles = StyleSheet.create({
         paddingTop: 15,
     },
     popupHeading: {
-        fontSize: 20,
+        fontSize: 30,
         alignSelf: 'center',
         marginBottom: 10,
+        marginTop: 10,
+        fontWeight: 'bold',
+    },
+    popupHeading1: {
+        fontSize: 30,
+        alignSelf: 'center',
+        marginTop: 30,
+        marginBottom: 30,
+        fontWeight: 'bold',
+    },
+    popupHeading2: {
+        fontSize: 30,
+        alignSelf: 'center',
+        marginTop: 50,
+        marginBottom: 30,
         fontWeight: 'bold',
     },
 })
