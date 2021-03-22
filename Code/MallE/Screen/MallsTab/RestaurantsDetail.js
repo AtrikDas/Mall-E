@@ -1,10 +1,24 @@
 import React from 'react';
-import {StyleSheet, Text, View, Image, ScrollView} from 'react-native';
+import {StyleSheet, Text, View, Image, ScrollView, Dimensions } from 'react-native';
 
 import {globalStyles} from '../../ThemesAndFonts';
-import Graph from "./Graph"
 import RatingsComponent from "../MallsTab/ratingsComponent";
+import { LineChart, BarChart } from 'react-native-chart-kit';
 const Separator = () => <View style={styles.separator} />;
+const data = {
+  labels: ["9 am", "12 pm", "3 pm", "6 pm", "9 pm"],
+  datasets: [
+    {
+      data: [20 + Math.random() * (30 - 20),
+      10 + Math.random() * (20 - 10),
+      8 + Math.random() * (15 - 8),
+      15 + Math.random() * (20 - 15),
+      20 + Math.random() * (25 - 20)],
+      color: (opacity = 1) => `rgba(0, 128, 255, ${opacity})`,
+      strokeWidth: 2
+    }
+  ],
+};
 
 export default class RestarantsFragment extends React.Component {
   
@@ -72,10 +86,31 @@ export default class RestarantsFragment extends React.Component {
 
             <Separator />
 
-            <Text style={[globalStyles.titleText, styles.popupHeading]}>Daily Crowd Density</Text>
-
-            <View><Graph/></View>
+            <Text style={[globalStyles.titleText, styles.popupHeading]}>Today's Waiting Times</Text>
           </View>
+          <LineChart
+            data={data}
+            width={Dimensions.get('window').width * 0.6}
+            height={200}
+            verticalLabelRotation={0}
+            // withInnerLines={true}
+            chartConfig={{
+              backgroundColor: "grey",
+              backgroundGradientFrom: "#ffffff",
+              backgroundGradientTo: "#ffffff",
+              decimalPlaces: 0,
+              color: (opacity = 1) => `rgba(0,0,0, ${opacity})`,
+              labelColor: (opacity = 1) => `rgba(0,0,0, ${opacity})`,
+              propsForDots: {
+                r: "4",
+                strokeWidth: "2",
+                stroke: "rgb(0,0,255)"
+              }
+            }}
+            fromZero={true}
+            bezier
+            style={styles.MallDensityLineChart}
+          />
         </ScrollView>
       </View>
     );
@@ -88,6 +123,7 @@ const styles = StyleSheet.create({
     height: '100%',    
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#ffffff'
   },
   TextDetailContainer: {
     justifyContent: 'flex-start',
@@ -100,14 +136,21 @@ const styles = StyleSheet.create({
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
   customText: {
-    paddingBottom: 15,
-    paddingTop: 15,
+    paddingVertical: 2,
 },
 popupHeading: {
-  fontSize: 30,
+  fontSize: 24,
   alignSelf: 'center',
   marginBottom: 10,
   marginTop: 10,
   fontWeight: 'bold',
 },
+
+  MallDensityLineChart: {
+    marginTop: 10,
+    alignSelf: 'center',
+    paddingRight: 25,
+    paddingLeft: 25,
+    paddingBottom: 14,
+  }
 });
