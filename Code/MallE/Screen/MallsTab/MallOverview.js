@@ -16,41 +16,38 @@ export default class MallOverview extends React.Component {
                     uri:'https://images.unsplash.com/flagged/photo-1562503542-2a1e6f03b16b?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8c2luZ2Fwb3JlfGVufDB8fDB8&ixlib=rb-1.2.1&w=1000&q=80'}}>
                 </Image>
                 <View style={styles.TextDetailContainer}>
-                    <Text style={globalStyles.titleText}>
-                    Website:
-                    <Text style={globalStyles.normalText}>
-                        http://foodrepublic.com.sg
-                    </Text>
-                    </Text>
-
-                    <Text style={globalStyles.titleText}>
-                    Location:
-                    <Text style={globalStyles.normalText}>
-                        #B2-63/64/65/66/70/71/72
-                    </Text>
+                <Text style={[globalStyles.titleText, styles.popupHeading]}>Jurong Point</Text>
+                    <Text style={[globalStyles.titleText, styles.customText]}>
+                    Website: 
+                    <Text style={globalStyles.normalText}> http://foodrepublic.com.sg</Text>
                     </Text>
 
-                    <Text style={globalStyles.titleText}>
+                    <Text style={[globalStyles.titleText, styles.customText]}>
+                    Location: 
+                    <Text style={globalStyles.normalText}> #B2-63/64/65/66/70/71/72</Text>
+                    </Text>
+
+                    <Text style={[globalStyles.titleText, styles.customText]}>
                     Hours:
-                    <Text style={globalStyles.normalText}>Open ⋅ Closes 9:30PM</Text>
+                    <Text style={globalStyles.normalText}> Open ⋅ Closes 9:30PM</Text>
                     </Text>
 
-                    <Text style={globalStyles.titleText}>
-                    Contact:
-                    <Text style={globalStyles.normalText}>+65 6834 3126</Text>
+                    <Text style={[globalStyles.titleText, styles.customText]}>
+                    Contact: 
+                    <Text style={globalStyles.normalText}> +65 6834 3126</Text>
                     </Text>
 
-                    <Text style={globalStyles.titleText}>
-                    Ratings: <Text style={globalStyles.normalText}>4/5</Text>
+                    <Text style={[globalStyles.titleText, styles.customText]}>
+                    Ratings: <Text style={globalStyles.normalText}> 4/5</Text>
                     </Text>
 
-                    <Text style={globalStyles.titleText}>Mall Crowd Density</Text>
+                    <Text style={[globalStyles.titleText, styles.customText]}>Mall Crowd Density</Text>
 
                     <View><Graph/></View>
                 
-                    <Text style={globalStyles.titleText}>Floor Crowd Density</Text>
+                    <Text style={[globalStyles.titleText, styles.customText]}>Floor Crowd Density</Text>
                     <Text style={globalStyles.titleText}>Floor Crowd Density</Text> 
-                    <Text style={globalStyles.titleText}>Floor Crowd Density</Text>
+                    {/* <Text style={globalStyles.titleText}>Floor Crowd Density</Text> */}
                     
                     <View style={[{
                         transform: [{ rotate: "90deg" },]}]}>  
@@ -79,5 +76,16 @@ const styles = StyleSheet.create({
         padding: 5,
         flexDirection: 'column',
         flex: 1
+    },
+
+    customText: {
+        paddingBottom: 15,
+        paddingTop: 15,
+    },
+    popupHeading: {
+        fontSize: 20,
+        alignSelf: 'center',
+        marginBottom: 10,
+        fontWeight: 'bold',
     },
 })
