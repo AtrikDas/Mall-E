@@ -5,7 +5,7 @@ import { BarChart } from 'react-native-chart-kit';
 import {VictoryBar, VictoryChart, VictoryGroup} from "victory-native";
 
 const data = {
-    labels: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+    labels: ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'],
     datasets: [
         { data: [20, 45, 28, 80, 99, 43, 50], },
     ]
@@ -17,8 +17,8 @@ export default class Graph extends React.Component {
             <View styles = {{flex:1, justifyContent: 'center', alignItem: 'center'}}>
                 <BarChart
                     data={data}
-                    width={Dimensions.get('window').width}
-                    height={400}
+                    width={Dimensions.get('window').width-10}
+                    height={250}
                     chartConfig={{
                         // backgroundColor: 'grey',
                         backgroundGradientFrom: '#ffffff',
@@ -33,14 +33,13 @@ export default class Graph extends React.Component {
                     }}
                     style={{
                         width: Dimensions.get('window').width,
-                        marginLeft: Dimensions.get('window').width * -0.15,
+                        marginLeft: Dimensions.get('window').width * -0.16,
                         // marginVertical: 10,
-                        // marginBottom: 10,
                         borderRadius: 10,
                         justifyContent: 'center',
                         alignItems: 'center'
                     }}
-                    verticalLabelRotation={75}
+                    verticalLabelRotation={0}
                     withHorizontalLabels={false}
                     />
             </View>

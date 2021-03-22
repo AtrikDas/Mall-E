@@ -93,8 +93,7 @@ export default function MapScreen() {
                             }}
                         />
                         <Text style={styles.popupText}><Text style={{ fontWeight: 'bold' }}>Address:</Text> {chosenMall.address}</Text>
-                        <Text style={styles.popupText}><Text style={{ fontWeight: 'bold' }}>Latitude:</Text> {chosenMall.latitude} N</Text>
-                        <Text style={styles.popupText}><Text style={{ fontWeight: 'bold' }}>Longitude:</Text> {chosenMall.longitude} E</Text>
+                        <Text style={styles.popupText}><Text style={{ fontWeight: 'bold' }}>Opening Hours:</Text> 10 am - 10 pm</Text>
                         <Text style={{ fontWeight: 'bold', marginTop: 5 }}>Today's Crowd Density Trend:</Text>
                         <LineChart
                             data={data}

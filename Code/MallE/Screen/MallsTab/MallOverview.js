@@ -73,34 +73,33 @@ const styles = StyleSheet.create({
         height: '100%',
         justifyContent: 'space-evenly',
         alignItems: 'flex-start',
-        padding: 5,
+        padding: 0,
         flexDirection: 'column',
         flex: 1
     },
 
     customText: {
-        paddingBottom: 15,
-        paddingTop: 15,
+        paddingVertical: 1,
     },
     popupHeading: {
-        fontSize: 30,
+        fontSize: 24,
         alignSelf: 'center',
         marginBottom: 10,
         marginTop: 10,
         fontWeight: 'bold',
     },
     popupHeading1: {
-        fontSize: 30,
+        fontSize: 20,
         alignSelf: 'center',
-        marginTop: 30,
+        marginTop: 20,
         marginBottom: 30,
         fontWeight: 'bold',
     },
     popupHeading2: {
-        fontSize: 30,
+        fontSize: 20,
         alignSelf: 'center',
-        marginTop: 50,
-        marginBottom: 30,
+        marginTop: 20,
+        marginBottom: 0,
         fontWeight: 'bold',
     },
 })

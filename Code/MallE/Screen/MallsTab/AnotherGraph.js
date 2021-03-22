@@ -17,10 +17,9 @@ export default class AnotherGraph extends React.Component {
             <View styles = {{}}>
                 <BarChart
                     data={data}
-                    width={Dimensions.get('window').width}
+                    width={Dimensions.get('window').width - 100}
                     height={400}
                     chartConfig={{
-                        // backgroundColor: 'grey',
                         backgroundGradientFrom: '#ffffff',
                         backgroundGradientTo: '#ffffff',
                         decimalPlaces: 0,
@@ -34,8 +33,8 @@ export default class AnotherGraph extends React.Component {
                     style={{
                         width: Dimensions.get('window').width,
                         marginLeft: Dimensions.get('window').width * -0.15,
-                        marginVertical: 10,
-                        marginBottom: -30,
+                        marginTop: 0,
+                        marginBottom: 0,
                         borderRadius: 10,
                         justifyContent: 'center',
                         alignItems: 'center'
@@ -56,7 +55,7 @@ const styles = StyleSheet.create({
         height: 100,
         width: 100,
         borderRadius: 5,
-        marginVertical: 40,
+        marginTop: 0,
         backgroundColor: "#61dafb",
         alignItems: "center",
         justifyContent: "center"
