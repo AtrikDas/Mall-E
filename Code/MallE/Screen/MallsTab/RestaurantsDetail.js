@@ -86,7 +86,7 @@ export default class RestarantsFragment extends React.Component {
 
             <Separator />
 
-            <Text style={[globalStyles.titleText, styles.popupHeading]}>Today's Waiting Times</Text>
+            <Text style={[globalStyles.titleText, styles.popupHeading, {fontSize: 20}]}>Today's Waiting Times</Text>
           </View>
           <LineChart
             data={data}

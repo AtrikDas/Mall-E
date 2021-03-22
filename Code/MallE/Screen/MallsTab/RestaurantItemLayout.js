@@ -93,7 +93,7 @@ export default function RestarantItemList(props) {
             case 2:{
                 return(
                     <View flexDirection = "row" alignItems = "center">
-                         <Text> 20-30 min</Text>
+                         <Text>20-30 min</Text>
                     </View>
                 )
             }
