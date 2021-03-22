@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Image, Dimensions } from 'react-native';
 import {globalStyles} from '../../ThemesAndFonts';
 
 import Graph from './Graph';
+import AnotherGraph from './AnotherGraph';
 
 const Separator = () => <View style={styles.separator} />;
 
@@ -49,6 +50,12 @@ export default class MallOverview extends React.Component {
                     <Text style={globalStyles.titleText}>Weekly Crowd Density</Text>
 
                     <Graph/>
+
+                    <Separator />
+
+                    <Text style={globalStyles.titleText}>Floor Crowd Density</Text>
+
+                    <AnotherGraph/>
                 </View>
             </View>
         );
