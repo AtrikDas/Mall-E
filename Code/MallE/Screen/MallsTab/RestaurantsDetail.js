@@ -37,48 +37,44 @@ export default class RestarantsFragment extends React.Component {
             source={{uri:this.restaurantDetails.imageURL}}
           />
           {/* restaurant details */}
-          <Text style={globalStyles.titleText}>
-              {this.restaurantDetails.name}
-          </Text>
+          <Text style={[globalStyles.titleText, styles.popupHeading]}> {this.restaurantDetails.name}</Text>
           <View style={styles.TextDetailContainer}>
-            <Text style={globalStyles.titleText}>
+            <Text style={[globalStyles.titleText, styles.customText]}>
               Website:
-              <Text style={globalStyles.normalText}>
-                {this.restaurantDetails.website}
+              <Text style={globalStyles.normalText}> {this.restaurantDetails.website}
               </Text>
             </Text>
 
-            <Text style={globalStyles.titleText}>
+            <Text style={[globalStyles.titleText, styles.customText]}>
               Location:
-              <Text style={globalStyles.normalText}>
-                {this.restaurantDetails.location}
+              <Text style={globalStyles.normalText}> {this.restaurantDetails.location}
               </Text>
             </Text>
 
-            <Text style={globalStyles.titleText}>
+            <Text style={[globalStyles.titleText, styles.customText]}>
               Hours:
-              <Text style={globalStyles.normalText}>Open {this.restaurantDetails.openTiming} ⋅ Closes {this.restaurantDetails.closingTimeing}</Text>
+              <Text style={globalStyles.normalText}> Open {this.restaurantDetails.openTiming} ⋅ Closes {this.restaurantDetails.closingTimeing}</Text>
             </Text>
 
-            <Text style={globalStyles.titleText}>
+            <Text style={[globalStyles.titleText, styles.customText]}>
               Contact:
-              <Text style={globalStyles.normalText}>{this.restaurantDetails.contact}</Text>
+              <Text style={globalStyles.normalText}> {this.restaurantDetails.contact}</Text>
             </Text>
 
-            <Text style={globalStyles.titleText}>
+            <Text style={[globalStyles.titleText, styles.customText]}>
               Ratings: <RatingsComponent rating={this.restaurantDetails.rating}/>
             </Text>
 
-            <Text style={globalStyles.titleText}>
+            <Text style={[globalStyles.titleText, styles.customText]}>
               Estimated Waiting Time:{' '}
               <Text style={globalStyles.normalText}> 20-30 Minutes</Text>
             </Text>
 
             <Separator />
 
-            <Text style={globalStyles.titleText}>Weekly Crowd Density</Text>
+            <Text style={[globalStyles.titleText, styles.popupHeading]}>Daily Crowd Density</Text>
 
-            <Graph/>
+            <View><Graph/></View>
           </View>
         </ScrollView>
       </View>
@@ -89,7 +85,9 @@ export default class RestarantsFragment extends React.Component {
 const styles = StyleSheet.create({
   ContainerOne: {
     width: '100%',
-    height: '100%',
+    height: '100%',    
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   TextDetailContainer: {
     justifyContent: 'flex-start',
@@ -101,4 +99,15 @@ const styles = StyleSheet.create({
     borderBottomColor: '#737373',
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
+  customText: {
+    paddingBottom: 15,
+    paddingTop: 15,
+},
+popupHeading: {
+  fontSize: 30,
+  alignSelf: 'center',
+  marginBottom: 10,
+  marginTop: 10,
+  fontWeight: 'bold',
+},
 });

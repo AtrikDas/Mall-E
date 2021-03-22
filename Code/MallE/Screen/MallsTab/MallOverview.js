@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, Image, Dimensions, ScrollView } from 'react-native';
 import {globalStyles} from '../../ThemesAndFonts';
 
 import Graph from './Graph';
@@ -11,6 +11,7 @@ export default class MallOverview extends React.Component {
     render() {
         return(
             <View style={styles.ContainerOne}>
+                <ScrollView>
                 <Image source={{
                     width: '100%',
                     height: 300,
@@ -55,6 +56,7 @@ export default class MallOverview extends React.Component {
                     </View>
             
                 </View>
+                </ScrollView>
             </View>
         );
     }
