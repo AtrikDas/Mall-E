@@ -5,7 +5,7 @@ import { BarChart } from 'react-native-chart-kit';
 import {VictoryBar, VictoryChart, VictoryGroup} from "victory-native";
 
 const data = {
-    labels: ['B2', 'B1', 'L1', 'L2', 'L3'],
+    labels: ['L3', 'L2', 'L1', 'B1', 'B2'],
     datasets: [
         { data: [20, 45, 28, 80, 99], },
     ]
@@ -14,7 +14,7 @@ const data = {
 export default class AnotherGraph extends React.Component {
     render() {
         return(
-            <View styles = {{flex:1, justifyContent: 'center', alignItem: 'center'}}>
+            <View styles = {{}}>
                 <BarChart
                     data={data}
                     width={Dimensions.get('window').width}
@@ -35,11 +35,12 @@ export default class AnotherGraph extends React.Component {
                         width: Dimensions.get('window').width,
                         marginLeft: Dimensions.get('window').width * -0.15,
                         marginVertical: 10,
+                        marginBottom: -30,
                         borderRadius: 10,
                         justifyContent: 'center',
                         alignItems: 'center'
                     }}
-                    verticalLabelRotation={75}
+                    verticalLabelRotation={-90}
                     withHorizontalLabels={false}
                     />
             </View>
@@ -49,5 +50,15 @@ export default class AnotherGraph extends React.Component {
 const styles = StyleSheet.create({
     graphStyle: {
         padding: 5,
+    },
+
+    graphView: {
+        height: 100,
+        width: 100,
+        borderRadius: 5,
+        marginVertical: 40,
+        backgroundColor: "#61dafb",
+        alignItems: "center",
+        justifyContent: "center"
     }
 })
