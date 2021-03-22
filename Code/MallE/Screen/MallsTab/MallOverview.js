@@ -4,6 +4,7 @@ import {globalStyles} from '../../ThemesAndFonts';
 
 import Graph from './Graph';
 import AnotherGraph from './AnotherGraph';
+import Rotation from './Rotation';
 
 export default class MallOverview extends React.Component {
 
@@ -12,7 +13,7 @@ export default class MallOverview extends React.Component {
             <View style={styles.ContainerOne}>
                 <Image source={{
                     width: '100%',
-                    height: 500,
+                    height: 300,
                     uri:'https://images.unsplash.com/flagged/photo-1562503542-2a1e6f03b16b?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8c2luZ2Fwb3JlfGVufDB8fDB8&ixlib=rb-1.2.1&w=1000&q=80'}}>
                 </Image>
                 {/* <Text style={globalStyles.titleText}>{MallDetails.name? MallDetails.name: "no mall selected"}</Text> */}
@@ -45,11 +46,17 @@ export default class MallOverview extends React.Component {
                     Ratings: <Text style={globalStyles.normalText}>4/5</Text>
                     </Text>
 
-                    <Graph/>
+                    <Text style={globalStyles.titleText}>Mall Crowd Density</Text>
 
+                    <View><Graph/></View>
+                
                     <Text style={globalStyles.titleText}>Floor Crowd Density</Text>
-
-                    <AnotherGraph/>
+                    
+                    <View style={[{
+                        transform: [{ rotate: "90deg" },]}]}>  
+                        <AnotherGraph/>
+                    </View>
+            
                 </View>
             </View>
         );
@@ -67,8 +74,10 @@ const styles = StyleSheet.create({
     TextDetailContainer: {
         width: '100%',
         height: '100%',
-        justifyContent: 'flex-start',
+        justifyContent: 'space-evenly',
         alignItems: 'flex-start',
         padding: 5,
+        flexDirection: 'column',
+        flex: 1
     },
 })

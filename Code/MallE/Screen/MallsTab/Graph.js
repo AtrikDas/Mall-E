@@ -34,7 +34,8 @@ export default class Graph extends React.Component {
                     style={{
                         width: Dimensions.get('window').width,
                         marginLeft: Dimensions.get('window').width * -0.15,
-                        marginVertical: 10,
+                        // marginVertical: 10,
+                        // marginBottom: 10,
                         borderRadius: 10,
                         justifyContent: 'center',
                         alignItems: 'center'
