@@ -5,8 +5,6 @@ import {globalStyles} from '../../ThemesAndFonts';
 import Graph from './Graph';
 import AnotherGraph from './AnotherGraph';
 
-const Separator = () => <View style={styles.separator} />;
-
 export default class MallOverview extends React.Component {
     render() {
         return(
@@ -45,10 +43,6 @@ export default class MallOverview extends React.Component {
                     Ratings: <Text style={globalStyles.normalText}>4/5</Text>
                     </Text>
 
-                    <Separator />
-
-                    <Text style={globalStyles.titleText}>Weekly Crowd Density</Text>
-
                     <Graph/>
 
                     <Separator />
@@ -68,7 +62,6 @@ const styles = StyleSheet.create({
         height: '100%',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#ffffff'
     },
 
     TextDetailContainer: {
@@ -78,10 +71,4 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start',
         padding: 5,
     },
-
-    separator: {
-        marginVertical: 8,
-        borderBottomColor: '#000000',
-        borderBottomWidth: StyleSheet.hairlineWidth,
-      },
 })
