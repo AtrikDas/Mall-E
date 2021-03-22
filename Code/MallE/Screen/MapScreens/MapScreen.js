@@ -6,7 +6,8 @@ import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import { Text, ActivityIndicator, StyleSheet, View, Modal, Button, Image, Dimensions } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Icon } from 'react-native-elements';
-import { LineChart, BarChart } from 'react-native-chart-kit'
+import { LineChart, BarChart } from 'react-native-chart-kit';
+import { useNavigation } from '@react-navigation/native';
 
 export default function MapScreen() {
     const [isLoading, setLoading] = useState(true);
@@ -14,6 +15,8 @@ export default function MapScreen() {
     const [showPopup, setPopupStatus] = useState(false);
     const [chosenMall, setChosenMall] = useState([]);
     const colors = ['rgb(0, 255, 128)', 'rgb(255, 128, 128)', 'rgb(255, 255, 0)', 'rgb(0, 255, 128)', 'rgb(255, 255, 0)']
+
+    const navigation = useNavigation();
 
     const data = {
         labels: ["9 am", "12 pm", "3 pm", "6 pm", "9 pm"],
@@ -118,7 +121,10 @@ export default function MapScreen() {
                         <TouchableOpacity style={styles.moreInfoButton}>
                             <Button
                                 title="More Information..."
-                                onPress={() => { setPopupStatus(false) }}
+                                onPress={() => { 
+                                    setPopupStatus(false)
+                                    navigation.navigate("Malls")
+                                 }}
                             >
                             </Button>
                         </TouchableOpacity>

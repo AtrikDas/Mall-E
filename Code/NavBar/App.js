@@ -18,6 +18,20 @@ export default function App() {
 export default class App extends Component {
   render() {
     return (
+       {/* SplashScreen which will come once for 5 Seconds */}
+      {/* <Stack.Screen
+      name="SplashScreen"
+      component={SplashScreen}
+      // Hiding header for Splash Screen
+      options={{headerShown: false}}
+      /> */}
+      {/* Auth Navigator: Include Login and Signup */}
+      {/* <Stack.Screen
+      name="Auth"
+      component={Auth}
+      options={{headerShown: false}}
+      /> */}
+      {/* Navigation Drawer as a landing page */}
       <NavigationContainer>
         <MyNavBar />
       </NavigationContainer>

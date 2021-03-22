@@ -7,8 +7,11 @@ import Graph from "./Graph"
 const Separator = () => <View style={styles.separator} />;
 
 export default class RestarantsFragment extends React.Component {
-
+  
+  restaurantDetails = this.props.route.params
+  
   componentDidMount(){
+    console.log(this.props.route.params)
       // var myHeaders = new Headers();
       // myHeaders.append("Cookie", "__cfduid=dc1330063cebaf9c65b9be7a32f19a1651615999201");
       
@@ -37,29 +40,32 @@ export default class RestarantsFragment extends React.Component {
             }}
           />
           {/* restaurant details */}
+          <Text style={globalStyles.titleText}>
+              {this.restaurantDetails.name}
+          </Text>
           <View style={styles.TextDetailContainer}>
             <Text style={globalStyles.titleText}>
               Website:
               <Text style={globalStyles.normalText}>
-                http://foodrepublic.com.sg
+                {this.restaurantDetails.website}
               </Text>
             </Text>
 
             <Text style={globalStyles.titleText}>
               Location:
               <Text style={globalStyles.normalText}>
-                #B2-63/64/65/66/70/71/72
+                {this.restaurantDetails.location}
               </Text>
             </Text>
 
             <Text style={globalStyles.titleText}>
               Hours:
-              <Text style={globalStyles.normalText}>Open ⋅ Closes 9:30PM</Text>
+              <Text style={globalStyles.normalText}>Open {this.restaurantDetails.openTiming} ⋅ Closes {this.restaurantDetails.closingTimeing}</Text>
             </Text>
 
             <Text style={globalStyles.titleText}>
               Contact:
-              <Text style={globalStyles.normalText}>+65 6834 3126</Text>
+              <Text style={globalStyles.normalText}>{this.restaurantDetails.contact}</Text>
             </Text>
 
             <Text style={globalStyles.titleText}>
