@@ -7,6 +7,7 @@ import AnotherGraph from './AnotherGraph';
 import Rotation from './Rotation';
 
 export default class MallOverview extends React.Component {
+
     render() {
         return(
             <View style={styles.ContainerOne}>
@@ -15,6 +16,7 @@ export default class MallOverview extends React.Component {
                     height: 300,
                     uri:'https://images.unsplash.com/flagged/photo-1562503542-2a1e6f03b16b?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8c2luZ2Fwb3JlfGVufDB8fDB8&ixlib=rb-1.2.1&w=1000&q=80'}}>
                 </Image>
+                {/* <Text style={globalStyles.titleText}>{MallDetails.name? MallDetails.name: "no mall selected"}</Text> */}
                 <View style={styles.TextDetailContainer}>
                 <Text style={[globalStyles.titleText, styles.popupHeading]}>Jurong Point</Text>
                     <Text style={[globalStyles.titleText, styles.customText]}>
@@ -45,9 +47,7 @@ export default class MallOverview extends React.Component {
 
                     <View><Graph/></View>
                 
-                    <Text style={[globalStyles.titleText, styles.customText]}>Floor Crowd Density</Text>
-                    <Text style={globalStyles.titleText}>Floor Crowd Density</Text> 
-                    {/* <Text style={globalStyles.titleText}>Floor Crowd Density</Text> */}
+                    <Text style={globalStyles.titleText}>Floor Crowd Density</Text>
                     
                     <View style={[{
                         transform: [{ rotate: "90deg" },]}]}>  

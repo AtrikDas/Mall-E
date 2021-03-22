@@ -17,14 +17,7 @@ const Stack = createStackNavigator();
 
 function Home() {
     return (
-        <NavigationContainer independent={true}>
-            <Stack.Navigator initialRouteName="MapScreen" screenOptions={{
-                headerShown: false
-            }}>
-                <Stack.Screen name="MapScreen" component={MapScreen} />
-            </Stack.Navigator>
-        </NavigationContainer>
-
+        <MapScreen/>
     );
 }
 
