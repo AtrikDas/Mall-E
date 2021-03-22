@@ -85,7 +85,6 @@ export default class Body extends React.Component {
                                     <MallOverview  />
                                 </Animated.View>
                                 <Animated.View style = {{flex: 1, justifyContent:'center', alignItems:'center', transform: [{translateX: translateXTabTwo}, {translateY: -translateY}]}}>
-                                    {/* <RestarantsFragment style = {{flex:1}}/> */}
                                     <RestarantsFragment/>
                                 </Animated.View>
                             </ScrollView>
@@ -99,8 +98,9 @@ export default class Body extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        width: '100%',
-        height: '100%',
+        // width: '100%',
+        // height: '100%',
+        flex: 1,
         // flexWrap: 'wrap',
         backgroundColor: '#ffffff'
     },

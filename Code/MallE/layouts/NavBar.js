@@ -12,7 +12,7 @@ import RestaurantsDetail from "../Screen/MallsTab/RestaurantsDetail";
 import Body from "../Screen/MallsTab/Body";
 import MallOverview from "../Screen/MallsTab/MallOverview"
 import MapScreen from '../Screen/MapScreens/MapScreen'
-
+import Icon from 'react-native-vector-icons/Entypo';
 const Stack = createStackNavigator();
 
 function Home() {
@@ -61,7 +61,7 @@ export default function MyNavBar() {
                 options={{
                     tabBarLabel: 'Home',
                     tabBarIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name="home" color={color} size={size} />
+                        <Icon name="home" color={color} size={size} />
                     ),
                 }}
             />
@@ -71,7 +71,7 @@ export default function MyNavBar() {
                 options={{
                     tabBarLabel: 'Malls',
                     tabBarIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name="shopping" color={color} size={size} />
+                        <Icon name="shopping-cart" color={color} size={size} />
                     ),
                 }}
             />
@@ -81,7 +81,7 @@ export default function MyNavBar() {
                 options={{
                     tabBarLabel: 'News',
                     tabBarIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name="web" color={color} size={size} />
+                        <Icon name="news" color={color} size={size} />
                     ),
                 }}
             />
@@ -91,7 +91,7 @@ export default function MyNavBar() {
                 options={{
                     tabBarLabel: 'Profile',
                     tabBarIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name="account" color={color} size={size} />
+                        <Icon name="user" color={color} size={size} />
                     ),
                 }}
             />

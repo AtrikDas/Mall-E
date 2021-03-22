@@ -3,8 +3,7 @@ import { StyleSheet, Text, View, Image, Dimensions } from 'react-native';
 import {globalStyles} from '../../ThemesAndFonts';
 
 import Graph from './Graph';
-
-const Separator = () => <View style={styles.separator} />;
+import AnotherGraph from './AnotherGraph';
 
 export default class MallOverview extends React.Component {
     render() {
@@ -44,11 +43,13 @@ export default class MallOverview extends React.Component {
                     Ratings: <Text style={globalStyles.normalText}>4/5</Text>
                     </Text>
 
+                    <Graph/>
+
                     <Separator />
 
-                    <Text style={globalStyles.titleText}>Weekly Crowd Density</Text>
+                    <Text style={globalStyles.titleText}>Floor Crowd Density</Text>
 
-                    <Graph/>
+                    <AnotherGraph/>
                 </View>
             </View>
         );
@@ -61,7 +62,6 @@ const styles = StyleSheet.create({
         height: '100%',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#ffffff'
     },
 
     TextDetailContainer: {
@@ -71,10 +71,4 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start',
         padding: 5,
     },
-
-    separator: {
-        marginVertical: 8,
-        borderBottomColor: '#000000',
-        borderBottomWidth: StyleSheet.hairlineWidth,
-      },
 })

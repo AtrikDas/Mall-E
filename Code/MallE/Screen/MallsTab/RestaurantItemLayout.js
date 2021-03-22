@@ -26,7 +26,7 @@ export default function RestarantItemList(props) {
         if(openTiming.isBefore() && closingTimeing.isAfter()){
             //shop is open
             return (<View flexDirection = "row">
-                <Text style = {textStyles.openText}>{"Open " }</Text><Text style = {textStyles.closeText}>Closes {openTiming.format(" h:mma")}</Text>
+                <Text style = {textStyles.openText}>{"Open " }</Text><Text style = {textStyles.closeText}>Closes {closingTimeing.format(" h:mma")}</Text>
                 </View>)
         }else{
             //shop is closed

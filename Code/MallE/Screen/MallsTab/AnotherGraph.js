@@ -5,13 +5,13 @@ import { BarChart } from 'react-native-chart-kit';
 import {VictoryBar, VictoryChart, VictoryGroup} from "victory-native";
 
 const data = {
-    labels: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+    labels: ['B2', 'B1', 'L1', 'L2', 'L3'],
     datasets: [
-        { data: [20, 45, 28, 80, 99, 43, 50], },
+        { data: [20, 45, 28, 80, 99], },
     ]
 }
 
-export default class Graph extends React.Component {
+export default class AnotherGraph extends React.Component {
     render() {
         return(
             <View styles = {{flex:1, justifyContent: 'center', alignItem: 'center'}}>
@@ -48,6 +48,6 @@ export default class Graph extends React.Component {
 }
 const styles = StyleSheet.create({
     graphStyle: {
-        padding: 5
+        padding: 5,
     }
 })
