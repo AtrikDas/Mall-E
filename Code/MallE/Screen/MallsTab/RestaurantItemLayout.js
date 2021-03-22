@@ -1,5 +1,5 @@
 import React ,{useState}from 'react';
-import { StyleSheet, Text, View ,FlatList,Image} from 'react-native';
+import { StyleSheet, Text, View ,FlatList,Image, ScrollView} from 'react-native';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Entypo';
@@ -107,6 +107,7 @@ export default function RestarantItemList(props) {
         }
     }
         return(
+            <ScrollView>
             <TouchableWithoutFeedback style={layoutStyles.itemContainer} onPress= {onPressFunction}>
                 <Image source={{uri:props.restaurantitem.imageURL}} style={layoutStyles.image}/>
                 <View style = {layoutStyles.textContainer}>
@@ -129,7 +130,7 @@ export default function RestarantItemList(props) {
                 
                 </View>
             </TouchableWithoutFeedback>
-            
+            </ScrollView>
         );
 }
 
