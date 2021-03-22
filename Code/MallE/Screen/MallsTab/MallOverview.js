@@ -49,6 +49,8 @@ export default class MallOverview extends React.Component {
                     <View><Graph/></View>
                 
                     <Text style={globalStyles.titleText}>Floor Crowd Density</Text>
+                    <Text style={globalStyles.titleText}>Floor Crowd Density</Text> 
+                    <Text style={globalStyles.titleText}>Floor Crowd Density</Text>
                     
                     <View style={[{
                         transform: [{ rotate: "90deg" },]}]}>  
@@ -72,9 +74,10 @@ const styles = StyleSheet.create({
     TextDetailContainer: {
         width: '100%',
         height: '100%',
-        justifyContent: 'flex-start',
+        justifyContent: 'space-evenly',
         alignItems: 'flex-start',
         padding: 5,
-        flex: 1,
+        flexDirection: 'column',
+        flex: 1
     },
 })
