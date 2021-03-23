@@ -19,6 +19,7 @@ export default class Graph extends React.Component {
                     data={data}
                     width={Dimensions.get('window').width-10}
                     height={250}
+                    fromZero={true}
                     chartConfig={{
                         // backgroundColor: 'grey',
                         backgroundGradientFrom: '#ffffff',

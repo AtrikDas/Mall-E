@@ -19,6 +19,7 @@ export default class AnotherGraph extends React.Component {
                     data={data}
                     width={Dimensions.get('window').width - 100}
                     height={400}
+                    fromZero={true}
                     chartConfig={{
                         backgroundGradientFrom: '#ffffff',
                         backgroundGradientTo: '#ffffff',
