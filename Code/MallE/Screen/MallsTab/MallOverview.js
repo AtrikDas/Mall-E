@@ -4,115 +4,100 @@ import {globalStyles} from '../../ThemesAndFonts';
 
 import Graph from './Graph';
 import AnotherGraph from './AnotherGraph';
-import Rotation from './Rotation';
 import StarGenerator from './ratingsComponent';
-
-// const Separator = () => <View style={styles.separator} />;
 
 export default class MallOverview extends React.Component {
 
     render() {
         return(
-            <View style={styles.ContainerOne}>
-                <ScrollView>
+            // Main Container
+            <View style={styles.container}>
+
+                <View style = {styles.seperatorLine}>
+                    <Text style={[globalStyles.titleText, {textDecorationLine: 'underline'}]}>Jurong Point</Text>
+                </View>
+
                 <Image source={{
                     width: '100%',
                     height: 300,
                     uri:'https://upload.wikimedia.org/wikipedia/commons/a/a0/JP2entrance2.jpg'}}>
                 </Image>
-                {/* <Text style={globalStyles.titleText}>{MallDetails.name? MallDetails.name: "no mall selected"}</Text> */}
-                <View style={styles.TextDetailContainer}>
-                <Text style={[globalStyles.titleText, styles.popupHeading]}>Jurong Point</Text>
-                    <Text style={[globalStyles.titleText, styles.customText]}>
-                    Website: 
-                    <Text style={globalStyles.normalText}> www.jurongpoint.com.sg</Text>
-                    </Text>
 
-                    <Text style={[globalStyles.titleText, styles.customText]}>
+                <View style={styles.textDetailContainer}>
+
+                    <View style = {styles.seperatorLine}>
+
+                        <Text style={[globalStyles.titleText, styles.customText]}>
+                        Website: 
+                        <Text style={globalStyles.normalText}> www.jurongpoint.com.sg</Text>
+                        </Text>
+
+                        <Text style={[globalStyles.titleText, styles.customText]}>
                         Address: 
-                    <Text style={globalStyles.normalText}> 1 Jurong West Central 2, Singapore 648886</Text>
-                    </Text>
+                        <Text style={globalStyles.normalText}> 1 Jurong West Central 2, Singapore 648886</Text>
+                        </Text>
 
-                    <Text style={[globalStyles.titleText, styles.customText]}>
-                    Hours:
-                    <Text style={globalStyles.normalText}> Open ⋅ Closes 9:30PM</Text>
-                    </Text>
+                        <Text style={[globalStyles.titleText, styles.customText]}>
+                        Hours:
+                        <Text style={globalStyles.normalText}> Open ⋅ Closes 9:30PM</Text>
+                        </Text>
 
-                    <Text style={[globalStyles.titleText, styles.customText]}>
-                    Contact: 
-                    <Text style={globalStyles.normalText}> +65 6834 3126</Text>
-                    </Text>
+                        <Text style={[globalStyles.titleText, styles.customText]}>
+                        Contact: 
+                        <Text style={globalStyles.normalText}> +65 6834 3126</Text>
+                        </Text>
 
-                    <Text style={[globalStyles.titleText, styles.customText]}>
-                    Ratings: <StarGenerator rating = {4}/>
-                    </Text>
+                        <Text style={[globalStyles.titleText, styles.customText]}>
+                        Ratings: 
+                        <StarGenerator rating = {4}/>
+                        </Text>
 
-                    <Text style={[globalStyles.titleText, styles.popupHeading1]}>Mall Crowd Density</Text>
-
-                    <View style={{paddingBottom:10, paddingTop:10}}><Graph/></View>
-                
-                    <Text style={[globalStyles.titleText, styles.popupHeading2]}>Floor Crowd Density</Text>
-                    
-                    <View style={[{
-                        transform: [{ rotate: "90deg" },]}]}>  
-                        <AnotherGraph/>
                     </View>
-            
+
                 </View>
-                </ScrollView>
+
+                <Text style={[globalStyles.titleText, 
+                    {marginTop: 10, marginBottom: 10, textDecorationLine: 'underline'}]}>
+                        Weekly Crowd Density</Text>
+                    
+                <View style = {[styles.seperatorLine]}><Graph/></View>
+                
+                <Text style={[globalStyles.titleText, 
+                    {marginTop: 10, marginBottom: 10, textDecorationLine: 'underline'}]}>
+                        Floor Crowd Density</Text>
+                
+                <View style = {[styles.seperatorLine]}><AnotherGraph/></View>
+
             </View>
         );
     }
 }
 
 const styles = StyleSheet.create({
-    ContainerOne: {
+    container: {
         width: '100%',
-        height: '100%',
-        justifyContent: 'center',
-        alignItems: 'center',
+        flex: 1,
+        justifyContent: 'space-evenly',
+        alignItems: 'flex-start',
     },
 
-    TextDetailContainer: {
-        width: '100%',
-        height: '100%',
+    textDetailContainer: {
         justifyContent: 'space-evenly',
         alignItems: 'flex-start',
         padding: 0,
         flexDirection: 'column',
-        flex: 1
+        flex: 1,
+    },
+
+    seperatorLine: {
+        borderBottomColor: '#000000',
+        borderBottomWidth: 0.75,
+        alignSelf: 'stretch',
+        paddingTop: 5,
+        paddingBottom: 5,
     },
 
     customText: {
         paddingVertical: 1,
     },
-    popupHeading: {
-        fontSize: 24,
-        alignSelf: 'center',
-        marginBottom: 10,
-        marginTop: 10,
-        fontWeight: 'bold',
-    },
-    popupHeading1: {
-        fontSize: 20,
-        alignSelf: 'center',
-        marginTop: 20,
-        marginBottom: 30,
-        fontWeight: 'bold',
-    },
-    popupHeading2: {
-        fontSize: 20,
-        alignSelf: 'center',
-        marginTop: 20,
-        marginBottom: 0,
-        fontWeight: 'bold',
-    },
-
-    // separator: {
-    //     marginTop: 20,
-    //     marginBottom: 30,
-    //     marginVertical: 0,
-    //     borderBottomColor: '#000000',
-    //     borderBottomWidth: 1,
-    //   },
 })

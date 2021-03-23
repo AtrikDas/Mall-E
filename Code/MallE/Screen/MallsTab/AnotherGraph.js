@@ -1,8 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, Dimensions } from 'react-native';
+import { StyleSheet, View, Dimensions } from 'react-native';
 
 import { BarChart } from 'react-native-chart-kit';
-import {VictoryBar, VictoryChart, VictoryGroup} from "victory-native";
 
 const data = {
     labels: ['L3', 'L2', 'L1', 'B1', 'B2'],
@@ -14,51 +13,50 @@ const data = {
 export default class AnotherGraph extends React.Component {
     render() {
         return(
-            <View styles = {{}}>
-                <BarChart
-                    data={data}
-                    width={Dimensions.get('window').width - 100}
-                    height={400}
+            <View styles={{transform: [{rotate: "90deg"}]}}>
+
+                <View styles = {styles.container}>
+
+                    <BarChart
+                        data={data}
+                    width={Dimensions.get('window').width}
+                    height={300}
+                    withHorizontalLabels={true}
                     fromZero={true}
+                    withInnerLines={false}
                     chartConfig={{
                         backgroundGradientFrom: '#ffffff',
                         backgroundGradientTo: '#ffffff',
-                        decimalPlaces: 0,
-                        color: (opacity = 0) => `rgba(90, 90, 90, ${opacity})`,
-                        style: {borderRadius: 0},
-                        propsForBackgroundLines:{stroke:"#ffffff"},
-                        barRadius: 16,
                         fillShadowGradient: 'red',
-                        fillShadowGradientOpacity: '8'
+                        fillShadowGradientOpacity: '5',
+                        decimalPlaces: 0,
+                        color: (opacity = 1) => `rgba(90, 90, 90, ${opacity})`,
+                        barPercentage: 0.6,
+                        barRadius: 16,
                     }}
                     style={{
-                        width: Dimensions.get('window').width,
-                        marginLeft: Dimensions.get('window').width * -0.15,
-                        marginTop: 0,
-                        marginBottom: 0,
+                        width: '100%',
+                        marginLeft: -Dimensions.get('window').width * 0.1,
+                        padding: 5,
                         borderRadius: 10,
-                        justifyContent: 'center',
-                        alignItems: 'center'
+                        justifyContent: 'flex-start',
+                        alignItems: 'flex-start',
+                        flex: 1
                     }}
-                    verticalLabelRotation={-90}
-                    withHorizontalLabels={false}
-                    />
+                    horizontalLabelRotation={0}
+                    verticalLabelRotation={0}
+                        />
+
+                </View>
+
             </View>
         )
     }
 }
 const styles = StyleSheet.create({
-    graphStyle: {
-        padding: 5,
-    },
-
-    graphView: {
-        height: 100,
-        width: 100,
-        borderRadius: 5,
-        marginTop: 0,
-        backgroundColor: "#61dafb",
-        alignItems: "center",
-        justifyContent: "center"
+    container: {
+        flex: 1, 
+        justifyContent: 'center', 
+        alignItems: 'center',
     }
 })

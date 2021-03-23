@@ -1,9 +1,10 @@
 import React from 'react';
 import {Animated, StyleSheet, Text, View, TouchableOpacity, ScrollView, Dimensions} from 'react-native';
+import {globalStyles} from '../../ThemesAndFonts';
 
 import MallOverview from './MallOverview';
+import MallsFragment from './MallsFragment';
 import RestarantsFragment from "./RestarantsFragment"
-import RestaurantsDetail from "./RestaurantsDetail"
 
 const { width } = Dimensions.get("window");
 
@@ -55,43 +56,60 @@ export default class Body extends React.Component {
     }
 
     render() {
-        let {tabOne, tabTwo, translateX, active, translateXTabOne, translateXTabTwo, translateY} = this.state;
+        let {active, tabOne, tabTwo, translateX, translateY, translateXTabOne, translateXTabTwo} = this.state;
         return(
+            // Main Container
             <View style = {styles.container}>
-                <View style = {styles.box}>
-                    <View style = {styles.segmentedControl}>
-                        <View style = {{width:'90%', marginLeft:'auto', marginRight:'auto'}}>
-                            <View style = {{flexDirection:'row', marginTop:10, marginBottom:20, height: 45, position: 'relative'}}>
-                                <Animated.View style = {{position:'absolute', width: '50%', height: '100%', top: 0, left: 0, backgroundColor:'#047580', borderRadius: 100,
-                                transform: [{translateX}]}}/>
-                                <TouchableOpacity
-                                style = {{flex: 1, justifyContent:'center', alignItems:'center', borderWidth: 2, borderColor:'#D3D3D3', borderRightWidth: 0, borderTopLeftRadius: 100, borderBottomLeftRadius: 100}}
-                                onLayout = {event => this.setState({tabOne: event.nativeEvent.layout.x})}
-                                onPress={() => this.setState({active: 0}, () => this.handleSlide(tabOne))}>
-                                    <Text style = {{color:'#D3D3D3'}}> Mall Overview </Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity
-                                style = {{flex: 1, justifyContent:'center', alignItems:'center', borderWidth: 2, borderColor:'#D3D3D3', borderLeftWidth: 0, borderTopRightRadius: 100, borderBottomRightRadius: 100}}
-                                onLayout = {event => this.setState({tabTwo: event.nativeEvent.layout.x})}
-                                onPress={() => this.setState({active: 1}, () => this.handleSlide(tabTwo))}>
-                                    <Text style = {{color:'#D3D3D3'}}> Restaurants </Text>
-                                </TouchableOpacity>
-                            </View>
-                            <ScrollView>
-                                <Animated.View style = {{flex: 1, justifyContent:'center', alignItems:'center', transform: [{translateX: translateXTabOne}]}}
-                                onLayout = {event => this.setState({
-                                    translateY: event.nativeEvent.layout.height
-                                })}> 
-                                    <MallOverview  />
 
-                                </Animated.View>
-                                <Animated.View style = {{flex: 1, justifyContent:'center', alignItems:'center', transform: [{translateX: translateXTabTwo}, {translateY: -translateY}]}}>
-                                    <RestarantsFragment/>
-                                </Animated.View>
-                            </ScrollView>
-                        </View>
-                    </View>
+                {/* Segmented Control */}
+                <View style = {styles.segmentedControl}>
+
+                    <Animated.View style={[styles.tabAnimation, 
+                        {transform: [{ translateX }]}]}/>
+
+                    {/* Tab 1 */}
+                    <TouchableOpacity
+                    style = {styles.tabX}
+                    onLayout = {event => this.setState({tabOne: event.nativeEvent.layout.x})}
+                    onPress={() => this.setState({active: 0}, () => this.handleSlide(tabOne))}>
+
+                        <Text style = {{color:'#D3D3D3', fontFamily: "poppins", fontSize: 17.5}}> Mall Overview </Text>
+
+                    </TouchableOpacity>
+
+                    {/* Tab 2 */}
+                    <TouchableOpacity
+                    style = {styles.tabY}
+                    onLayout = {event => this.setState({tabTwo: event.nativeEvent.layout.x})}
+                    onPress={() => this.setState({active: 1}, () => this.handleSlide(tabTwo))}>
+
+                        <Text style = {{color:'#D3D3D3', fontFamily: "poppins", fontSize: 17.5}}> Restaurants </Text>
+
+                    </TouchableOpacity>
+
                 </View>
+
+                {/* Scrollable / Content and Details */}
+                <ScrollView styles = {styles.scrollView}>
+                    
+                    {/* Contents of TabOne */}
+                    <Animated.View style = {[styles.tabXContent, 
+                    {transform: [{translateX: translateXTabOne}]}]}
+                    onLayout = {event => this.setState({translateY: event.nativeEvent.layout.height})}> 
+
+                        <MallsFragment/>
+
+                    {/* Contents of TabTwo */}
+                    </Animated.View>
+                    <Animated.View style = {[styles.tabYContent, 
+                    {transform: [{translateX: translateXTabTwo}, {translateY: -translateY}]}]}>
+
+                        <RestarantsFragment/>
+
+                    </Animated.View>
+
+                </ScrollView>
+
             </View>
             )
     }
@@ -99,20 +117,70 @@ export default class Body extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        // width: '100%',
-        // height: '100%',
-        flex: 1,
-        // flexWrap: 'wrap',
-        backgroundColor: '#ffffff'
-    },
-
-    box: {
         width: '100%',
         height: '100%',
-        flexDirection: 'column',
+        flex: 1,
+        backgroundColor: '#ffffff',
+        padding: 20,
     },
 
     segmentedControl: {
-        flex: 1,
+        flexDirection:'row', 
+        marginTop: 10, 
+        marginBottom: 20, 
+        height: 45, 
+        position: 'relative'
+    },
+
+    tabAnimation: {
+        position:'absolute', 
+        width: '50%', 
+        height: '100%', 
+        top: 0, 
+        left: 0, 
+        backgroundColor:'#047580', 
+        borderRadius: 100,
+    },
+
+    tabX: {
+        flex: 1, 
+        justifyContent:'center', 
+        alignItems:'center', 
+        borderWidth: 2, 
+        borderColor:'#D3D3D3', 
+        borderRightWidth: 0, 
+        borderTopLeftRadius: 100, 
+        borderBottomLeftRadius: 100
+    },
+
+    tabY: {
+        flex: 1, 
+        justifyContent:'center',
+        alignItems:'center', 
+        borderWidth: 2, 
+        borderColor:'#D3D3D3', 
+        borderLeftWidth: 0, 
+        borderTopRightRadius: 100, 
+        borderBottomRightRadius: 100
+    },
+
+    scrollView: {
+        flex: 1, 
+        justifyContent:'center', 
+        alignItems:'center',
+    },   
+
+    tabXContent: {
+        flex: 1, 
+        justifyContent:'center', 
+        alignItems:'center',
+        padding: 5,
+    },
+
+    tabYContent: {
+        flex: 1, 
+        justifyContent:'center', 
+        alignItems:'center',
+        padding: 5,
     }
 })

@@ -8,37 +8,32 @@ import moment from 'moment';
 import StarGenerator from "./ratingsComponent"
 import { Row } from 'native-base';
 
-export default function RestarantItemList(props) {
+export default function MallItemList(props) {
 
     const navigation = useNavigation();
-    
-    const onPressFunction = ()=>{
-    
-        navigation.navigate('RestaurantsDetail',props.restaurantitem)
-        console.log(`${props.restaurantitem.key} button is pressed`)
+
+    const onPressFunction = () => {
+        navigation.navigate('MallsDetail', props.mallsItem)
     }
 
-    const DateComponent = ()=>{
-        let openTiming = moment(props.restaurantitem.openTiming, 'h:mma')
-        let closingTimeing = moment(props.restaurantitem.closingTimeing, 'h:mma')
+    const TimeComponent = () => {
+        let openingTiming = moment(props.mallItem.openTiming, 'h:mma')
+        let closingTimeing = moment(props.mallItem.closingTimeing, 'h:mma')
         
-        
-        if(openTiming.isBefore() && closingTimeing.isAfter()){
+        if(openingTiming.isBefore() && closingTimeing.isAfter()) {
             //shop is open
             return (<View flexDirection = "row">
-                    <Text style = {textStyles.openText}>{"Open " }</Text>
-                    <Text style = {textStyles.closeText}>Closes {closingTimeing.format(" h:mma")}</Text>
+                <Text style = {textStyles.openText}>Open</Text>
+                <Text style = {textStyles.closeText}>Closes {closingTimeing.format(" h:mma")}</Text>
                 </View>)
         }else{
             //shop is closed
             return (<Text style = {textStyles.closeText}>Closed</Text>)
         }
-        
     }
 
-    const CrowedComponent = ()=>{
-
-        switch(props.restaurantitem.crowdDensity){
+    const CrowedComponent = () => {
+        switch(props.mallItem.crowdDensity){
             case 0:{
                 return(
                     <View flexDirection = "row" alignItems = "center">
@@ -67,16 +62,16 @@ export default function RestarantItemList(props) {
                 return(
                     <View flexDirection = "row" alignItems = "center">
                          <Icon name= "controller-record" size = {15} color= "#DC0000" />
-                         <Text>Max Crowd</Text>
+                         <Text> Max Crowd</Text>
                     </View>
                 )
             }
         }
     }
 
-    const WaitingTimeComponent = ()=>{
+    const WaitingTimeComponent = () => {
 
-        switch(props.restaurantitem.crowdDensity){
+        switch(props.mallItem.crowdDensity){
             case 0:{
                 return(
                     <View flexDirection = "row" alignItems = "center">
@@ -107,36 +102,55 @@ export default function RestarantItemList(props) {
             }
         }
     }
-        return(
-            <ScrollView>
-            <TouchableWithoutFeedback style={layoutStyles.itemContainer} onPress= {onPressFunction}>
-                <Image source={{uri:props.restaurantitem.imageURL}} style={layoutStyles.image}/>
-                <View style = {layoutStyles.textContainer}>
-                    <View style={layoutStyles.headerRow} >
-                        <Text style= {textStyles.header}>{props.restaurantitem.name}</Text> 
-                        <CrowedComponent />
-                    </View>
-                    <View style={layoutStyles.descriptionRow} >
-                        <Text style= {textStyles.descriptionHeader}>Hours: </Text> 
-                        <DateComponent />
-                    </View>
-                    <View style={layoutStyles.descriptionRow} >
-                        <Text style= {textStyles.descriptionHeader}>Estimated Waiting Time: </Text> 
-                        <WaitingTimeComponent/>
-                    </View>
-                    <View style={layoutStyles.descriptionRow} >
-                        <Text style= {textStyles.descriptionHeader}>Ratings: </Text> 
-                        <StarGenerator rating = {props.restaurantitem.rating}/>
-                    </View>
-                
+
+    return(
+        <ScrollView>
+
+        <TouchableWithoutFeedback style={layoutStyles.itemContainer} onPress= {onPressFunction}>
+
+            <Image source={{uri:props.mallItem.imageURL}} style={layoutStyles.image}/>
+
+            <View style = {layoutStyles.textContainer}>
+
+                <View style={layoutStyles.headerRow} >
+
+                    <Text style= {textStyles.header}>{props.mallItem.name}</Text> 
+
+                    <CrowedComponent />
+
                 </View>
-            </TouchableWithoutFeedback>
-            </ScrollView>
-        );
+
+                <View style={layoutStyles.descriptionRow} >
+
+                    <Text style= {textStyles.descriptionHeader}>Hours: </Text> 
+
+                    <TimeComponent />
+
+                </View>
+
+                <View style={layoutStyles.descriptionRow} >
+
+                    <Text style= {textStyles.descriptionHeader}>Estimated Waiting Time: </Text> 
+
+                    <WaitingTimeComponent/>
+
+                </View>
+
+                <View style={layoutStyles.descriptionRow} >
+
+                    <Text style= {textStyles.descriptionHeader}>Ratings: </Text> 
+
+                    <StarGenerator rating = {props.mallItem.rating}/>
+
+                </View>
+            
+            </View>
+
+        </TouchableWithoutFeedback>
+
+        </ScrollView>
+    );
 }
-
-
-
 
 const layoutStyles = StyleSheet.create({
     itemContainer: {
@@ -159,23 +173,21 @@ const layoutStyles = StyleSheet.create({
         marginRight:10,
         justifyContent:'space-between'
     },
+
     headerRow:{
         flexDirection :"row",
         justifyContent : 'space-between',
         width:"100%",
         height:"100%",
-        
         flex:1
     },
+
     descriptionRow:{
         flexDirection :"row",
         justifyContent : 'flex-start',
         width:"100%",
-        
-        
         flex:1
     }
-
 })
 
 const textStyles = StyleSheet.create({
