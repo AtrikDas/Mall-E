@@ -5,6 +5,9 @@ import {globalStyles} from '../../ThemesAndFonts';
 import Graph from './Graph';
 import AnotherGraph from './AnotherGraph';
 import Rotation from './Rotation';
+import StarGenerator from './ratingsComponent';
+
+// const Separator = () => <View style={styles.separator} />;
 
 export default class MallOverview extends React.Component {
 
@@ -41,12 +44,12 @@ export default class MallOverview extends React.Component {
                     </Text>
 
                     <Text style={[globalStyles.titleText, styles.customText]}>
-                    Ratings: <Text style={globalStyles.normalText}> 4/5</Text>
+                    Ratings: <StarGenerator rating = {4}/>
                     </Text>
 
                     <Text style={[globalStyles.titleText, styles.popupHeading1]}>Mall Crowd Density</Text>
 
-                    <View style={{paddingBottom:10}}><Graph/></View>
+                    <View style={{paddingBottom:10, paddingTop:10}}><Graph/></View>
                 
                     <Text style={[globalStyles.titleText, styles.popupHeading2]}>Floor Crowd Density</Text>
                     
@@ -104,4 +107,12 @@ const styles = StyleSheet.create({
         marginBottom: 0,
         fontWeight: 'bold',
     },
+
+    // separator: {
+    //     marginTop: 20,
+    //     marginBottom: 30,
+    //     marginVertical: 0,
+    //     borderBottomColor: '#000000',
+    //     borderBottomWidth: 1,
+    //   },
 })

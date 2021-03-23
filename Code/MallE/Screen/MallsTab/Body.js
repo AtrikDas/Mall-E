@@ -83,6 +83,7 @@ export default class Body extends React.Component {
                                     translateY: event.nativeEvent.layout.height
                                 })}> 
                                     <MallOverview  />
+
                                 </Animated.View>
                                 <Animated.View style = {{flex: 1, justifyContent:'center', alignItems:'center', transform: [{translateX: translateXTabTwo}, {translateY: -translateY}]}}>
                                     <RestarantsFragment/>
