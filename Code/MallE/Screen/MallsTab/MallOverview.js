@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, navigation} from 'react';
 import { StyleSheet, Text, View, Image, Dimensions, ScrollView } from 'react-native';
 import {globalStyles} from '../../ThemesAndFonts';
 
@@ -14,7 +14,8 @@ export default class MallOverview extends React.Component {
             <View style={styles.container}>
 
                 <View style = {styles.seperatorLine}>
-                    <Text style={[globalStyles.titleText, {textDecorationLine: 'underline'}]}>Jurong Point</Text>
+                    <Text style={[globalStyles.titleText, {textDecorationLine: 'underline'}]}>
+                        Jurong Point</Text>
                 </View>
 
                 <Image source={{

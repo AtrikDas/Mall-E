@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {navigation} from 'react';
 import {Animated, StyleSheet, Text, View, TouchableOpacity, ScrollView, Dimensions} from 'react-native';
 import {globalStyles} from '../../ThemesAndFonts';
 
@@ -16,7 +16,9 @@ export default class Body extends React.Component {
         translateX: new Animated.Value(0),
         translateXTabOne: new Animated.Value(0),
         translateXTabTwo: new Animated.Value(width),
-        translateY: -width
+        translateY: 0,
+        offsetX: 0,
+        offsetY: 0,
     };
 
     handleSlide = type => {
@@ -56,7 +58,7 @@ export default class Body extends React.Component {
     }
 
     render() {
-        let {active, tabOne, tabTwo, translateX, translateY, translateXTabOne, translateXTabTwo} = this.state;
+        let {active, tabOne, tabTwo, translateX, translateY, translateXTabOne, translateXTabTwo, offsetX, offsetY} = this.state;
         return(
             // Main Container
             <View style = {styles.container}>
@@ -90,22 +92,24 @@ export default class Body extends React.Component {
                 </View>
 
                 {/* Scrollable / Content and Details */}
-                <ScrollView styles = {styles.scrollView}>
+                <ScrollView styles = {[styles.scrollView]}>
                     
                     {/* Contents of TabOne */}
-                    <Animated.View style = {[styles.tabXContent, 
-                    {transform: [{translateX: translateXTabOne}]}]}
-                    onLayout = {event => this.setState({translateY: event.nativeEvent.layout.height})}> 
+                    <Animated.View style = {[styles.tabXContent,
+                    {transform: [{translateX: translateXTabOne}]},]}
+                    onLayout = {event => this.setState({offsetX: event.nativeEvent.layout.height})}> 
 
-                        <MallsFragment/>
+                        <MallOverview/>
 
-                    {/* Contents of TabTwo */}
                     </Animated.View>
+                    
+                    {/* Contents of TabTwo */}
                     <Animated.View style = {[styles.tabYContent, 
-                    {transform: [{translateX: translateXTabTwo}, {translateY: -translateY}]}]}>
+                    {transform: [{translateX: translateXTabTwo}, {translateY: -offsetX}]}, {marginBottom: -offsetY}]}
+                    onLayout = {event => this.setState({offsetY: event.nativeEvent.layout.height})}>
 
                         <RestarantsFragment/>
-
+ 
                     </Animated.View>
 
                 </ScrollView>
