@@ -10,18 +10,20 @@ import HomeScreen from './DrawerScreens/HomeScreen';
 import SettingsScreen from './DrawerScreens/SettingsScreen';
 import CustomSidebarMenu from './Components/CustomSidebarMenu';
 import NavigationDrawerHeader from './Components/NavigationDrawerHeader';
+import MapScreen from './MapScreens/MapScreen';
+import NavBar from '../../layouts/NavBar';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
 const homeScreenStack = ({navigation}) => {
   return (
-    <Stack.Navigator initialRouteName="HomeScreen">
+    <Stack.Navigator initialRouteName="NavBar">
       <Stack.Screen
-        name="HomeScreen"
-        component={HomeScreen}
+        name="NavBar"
+        component={NavBar}
         options={{
-          title: 'Home', //Set Header Title
+          title: 'Mall-E', //Set Header Title
           headerLeft: () => (
             <NavigationDrawerHeader navigationProps={navigation} />
           ),
@@ -83,11 +85,11 @@ const DrawerNavigatorRoutes = (props) => {
         options={{drawerLabel: 'Home Screen'}}
         component={homeScreenStack}
       />
-      <Drawer.Screen
+      {/* <Drawer.Screen
         name="settingScreenStack"
         options={{drawerLabel: 'Setting Screen'}}
         component={settingScreenStack}
-      />
+      /> */}
     </Drawer.Navigator>
   );
 };

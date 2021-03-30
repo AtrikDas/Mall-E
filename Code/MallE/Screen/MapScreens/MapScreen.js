@@ -9,6 +9,8 @@ import { Icon } from 'react-native-elements';
 import { LineChart, BarChart } from 'react-native-chart-kit';
 import { useNavigation } from '@react-navigation/native';
 
+import NavBar from '../../layouts/NavBar';
+
 export default function MapScreen() {
     const [isLoading, setLoading] = useState(true);
     const [places, setPlaces] = useState([]);
@@ -133,7 +135,7 @@ export default function MapScreen() {
                         </TouchableOpacity>
                     </View>
                 </View>
-            </Modal>
+            </Modal>        
         </View>
     );
 }

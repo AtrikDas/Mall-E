@@ -1,24 +1,38 @@
-import React from 'react';
-import { StyleSheet, View, Dimensions } from 'react-native';
+import React, { useState, useEffect, Component } from 'react';
+import { StyleSheet, View, Dimensions, ActivityIndicator, Text } from 'react-native';
 
 import { BarChart } from 'react-native-chart-kit';
 
-const data = {
-    labels: ['L3', 'L2', 'L1', 'B1', 'B2'],
-    datasets: [
-        { data: [20, 45, 28, 80, 99], },
-    ]
-}
+export default function AnotherGraph() {
+    const [isLoading, setLoading] = useState(true);
+    const [test, setData] = useState([]);
 
-export default class AnotherGraph extends React.Component {
-    render() {
-        return(
-            <View styles={{transform: [{rotate: "90deg"}]}}>
+    useEffect(() => {
+        fetch('https://jsonkeeper.com/b/W0L1')
+            .then((response) => response.json())
+            .then((json) => setData(json.data)) 
+            .catch((error) => console.error(error))
+            .finally(() => setLoading(false));
+    }, []);
 
-                <View styles = {styles.container}>
+    const data = {
+        labels: ['L3', 'L2', 'L1', 'B1', 'B2'],
+        datasets: [
+            { data: [20, 45, 28, 80, 99], },
+        ]
+    }
 
-                    <BarChart
-                        data={data}
+    return(
+        <View styles={{transform: [{rotate: "90deg"}]}}>
+            {test.map((item) => {
+                <Text>{item.name.toString()}</Text>
+                console.log(JSON.stringify(item.crowd))
+            })}
+            <View styles = {styles.container}>
+
+                {isLoading ? <ActivityIndicator/> : (
+                <BarChart
+                    data = {data}
                     width={Dimensions.get('window').width}
                     height={300}
                     withHorizontalLabels={true}
@@ -45,14 +59,14 @@ export default class AnotherGraph extends React.Component {
                     }}
                     horizontalLabelRotation={0}
                     verticalLabelRotation={0}
-                        />
-
-                </View>
+                />)}
 
             </View>
-        )
-    }
+
+        </View>
+    )
 }
+
 const styles = StyleSheet.create({
     container: {
         flex: 1, 

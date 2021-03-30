@@ -44,7 +44,7 @@ const LoginScreen = ({navigation}) => {
     }
     formBody = formBody.join('&');
 
-    fetch('http://localhost:3000/api/user/login', {
+    fetch('http://192.168.0.185:3000/api/user/login', {
       method: 'POST',
       body: formBody,
       headers: {
@@ -97,6 +97,9 @@ const LoginScreen = ({navigation}) => {
                   margin: 30,
                 }}
               />
+              <Text style={{color: '#307ecc', fontSize: 20, paddingBottom: 10}}>
+          Your Ultimate Mall Companion app!
+        </Text>
             </View>
             <View style={styles.SectionStyle}>
               <TextInput
@@ -162,7 +165,7 @@ const styles = StyleSheet.create({
   mainBody: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: '#307ecc',
+    backgroundColor: '#FFFFFF',
     alignContent: 'center',
   },
   SectionStyle: {
@@ -174,7 +177,7 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   buttonStyle: {
-    backgroundColor: '#7DE24E',
+    backgroundColor: '#307ecc',
     borderWidth: 0,
     color: '#FFFFFF',
     borderColor: '#7DE24E',
@@ -193,7 +196,7 @@ const styles = StyleSheet.create({
   },
   inputStyle: {
     flex: 1,
-    color: 'white',
+    color: '#307ecc',
     paddingLeft: 15,
     paddingRight: 15,
     borderWidth: 1,
@@ -201,7 +204,7 @@ const styles = StyleSheet.create({
     borderColor: '#dadae8',
   },
   registerTextStyle: {
-    color: '#FFFFFF',
+    color: '#307ecc',
     textAlign: 'center',
     fontWeight: 'bold',
     fontSize: 14,
