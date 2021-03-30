@@ -11,7 +11,7 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-
+import config from "../config.json";
 import Loader from '../Components/Loader';
 
 const RegisterScreen = (props) => {
@@ -71,7 +71,7 @@ const RegisterScreen = (props) => {
     }
     formBody = formBody.join('&');
 
-    fetch('http://192.168.0.185:3000/api/user/register', {
+    fetch(`http://${config.ipAddress}:3000/api/user/register`, {
       method: 'POST',
       body: formBody,
       headers: {

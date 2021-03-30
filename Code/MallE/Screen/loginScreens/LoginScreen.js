@@ -11,7 +11,7 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
 } from 'react-native';
-
+import config from "../config.json"
 import AsyncStorage from '@react-native-community/async-storage';
 
 import Loader from '../Components/Loader';
@@ -44,7 +44,7 @@ const LoginScreen = ({navigation}) => {
     }
     formBody = formBody.join('&');
 
-    fetch('http://192.168.0.185:3000/api/user/login', {
+    fetch(`http://${config.ipAddress}:3000/api/user/login`, {
       method: 'POST',
       body: formBody,
       headers: {
