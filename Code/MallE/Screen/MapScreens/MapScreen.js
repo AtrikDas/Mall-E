@@ -23,10 +23,12 @@ export default function MapScreen() {
 
     const navigation = useNavigation();
 
-    const onPressed = () => {
+    const onPressed = async () => {
         if(!isPressed){
             setIsPressed(true);
             AsyncStorage.setItem('bookmarks', chosenMall.name);
+            var value = await AsyncStorage.getItem('bookmarks');
+            console.log(value)
         }else{
             setIsPressed(false);
             AsyncStorage.removeItem('bookmarks');
