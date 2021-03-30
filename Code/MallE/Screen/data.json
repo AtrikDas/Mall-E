@@ -1,0 +1,36 @@
+{
+    "data": [{
+            "id": 1,
+            "name": "Jurong Point",
+            "latitude": 1.34,
+            "longitude": 103.7041,
+            "address": "1 Jurong West Central 2, Singapore 648886",
+            "imageURL": "https://upload.wikimedia.org/wikipedia/commons/a/a0/JP2entrance2.jpg",
+            "restaurants": []
+        },
+        {
+            "id": 3,
+            "name": "ION Orchard",
+            "latitude": 1.3039,
+            "longitude": 103.832,
+            "address": "2 Orchard Turn, ION Orchard, Singapore 238801",
+            "imageURL": "https://i.ytimg.com/vi/7d0V5QuQDP0/maxresdefault.jpg"
+        },
+        {
+            "id": 4,
+            "name": "City Square Mall",
+            "latitude": 1.3112,
+            "longitude": 103.8567,
+            "address": "180 Kitchener Rd, Singapore 208539",
+            "imageURL": "https://www.citysquaremall.com.sg/wp-content/uploads/2019/09/about_the_mall.jpg"
+        },
+        {
+            "id": 5,
+            "name": "The Shoppes at Marina Bay Sands",
+            "latitude": 1.2837,
+            "longitude": 103.8592,
+            "address": "2 Bayfront Ave Marina Bay Sands, Singapore 018972",
+            "imageURL": "https://static.straitstimes.com.sg/s3fs-public/articles/2020/09/17/rk_marinabaysands_170920.jpg"
+        }
+    ]
+}
