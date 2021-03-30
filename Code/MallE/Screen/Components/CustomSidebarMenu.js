@@ -26,7 +26,6 @@ const CustomSidebarMenu = (props) => {
       <View style={stylesSidebar.profileHeaderLine} />
 
       <DrawerContentScrollView {...props}>
-        <DrawerItemList {...props} />
         <DrawerItem
           label={({color}) => 
             <Text style={{color: '#d8d8d8'}}>
