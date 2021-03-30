@@ -1,6 +1,4 @@
 import React, { useState, useEffect, Component } from 'react';
-
-import type { Node } from 'react';
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 
 import { Text, ActivityIndicator, StyleSheet, View, Modal, Button, Image, Dimensions } from 'react-native';
