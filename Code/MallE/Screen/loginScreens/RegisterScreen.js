@@ -10,15 +10,15 @@ import {
   Keyboard,
   TouchableOpacity,
   ScrollView,
-} from 'react-native'; 
+} from 'react-native';
 
 import Loader from '../Components/Loader';
 
 const RegisterScreen = (props) => {
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
-  const [userAge, setUserAge] = useState('');
-  const [userAddress, setUserAddress] = useState('');
+  // const [userAge, setUserAge] = useState('');
+  // const [userAddress, setUserAddress] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [errortext, setErrortext] = useState('');
@@ -28,8 +28,8 @@ const RegisterScreen = (props) => {
   ] = useState(false);
 
   const emailInputRef = createRef();
-  const ageInputRef = createRef();
-  const addressInputRef = createRef();
+  // const ageInputRef = createRef();
+  // const addressInputRef = createRef();
   const passwordInputRef = createRef();
 
   const handleSubmitButton = () => {
@@ -42,14 +42,14 @@ const RegisterScreen = (props) => {
       alert('Please fill Email');
       return;
     }
-    if (!userAge) {
-      alert('Please fill Age');
-      return;
-    }
-    if (!userAddress) {
-      alert('Please fill Address');
-      return;
-    }
+    // if (!userAge) {
+    //   alert('Please fill Age');
+    //   return;
+    // }
+    // if (!userAddress) {
+    //   alert('Please fill Address');
+    //   return;
+    // }
     if (!userPassword) {
       alert('Please fill Password');
       return;
@@ -59,8 +59,8 @@ const RegisterScreen = (props) => {
     var dataToSend = {
       name: userName,
       email: userEmail,
-      age: userAge,
-      address: userAddress,
+      // age: userAge,
+      // address: userAddress,
       password: userPassword,
     };
     var formBody = [];
@@ -71,7 +71,7 @@ const RegisterScreen = (props) => {
     }
     formBody = formBody.join('&');
 
-    fetch('http://localhost:3000/api/user/register', {
+    fetch('http://192.168.0.185:3000/api/user/register', {
       method: 'POST',
       body: formBody,
       headers: {
@@ -106,7 +106,7 @@ const RegisterScreen = (props) => {
       <View
         style={{
           flex: 1,
-          backgroundColor: '#307ecc',
+          backgroundColor: '#FFFFFF',
           justifyContent: 'center',
         }}>
         <Image
@@ -116,7 +116,7 @@ const RegisterScreen = (props) => {
             resizeMode: 'contain',
             alignSelf: 'center'
           }}
-        />
+        />        
         <Text style={styles.successTextStyle}>
           Registration Successful
         </Text>
@@ -130,7 +130,7 @@ const RegisterScreen = (props) => {
     );
   }
   return (
-    <View style={{flex: 1, backgroundColor: '#307ecc'}}>
+    <View style={{flex: 1, backgroundColor: '#FFFFFF'}}>
       <Loader loading={loading} />
       <ScrollView
         keyboardShouldPersistTaps="handled"
@@ -148,6 +148,9 @@ const RegisterScreen = (props) => {
               margin: 30,
             }}
           />
+          <Text style={{color: '#307ecc', fontSize: 20, paddingBottom: 10}}>
+          Your Ultimate Mall Companion app!
+        </Text>
         </View>
         <KeyboardAvoidingView enabled>
           <View style={styles.SectionStyle}>
@@ -201,7 +204,7 @@ const RegisterScreen = (props) => {
               blurOnSubmit={false}
             />
           </View>
-          <View style={styles.SectionStyle}>
+          {/* <View style={styles.SectionStyle}>
             <TextInput
               style={styles.inputStyle}
               onChangeText={(UserAge) => setUserAge(UserAge)}
@@ -233,7 +236,7 @@ const RegisterScreen = (props) => {
               onSubmitEditing={Keyboard.dismiss}
               blurOnSubmit={false}
             />
-          </View>
+          </View> */}
           {errortext != '' ? (
             <Text style={styles.errorTextStyle}>
               {errortext}
@@ -253,6 +256,12 @@ const RegisterScreen = (props) => {
 export default RegisterScreen;
 
 const styles = StyleSheet.create({
+  mainBody: {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: '#FFFFFF',
+    alignContent: 'center',
+  },
   SectionStyle: {
     flexDirection: 'row',
     height: 40,
@@ -262,10 +271,10 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   buttonStyle: {
-    backgroundColor: '#7DE24E',
+    backgroundColor: '#307ecc',
     borderWidth: 0,
     color: '#FFFFFF',
-    borderColor: '#7DE24E',
+    borderColor: '#307ecc',
     height: 40,
     alignItems: 'center',
     borderRadius: 30,
@@ -281,7 +290,7 @@ const styles = StyleSheet.create({
   },
   inputStyle: {
     flex: 1,
-    color: 'white',
+    color: '#307ecc',
     paddingLeft: 15,
     paddingRight: 15,
     borderWidth: 1,

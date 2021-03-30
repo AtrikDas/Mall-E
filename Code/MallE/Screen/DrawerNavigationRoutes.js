@@ -10,16 +10,17 @@ import HomeScreen from './DrawerScreens/HomeScreen';
 import SettingsScreen from './DrawerScreens/SettingsScreen';
 import CustomSidebarMenu from './Components/CustomSidebarMenu';
 import NavigationDrawerHeader from './Components/NavigationDrawerHeader';
+import MapScreen from './MapScreens/MapScreen';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
 const homeScreenStack = ({navigation}) => {
   return (
-    <Stack.Navigator initialRouteName="HomeScreen">
+    <Stack.Navigator initialRouteName="MapScreen">
       <Stack.Screen
-        name="HomeScreen"
-        component={HomeScreen}
+        name="MapScreen"
+        component={MapScreen}
         options={{
           title: 'Home', //Set Header Title
           headerLeft: () => (
