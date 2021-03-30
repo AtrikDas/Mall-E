@@ -2,8 +2,6 @@
 
 Run "npm i" both from Code directory and then from Code/MallE directory to install all the node modules.
 
-Then run "nodemon run server" from Code directory to run the server
-
 To run the project on an Android Virtual Device or on real debugging device:
 IF YOU ARE USING REACT CLI:
 
@@ -12,5 +10,13 @@ IF YOU ARE USING REACT CLI:
 
 link for vector icons
 https://oblador.github.io/react-native-vector-icons/
-IF YOU ARE USING EXPO:
-@Melvin pls fill this out
+
+
+To start server for login/register:
+1. Go to server folder 
+2. Type 'npm i'
+3. Type 'npm start'
+
+Test credentials for login:
+Email: test123@test.com
+Password: test123
