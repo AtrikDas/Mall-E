@@ -1,0 +1,48 @@
+{
+    "business_status": "OPERATIONAL",
+    "formatted_address": "604 Sembawang Rd, Singapore 758459",
+    "geometry": {
+        "location": {
+            "lat": 1.4419459,
+            "lng": 103.8250936
+        },
+        "viewport": {
+            "northeast": {
+                "lat": 1.443040479892722,
+                "lng": 103.8261878298927
+            },
+            "southwest": {
+                "lat": 1.440340820107278,
+                "lng": 103.8234881701073
+            }
+        }
+    },
+    "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/shopping-71.png",
+    "name": "Sembawang Shopping Centre",
+    "opening_hours": {
+        "open_now": true
+    },
+    "photos": [
+        {
+            "height": 2916,
+            "html_attributions": [
+                "<a href=\"https://maps.google.com/maps/contrib/112216745376003042680\">Moke Tsing</a>"
+            ],
+            "photo_reference": "ATtYBwLH_F47z-FCs3qBr1ibEPrvJGSnTN2bg0auV5LTe_E-OO8Q3rG_EGdyzeeeifGEvi70oCA78A5jhOpExf7i7H1mxriQ18OnxN9WdtjL6ho-y6Z0MEn84mAZFOx63IEZ3iMm9-WdnQErzy_aJ2LaU9mWdWVUZvDIFmL6NZwh74-2MyEa",
+            "width": 5184
+        }
+    ],
+    "place_id": "ChIJ5-zrBoEU2jERhLnuZ0bgvUw",
+    "plus_code": {
+        "compound_code": "CRRG+Q2 Singapore",
+        "global_code": "6PH5CRRG+Q2"
+    },
+    "rating": 4,
+    "reference": "ChIJ5-zrBoEU2jERhLnuZ0bgvUw",
+    "types": [
+        "shopping_mall",
+        "point_of_interest",
+        "establishment"
+    ],
+    "user_ratings_total": 4146
+}

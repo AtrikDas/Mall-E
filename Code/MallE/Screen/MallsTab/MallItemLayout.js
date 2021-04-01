@@ -11,9 +11,8 @@ import { Row } from 'native-base';
 export default function MallItemList(props) {
 
     const navigation = useNavigation();
-
     const onPressFunction = () => {
-        navigation.navigate('MallsDetail', props.mallsItem)
+        navigation.navigate('Body', props.mallsItem)
     }
 
     const TimeComponent = () => {

@@ -13,6 +13,7 @@ import Body from "../Screen/MallsTab/Body";
 import MallOverview from "../Screen/MallsTab/MallOverview"
 import MapScreen from '../Screen/MapScreens/MapScreen'
 import Icon from 'react-native-vector-icons/Entypo';
+import MallList from "../Screen/MallsTab/MallsFragment"
 const Stack = createStackNavigator();
 
 function Home() {
@@ -24,9 +25,10 @@ function Home() {
 function Malls() {
     return (
         <NavigationContainer independent={true}>
-            <Stack.Navigator initialRouteName="Body" screenOptions={{
+            <Stack.Navigator initialRouteName="MallList" screenOptions={{
                         headerShown: false
                     }}>
+                <Stack.Screen name = "MallList" component = {MallList}/>
                 <Stack.Screen name="Body" component={Body} />
                 <Stack.Screen name="RestaurantsDetail" component={RestaurantsDetail} />
             </Stack.Navigator>
