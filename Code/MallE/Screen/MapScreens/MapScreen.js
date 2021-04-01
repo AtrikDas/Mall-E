@@ -50,12 +50,33 @@ export default function MapScreen() {
     };
 
     useEffect(() => {
-        fetch('https://jsonkeeper.com/b/IGBH')
-            .then((response) => response.json())
-            .then((json) => setPlaces(json.data))
-            .catch((error) => console.error(error))
-            .finally(() => setLoading(false));            
+        // fetch('https://jsonkeeper.com/b/IGBH')
+        //     .then((response) => response.json())
+        //     .then((json) => setPlaces(json.data))
+        //     .catch((error) => console.error(error))
+        //     .finally(() => setLoading(false));
+            
+        // using google places api to get all the shopping malls in Singapore
+        var requestOptions = {
+            method: 'GET',
+            redirect: 'follow'
+          };
+          
+          fetch("https://maps.googleapis.com/maps/api/place/textsearch/json?query=Shopping+malls+in+Singapore&key=AIzaSyA-XRcHLWd3GVfU0RE6XpbRn86XXG4SsEI", requestOptions)
+            .then(response => response.json())
+            .then(results => setPlaces(results.results))
+            .catch(error => console.log('error', error))
+            .finally(() => setLoading(false));
+            
+        
+        getMallPopularTimes();
     }, []);
+
+    const getMallPopularTimes = () => {
+        // for(let i = 0; i<places.length; i++){
+        //     places[i].
+        // }
+    }
 
     return (
         <View>
@@ -72,15 +93,15 @@ export default function MapScreen() {
                 >
                     {places.map((place) => (
                         <Marker
-                            key={place.id}
+                            key={place.place_id}
                             coordinate={{
-                                latitude: place.latitude,
-                                longitude: place.longitude,
+                                latitude: place.geometry.location.lat,
+                                longitude: place.geometry.location.lng,
                             }}
                             title={place.name}
-                            description={place.address}
+                            description={place.formatted_address}
                             onPress={() => { setTimeout(() => { setPopupStatus(true); setChosenMall(place); }, 300) }}
-                            pinColor={colors[place.id - 1]}
+                            pinColor="red"
                         />
                     ))}
                 </MapView>
@@ -103,11 +124,9 @@ export default function MapScreen() {
                         <Text style={styles.popupHeading}>{chosenMall.name}</Text>
                         <Image
                             style={styles.image}
-                            source={{
-                                uri: chosenMall.imageURL,
-                            }}
+                            source={{uri:"https://maps.googleapis.com/maps/api/place/photo?key=AIzaSyA-XRcHLWd3GVfU0RE6XpbRn86XXG4SsEI&photoreference=ATtYBwJxp6E0bfUJTYikTlpVdy4ZXYh3NUW6_H9I2PLgb1gy2lR7kInNqoKKVkbWi9ncu-SJUDzyuskqZ7PvYL2unEgvesm3rHgz_K3RE91luQEfA1mZjuY12o5d0ZbaXcFuX4VV9Sw-XUUClrlHGMkWCYH12kMvltJpPfn7yZ0Ha1tseCsy&maxwidth=400"}}
                         />
-                        <Text style={styles.popupText}><Text style={{ fontWeight: 'bold' }}>Address:</Text> {chosenMall.address}</Text>
+                        <Text style={styles.popupText}><Text style={{ fontWeight: 'bold' }}>Address:</Text> {chosenMall.formatted_address}</Text>
                         <Text style={styles.popupText}><Text style={{ fontWeight: 'bold' }}>Opening Hours:</Text> 10 am - 10 pm</Text>
                         
                         <Card>
