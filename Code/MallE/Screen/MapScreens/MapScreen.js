@@ -1,6 +1,4 @@
 import React, { useState, useEffect, Component } from 'react';
-
-import type { Node } from 'react';
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 
 import { Text, ActivityIndicator, StyleSheet, View, Modal, Button, Image, Dimensions } from 'react-native';
@@ -8,6 +6,8 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Icon } from 'react-native-elements';
 import { LineChart, BarChart } from 'react-native-chart-kit';
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-community/async-storage';
+import {CheckBox, CardItem, Card} from "native-base"
 
 import NavBar from '../../layouts/NavBar';
 
@@ -16,9 +16,22 @@ export default function MapScreen() {
     const [places, setPlaces] = useState([]);
     const [showPopup, setPopupStatus] = useState(false);
     const [chosenMall, setChosenMall] = useState([]);
+    const [isPressed, setIsPressed] = useState(false);
     const colors = ['rgb(0, 255, 128)', 'rgb(255, 128, 128)', 'rgb(255, 255, 0)', 'rgb(0, 255, 128)', 'rgb(255, 255, 0)']
 
     const navigation = useNavigation();
+
+    const onPressed = async () => {
+        if(!isPressed){
+            setIsPressed(true);
+            AsyncStorage.setItem('bookmarks', chosenMall.name);
+            var value = await AsyncStorage.getItem('bookmarks');
+            console.log(value)
+        }else{
+            setIsPressed(false);
+            AsyncStorage.removeItem('bookmarks');
+        }        
+    };
 
     const data = {
         labels: ["9 am", "12 pm", "3 pm", "6 pm", "9 pm"],
@@ -41,7 +54,7 @@ export default function MapScreen() {
             .then((response) => response.json())
             .then((json) => setPlaces(json.data))
             .catch((error) => console.error(error))
-            .finally(() => setLoading(false));
+            .finally(() => setLoading(false));            
     }, []);
 
     return (
@@ -96,6 +109,16 @@ export default function MapScreen() {
                         />
                         <Text style={styles.popupText}><Text style={{ fontWeight: 'bold' }}>Address:</Text> {chosenMall.address}</Text>
                         <Text style={styles.popupText}><Text style={{ fontWeight: 'bold' }}>Opening Hours:</Text> 10 am - 10 pm</Text>
+                        
+                        <Card>
+                            <CardItem body>
+                                <Text style={{marginLeft:20}}>Bookmark: </Text>
+                                <CheckBox checked={isPressed} 
+                                    style={{marginLeft:30}}
+                                    onPress={() => onPressed()}
+                                />
+                            </CardItem>
+                        </Card>
                         <Text style={{ fontWeight: 'bold', marginTop: 5 }}>Today's Crowd Density Trend:</Text>
                         <LineChart
                             data={data}

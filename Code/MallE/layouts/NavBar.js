@@ -14,6 +14,8 @@ import MallOverview from "../Screen/MallsTab/MallOverview"
 import MapScreen from '../Screen/MapScreens/MapScreen'
 import Icon from 'react-native-vector-icons/Entypo';
 import MallList from "../Screen/MallsTab/MallsFragment"
+import Profile from "../Screen/ProfileScreens/Profile";
+
 const Stack = createStackNavigator();
 
 function Home() {
@@ -37,11 +39,9 @@ function Malls() {
     );
 }
 
-function Profile() {
+function ProfileScreen() {
     return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>Profile!</Text>
-        </View>
+        <Profile/>
     );
 }
 
@@ -89,7 +89,7 @@ export default function MyNavBar() {
             />
             <Tab.Screen
                 name="Profile"
-                component={Profile}
+                component={ProfileScreen}
                 options={{
                     tabBarLabel: 'Profile',
                     tabBarIcon: ({ color, size }) => (
