@@ -21,11 +21,16 @@ export default function MapScreen() {
 
     const navigation = useNavigation();
 
+    componentDidMount = () => {
+        setIsPressed(false);
+    }
+
     const onPressed = async () => {
+        let bookmarks = []
         if(!isPressed){
             setIsPressed(true);
             const existingBookmarks = await AsyncStorage.getItem('bookmarks')
-            let bookmarks = JSON.parse(existingBookmarks);
+            bookmarks = JSON.parse(existingBookmarks);
             if( !bookmarks ){
                 bookmarks = []
             }
@@ -37,15 +42,11 @@ export default function MapScreen() {
                 .catch( ()=>{
                     console.log('There was an error')
                     } );
-            // var value = await AsyncStorage.getItem('bookmarks')
-            // .then(req => JSON.parse(req))
-            // .then(json => console.log(json))
-            // .catch(error => console.log('error!'));
-            // console.log(value)
         }else{
             setIsPressed(false);
-            // AsyncStorage.removeItem('bookmarks');
-        }        
+        }     
+        
+        
     };
 
     const data = {
@@ -93,6 +94,10 @@ export default function MapScreen() {
         // }
     }
 
+    const handleClose = () => {
+        setIsPressed(false);
+      };
+
     return (
         <View>
             {isLoading ? <ActivityIndicator /> : (
@@ -125,6 +130,10 @@ export default function MapScreen() {
                 transparent={true}
                 visible={showPopup}
                 animationType='slide'
+                onRequestClose={() => {
+                    handleClose();
+                    setPopupStatus(!showPopup);
+                  }}
             >
                 <View style={styles.outsidePopup}>
                     <View style={styles.insidePopup}>
