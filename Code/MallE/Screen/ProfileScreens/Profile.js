@@ -8,8 +8,12 @@ const SettingsScreen = () => {
     const [name, setName] = useState('');
 
     onPressReload = async () => {
-        var value = await AsyncStorage.getItem('bookmarks');
-        console.log(value)
+        const value = await AsyncStorage.getItem('bookmarks');
+        setName(value)
+        console.log(name)
+    }
+    onPressDelete = async () => {
+        const value = await AsyncStorage.removeItem('bookmarks');
         setName(value)
         console.log(name)
     }
@@ -33,7 +37,18 @@ const SettingsScreen = () => {
           </Text>
           <Button
           onPress={onPressReload}
-          title="Reload"
+          title="Show Bookmarks"
+          color="#841584"
+          />
+          <Text
+            style={{
+              fontSize: 20,
+              textAlign: 'center',
+            }}>            
+          </Text>
+          <Button
+          onPress={onPressDelete}
+          title="Delete Bookmarks"
           color="#841584"
           />
         </View>
