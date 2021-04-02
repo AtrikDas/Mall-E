@@ -80,10 +80,15 @@ export default function MapScreen() {
           
           fetch("https://maps.googleapis.com/maps/api/place/textsearch/json?query=Shopping+malls+in+Singapore&key=AIzaSyA-XRcHLWd3GVfU0RE6XpbRn86XXG4SsEI", requestOptions)
             .then(response => response.json())
-            .then(results => setPlaces(results.results))
+            .then(results => {
+                setPlaces(results.results);
+                AsyncStorage.setItem("mallList", JSON.stringify(results)).then(() => console.log("set mallList")).catch((e)=> console.log(e));
+            })
             .catch(error => console.log('error', error))
             .finally(() => setLoading(false));
             
+
+
         
         getMallPopularTimes();
     }, []);
