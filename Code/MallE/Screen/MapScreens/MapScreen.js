@@ -24,12 +24,27 @@ export default function MapScreen() {
     const onPressed = async () => {
         if(!isPressed){
             setIsPressed(true);
-            AsyncStorage.setItem('bookmarks', chosenMall.name);
-            var value = await AsyncStorage.getItem('bookmarks');
-            console.log(value)
+            const existingBookmarks = await AsyncStorage.getItem('bookmarks')
+            let bookmarks = JSON.parse(existingBookmarks);
+            if( !bookmarks ){
+                bookmarks = []
+            }
+            bookmarks.push(chosenMall.name);
+            AsyncStorage.setItem('bookmarks', JSON.stringify(bookmarks))
+            .then( ()=>{
+                console.log(bookmarks)
+                } )
+                .catch( ()=>{
+                    console.log('There was an error')
+                    } );
+            // var value = await AsyncStorage.getItem('bookmarks')
+            // .then(req => JSON.parse(req))
+            // .then(json => console.log(json))
+            // .catch(error => console.log('error!'));
+            // console.log(value)
         }else{
             setIsPressed(false);
-            AsyncStorage.removeItem('bookmarks');
+            // AsyncStorage.removeItem('bookmarks');
         }        
     };
 

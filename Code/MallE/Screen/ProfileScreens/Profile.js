@@ -8,7 +8,7 @@ const SettingsScreen = () => {
     const [name, setName] = useState('');
 
     onPressReload = async () => {
-        var value = await AsyncStorage.getItem('bookmarks');
+        const value = await AsyncStorage.getItem('bookmarks');
         console.log(value)
         setName(value)
         console.log(name)
