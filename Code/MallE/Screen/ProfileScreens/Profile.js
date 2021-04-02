@@ -1,20 +1,22 @@
 // Import React and Component
 import React, { useState, useEffect, Component } from 'react';
-import {View, Text, SafeAreaView, Button} from 'react-native';
+import {View, Text, SafeAreaView, Button, StyleSheet} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 
 const SettingsScreen = () => {
 
-    const [name, setName] = useState('');
+    const [name, setName] = useState([]);
 
     onPressReload = async () => {
-        const value = await AsyncStorage.getItem('bookmarks');
-        setName(value)
+        var value = await AsyncStorage.getItem('bookmarks');
+        value = value.replace(/[\[\]"]+/g,'');
+        var array = value.split(",")
+        setName(array)
         console.log(name)
     }
     onPressDelete = async () => {
-        const value = await AsyncStorage.removeItem('bookmarks');
-        setName(value)
+        var value = await AsyncStorage.removeItem('bookmarks');        
+        setName(value)        
         console.log(name)
     }
       
@@ -31,9 +33,8 @@ const SettingsScreen = () => {
             style={{
               fontSize: 20,
               textAlign: 'center',
-              marginBottom: 16,
             }}>
-            {name}
+            {name.map(place => {return (<Text>{place} {"\n"}</Text>)})}
           </Text>
           <Button
           onPress={onPressReload}
@@ -58,3 +59,10 @@ const SettingsScreen = () => {
 };
 
 export default SettingsScreen;
+
+const styles = StyleSheet.create({
+    TextStyle:{
+        fontSize : 25,
+         textAlign: 'center'
+      }
+  });
