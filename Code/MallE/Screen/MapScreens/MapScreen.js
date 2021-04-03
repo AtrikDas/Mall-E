@@ -125,7 +125,7 @@ export default function MapScreen() {
             .then(response => response.json())
             .then(results => {
                 setPlaces(results.results);
-                AsyncStorage.setItem("mallList", JSON.stringify(results)).then(() => console.log("set mallList")).catch((e)=> console.log(e));
+                AsyncStorage.setItem("mallList", JSON.stringify(results.results)).then(() => console.log("set mallList")).catch((e)=> console.log(e));
             })
             .catch(error => console.log('error', error))
             .finally(() => setLoading(false));

@@ -9,17 +9,28 @@ import RestarantsFragment from "./RestarantsFragment"
 const { width } = Dimensions.get("window");
 
 export default class Body extends React.Component {
-    state = {
-        active: 0,
-        tabOne: 0,
-        tabTwo: 0,
-        translateX: new Animated.Value(0),
-        translateXTabOne: new Animated.Value(0),
-        translateXTabTwo: new Animated.Value(width),
-        translateY: 0,
-        offsetX: 0,
-        offsetY: 0,
-    };
+
+    constructor(props) {
+        super(props);
+        
+       
+        this.state = {
+            mallDetail: {},
+          active: 0,
+          tabOne: 0,
+          tabTwo: 0,
+          translateX: new Animated.Value(0),
+          translateXTabOne: new Animated.Value(0),
+          translateXTabTwo: new Animated.Value(width),
+          translateY: 0,
+          offsetX: 0,
+          offsetY: 0,
+        };
+      }
+      
+      componentDidMount(){
+          console.log(JSON.stringify(this.props));
+      }
 
     handleSlide = type => {
         let {active, tabOne, tabTwo, translateX, translateXTabOne, translateXTabTwo} = this.state;
@@ -57,7 +68,20 @@ export default class Body extends React.Component {
         }
     }
 
+    componentDidMount(){
+            var requestOptions = {
+            method: 'GET',
+            redirect: 'follow'
+          };
+          
+          fetch(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${this.props.mallItem.place_id}&key=AIzaSyA-XRcHLWd3GVfU0RE6XpbRn86XXG4SsEI`, requestOptions)
+            .then(response => response.json())
+            .then(results => this.setState({mallDetail:results.result}))
+            .catch(error => console.log('error', error))
+        }
+        
     render() {
+
         let {active, tabOne, tabTwo, translateX, translateY, translateXTabOne, translateXTabTwo, offsetX, offsetY} = this.state;
         return(
             // Main Container
@@ -99,7 +123,7 @@ export default class Body extends React.Component {
                     {transform: [{translateX: translateXTabOne}]},]}
                     onLayout = {event => this.setState({offsetX: event.nativeEvent.layout.height})}> 
 
-                        <MallOverview/>
+                        <MallOverview mallDetail={this.state.mallDetail}/>
 
                     </Animated.View>
                     

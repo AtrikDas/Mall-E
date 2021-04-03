@@ -8,6 +8,13 @@ import StarGenerator from './ratingsComponent';
 
 export default class MallOverview extends React.Component {
 
+    // MallOverview(props) {
+        
+    //     this.state = {
+    //         chosenMall: props.mallsItem
+    //     }
+    //   }
+
     render() {
         return(
             // Main Container
@@ -15,14 +22,14 @@ export default class MallOverview extends React.Component {
 
                 <View style = {styles.seperatorLine}>
                     <Text style={[globalStyles.titleText, {textDecorationLine: 'underline'}]}>
-                        Jurong Point</Text>
+                        {this.props.mallDetail.name}</Text>
                 </View>
 
-                <Image source={{
+                {/* <Image source={{
                     width: '100%',
                     height: 300,
-                    uri:'https://upload.wikimedia.org/wikipedia/commons/a/a0/JP2entrance2.jpg'}}>
-                </Image>
+                    uri:`https://maps.googleapis.com/maps/api/place/photo?key=AIzaSyA-XRcHLWd3GVfU0RE6XpbRn86XXG4SsEI&photoreference=${this.props.mallDetail.photos[0].photo_reference}&maxheight=300`}}>
+                </Image> */}
 
                 <View style={styles.textDetailContainer}>
 
@@ -30,12 +37,12 @@ export default class MallOverview extends React.Component {
 
                         <Text style={[globalStyles.titleText, styles.customText]}>
                         Website: 
-                        <Text style={globalStyles.normalText}> www.jurongpoint.com.sg</Text>
+                        <Text style={globalStyles.normalText}>{this.props.mallDetail.website}</Text>
                         </Text>
 
                         <Text style={[globalStyles.titleText, styles.customText]}>
                         Address: 
-                        <Text style={globalStyles.normalText}> 1 Jurong West Central 2, Singapore 648886</Text>
+                        <Text style={globalStyles.normalText}>{this.props.mallDetail.formatted_address}</Text>
                         </Text>
 
                         <Text style={[globalStyles.titleText, styles.customText]}>
@@ -45,12 +52,12 @@ export default class MallOverview extends React.Component {
 
                         <Text style={[globalStyles.titleText, styles.customText]}>
                         Contact: 
-                        <Text style={globalStyles.normalText}> +65 6834 3126</Text>
+                        <Text style={globalStyles.normalText}>{this.props.mallDetail.formatted_phone_number}</Text>
                         </Text>
 
                         <Text style={[globalStyles.titleText, styles.customText]}>
                         Ratings: 
-                        <StarGenerator rating = {4}/>
+                        <StarGenerator rating = {Math.floor( this.props.mallDetail.rating)}/>
                         </Text>
 
                     </View>
