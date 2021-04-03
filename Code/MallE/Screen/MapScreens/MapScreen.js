@@ -4,12 +4,15 @@ import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import { Text, ActivityIndicator, StyleSheet, View, Modal, Button, Image, Dimensions } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Icon } from 'react-native-elements';
-import { LineChart, BarChart } from 'react-native-chart-kit';
+// import { LineChart, BarChart } from 'react-native-chart-kit';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage';
 import {CheckBox, CardItem, Card} from "native-base"
 
 import NavBar from '../../layouts/NavBar';
+import { LineChart, Grid, XAxis, YAxis } from 'react-native-svg-charts'
+
+
 
 export default function MapScreen() {
     const [isLoading, setLoading] = useState(true);
@@ -17,8 +20,48 @@ export default function MapScreen() {
     const [showPopup, setPopupStatus] = useState(false);
     const [chosenMall, setChosenMall] = useState([]);
     const [isPressed, setIsPressed] = useState(false);
-    const colors = ['rgb(0, 255, 128)', 'rgb(255, 128, 128)', 'rgb(255, 255, 0)', 'rgb(0, 255, 128)', 'rgb(255, 255, 0)']
-
+    const colors = ['rgb(0, 255, 128)', 'rgb(255, 128, 128)', 'rgb(255, 255, 0)', 'rgb(0, 255, 128)', 'rgb(255, 255, 0)'];
+    const data2 = [50, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80];
+    const data4 =  [70 + Math.random() * (100 - 70),
+                    50 + Math.random() * (80 - 50),
+                    50 + Math.random() * (80 - 50),
+                    50 + Math.random() * (80 - 50),
+                    50 + Math.random() * (80 - 50),
+                    50 + Math.random() * (80 - 50),
+                    50 + Math.random() * (80 - 50),
+                    50 + Math.random() * (80 - 50),
+                    50 + Math.random() * (80 - 50),
+                    50 + Math.random() * (80 - 50),
+                    20 + Math.random() * (50 - 20),
+                    80 + Math.random() * (100 - 80),
+                    80 + Math.random() * (100 - 80),
+                    80 + Math.random() * (100 - 80),
+                    80 + Math.random() * (100 - 80),
+                    60 + Math.random() * (95 - 60)];
+    
+    const data3 = [ 80,
+                    85,
+                    55,
+                    40,
+                    60,
+                    50,
+                    30,
+                    25,
+                    35,
+                    50,
+                    80,
+                    85,
+                    90,
+                    70,
+                    60,
+                    10];
+    
+    const axesSvg = { fontSize: 12, fill: 'rgb(32,32,32)' };
+    const verticalContentInset = { top: 10, bottom: 10 }
+    const xAxisHeight = 30
+    
+    
+    
     const navigation = useNavigation();
 
     componentDidMount = () => {
@@ -102,7 +145,7 @@ export default function MapScreen() {
     const handleClose = () => {
         setIsPressed(false);
       };
-
+    
     return (
         <View>
             {isLoading ? <ActivityIndicator /> : (
@@ -125,7 +168,7 @@ export default function MapScreen() {
                             }}
                             title={place.name}
                             description={place.formatted_address}
-                            onPress={() => { setTimeout(() => { setPopupStatus(true); setChosenMall(place); }, 300) }}
+                            onPress={() => { setTimeout(() => { setPopupStatus(true);setChosenMall(place);}, 300) }}
                             pinColor="red"
                         />
                     ))}
@@ -167,33 +210,49 @@ export default function MapScreen() {
                                 />
                             </CardItem>
                         </Card>
-                        <Text style={{ fontWeight: 'bold', marginTop: 5 }}>Today's Crowd Density Trend:</Text>
-                        <LineChart
-                            data={data}
-                            width={Dimensions.get('window').width * 0.6}
-                            height={150}
-                            verticalLabelRotation={0}
-                            chartConfig={{
-                                backgroundColor: "#ffffff",
-                                backgroundGradientFrom: "#ffffff",
-                                backgroundGradientTo: "#ffffff",
-                                decimalPlaces: 0,
-                                color: (opacity = 1) => `rgba(0,0,0, ${opacity})`,
-                                labelColor: (opacity = 1) => `rgba(0,0,0, ${opacity})`,
-                                style: {
-                                    borderRadius: 16,
-                                    alignSelf: 'center'
-                                },
-                                propsForDots: {
-                                    r: "4",
-                                    strokeWidth: "2",
-                                    stroke: "rgb(0,0,255)"
-                                }
-                            }}
-                            fromZero={true}
-                            bezier
-                            style={styles.MallDensityLineChart}
-                        />
+                        <Text style={{ fontWeight: 'bold', marginTop: 8 }}>Today's Crowd Density Trend:</Text>
+                        <View style={{ height: 200, padding: 0, flexDirection: 'row' }}>
+                            <YAxis
+                                data={data3}
+                                style={{ marginBottom: xAxisHeight }}
+                                contentInset={verticalContentInset}
+                                svg={axesSvg}
+                                numberOfTicks={5}
+                                // min={0}
+                                // max={100}
+                            />
+                            <View style={{ flex: 1, marginLeft: 10 }}>
+                                <LineChart
+                                    style={{ flex: 1 }}
+                                    data={data3}
+                                    contentInset={verticalContentInset}
+                                    svg={{ stroke: 'rgb(0, 128, 255)' }}
+                                    // gridMin={0}
+                                    // gridMax={100}
+                                >
+                                    <Grid />
+                                </LineChart>
+                                <XAxis
+                                    style={{ marginHorizontal: -10, height: xAxisHeight }}
+                                    data={data3}
+                                    formatLabel={(value, index) => {
+                                        if ((index + 8) % 3 == 0) {
+                                            if (index + 8 < 12)
+                                                return `${index + 8} am`;
+                                            else if (index + 8 == 12)
+                                                return `${index + 8} pm`;
+                                            else
+                                                return `${index - 4} pm`;
+                                        } else {
+                                            return;
+                                        }
+                                    }}
+                                    contentInset={{ left: 10, right: 10 }}
+                                    svg={axesSvg}
+                                />
+                            </View>
+                        </View>
+                        
                         <TouchableOpacity style={styles.moreInfoButton}>
                             <Button
                                 title="More Information..."
@@ -240,9 +299,11 @@ const styles = StyleSheet.create({
     },
 
     popupHeading: {
-        fontSize: 20,
+        fontSize: 18,
         alignSelf: 'center',
         marginBottom: 10,
+        marginTop: -5,
+        marginHorizontal: -10,
         fontWeight: 'bold',
     },
 
@@ -253,8 +314,8 @@ const styles = StyleSheet.create({
 
     closeIcon: {
         position: 'absolute',
-        right: 15,
-        top: 15,
+        right: 12,
+        top: 12,
     },
 
     MallDensityLineChart: {
@@ -265,3 +326,32 @@ const styles = StyleSheet.create({
         paddingBottom: 14,
     }
 });
+
+
+// OLD LINE CHART USING REACT-NATIVE-CHART-KIT
+{/* <LineChart
+                            data={data}
+                            width={Dimensions.get('window').width * 0.6}
+                            height={150}
+                            verticalLabelRotation={0}
+                            chartConfig={{
+                                backgroundColor: "#ffffff",
+                                backgroundGradientFrom: "#ffffff",
+                                backgroundGradientTo: "#ffffff",
+                                decimalPlaces: 0,
+                                color: (opacity = 1) => `rgba(0,0,0, ${opacity})`,
+                                labelColor: (opacity = 1) => `rgba(0,0,0, ${opacity})`,
+                                style: {
+                                    borderRadius: 16,
+                                    alignSelf: 'center'
+                                },
+                                propsForDots: {
+                                    r: "4",
+                                    strokeWidth: "2",
+                                    stroke: "rgb(0,0,255)"
+                                }
+                            }}
+                            fromZero={true}
+                            bezier
+                            style={styles.MallDensityLineChart}
+                        /> */}
