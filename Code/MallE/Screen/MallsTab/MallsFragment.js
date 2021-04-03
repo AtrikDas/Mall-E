@@ -9,6 +9,7 @@ import {
 import AsyncStorage from '@react-native-community/async-storage';
 
 import MallItemList from './MallItemLayout';
+import { Item } from 'native-base';
 
 export default function MallsFragment() {
   const [mallList, setMallList] = useState([]);
@@ -17,29 +18,39 @@ export default function MallsFragment() {
   useEffect(() => {
 
     AsyncStorage.getItem('mallList')
-      .then((result) => {JSON.parse(result); setMallList(result); console.log("get mallList");})
+      .then((result) => {; 
+        setMallList(JSON.parse(result)); 
+      })
+      .then(console.log("mall list length :"+ mallList.length))
       .catch((err) => console.log(err))
       .finally(() => setLoading(false));
 
-  });
+  },[]);
 
   return (
-    <View>
-      {Loading ? (
+    <View
+    style = {styles.ContainerOne}
+    >
+      {
+      Loading ? (
         <ActivityIndicator />
-      ) : mallList == null ? (
+      ) :( mallList == null ? (
         <Text>No Malls Found!</Text>
       ) : (
         <FlatList
           style={{flex: 1}}
           data={mallList}
           ItemSeparatorComponent={renderSeparator}
-          initialNumToRender={mallList.length}
-          renderItem={(item) => <MallItemList mallItem={item} />}
-          keyExtractor={(item) => item.place_id}
+          initialNumToRender={5}
+          renderItem={({item, index}) => ( <MallItemList mallItem={item} /> )}
+          keyExtractor={(item,index)=>index.toString()}
         />
-      )}
+      ))
+      }
+      {console.log("rendered view")}
     </View>
+
+    
   );
 }
 

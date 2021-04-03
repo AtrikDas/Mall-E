@@ -4,6 +4,8 @@ import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Entypo';
 import moment from 'moment';
+import AsyncStorage from '@react-native-community/async-storage';
+
 
 import StarGenerator from "./ratingsComponent"
 import { Row } from 'native-base';
@@ -12,18 +14,30 @@ export default function MallItemList(props) {
 
     const navigation = useNavigation();
     const onPressFunction = () => {
-        navigation.navigate('Body', props.mallsItem)
+        navigation.navigate('Body', props.mallItem);
+
     }
 
     const TimeComponent = () => {
-        let openingTiming = moment(props.mallItem.openTiming, 'h:mma')
-        let closingTimeing = moment(props.mallItem.closingTimeing, 'h:mma')
+        // let openingTiming = moment(props.mallItem.openTiming, 'h:mma')
+        // let closingTimeing = moment(props.mallItem.closingTimeing, 'h:mma')
         
-        if(openingTiming.isBefore() && closingTimeing.isAfter()) {
+        // if(openingTiming.isBefore() && closingTimeing.isAfter()) {
+        //     //shop is open
+        //     return (<View flexDirection = "row">
+        //         <Text style = {textStyles.openText}>Open</Text>
+        //         <Text style = {textStyles.closeText}>Closes {closingTimeing.format(" h:mma")}</Text>
+        //         </View>)
+        // }else{
+        //     //shop is closed
+        //     return (<Text style = {textStyles.closeText}>Closed</Text>)
+        // }
+        
+        if(props.mallItem.opening_hours != null) {
             //shop is open
             return (<View flexDirection = "row">
                 <Text style = {textStyles.openText}>Open</Text>
-                <Text style = {textStyles.closeText}>Closes {closingTimeing.format(" h:mma")}</Text>
+                {/* <Text style = {textStyles.closeText}>Closes {closingTimeing.format(" h:mma")}</Text> */}
                 </View>)
         }else{
             //shop is closed
@@ -107,7 +121,7 @@ export default function MallItemList(props) {
 
         <TouchableWithoutFeedback style={layoutStyles.itemContainer} onPress= {onPressFunction}>
 
-            <Image source={{uri:props.mallItem.imageURL}} style={layoutStyles.image}/>
+            <Image source={{uri:`https://maps.googleapis.com/maps/api/place/photo?key=AIzaSyA-XRcHLWd3GVfU0RE6XpbRn86XXG4SsEI&photoreference=${props.mallItem.photos[0].photo_reference}&maxwidth=90`}} style={layoutStyles.image}/>
 
             <View style = {layoutStyles.textContainer}>
 
@@ -115,7 +129,7 @@ export default function MallItemList(props) {
 
                     <Text style= {textStyles.header}>{props.mallItem.name}</Text> 
 
-                    <CrowedComponent />
+                    {/* <CrowedComponent /> */}
 
                 </View>
 
@@ -127,13 +141,13 @@ export default function MallItemList(props) {
 
                 </View>
 
-                <View style={layoutStyles.descriptionRow} >
+                {/* <View style={layoutStyles.descriptionRow} >
 
                     <Text style= {textStyles.descriptionHeader}>Estimated Waiting Time: </Text> 
 
                     <WaitingTimeComponent/>
 
-                </View>
+                </View> */}
 
                 <View style={layoutStyles.descriptionRow} >
 
