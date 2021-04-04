@@ -120,7 +120,6 @@ const SettingsScreen = () => {
                 <Text
                   style={{
                     fontSize: 15,
-                    textAlign: 'center',
                   }}>
                   {name.map(place => { return (<Text>{place} {"\n"}</Text>) })}
                 </Text>
