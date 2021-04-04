@@ -48,20 +48,20 @@ export default class RestarantsFragment extends React.Component {
           {/* restaurant image */}
           <Image
             style={{width: '100%',height: 200,}}
-            source={{uri:this.restaurantDetails.imageURL}}
+            source={{uri:`https://maps.googleapis.com/maps/api/place/photo?key=AIzaSyA-XRcHLWd3GVfU0RE6XpbRn86XXG4SsEI&photoreference=${this.restaurantDetails.photos[0].photo_reference}&maxheight=200`}}
           />
           {/* restaurant details */}
           <Text style={[globalStyles.titleText, styles.popupHeading]}> {this.restaurantDetails.name}</Text>
           <View style={styles.TextDetailContainer}>
-            <Text style={[globalStyles.titleText, styles.customText]}>
+            {/* <Text style={[globalStyles.titleText, styles.customText]}>
               Website:
               <Text style={globalStyles.normalText}> {this.restaurantDetails.website}
               </Text>
-            </Text>
+            </Text> */}
 
             <Text style={[globalStyles.titleText, styles.customText]}>
               Location:
-              <Text style={globalStyles.normalText}> {this.restaurantDetails.location}
+              <Text style={globalStyles.normalText}> {this.restaurantDetails.formatted_address}
               </Text>
             </Text>
 
@@ -70,10 +70,10 @@ export default class RestarantsFragment extends React.Component {
               <Text style={globalStyles.normalText}> Open {this.restaurantDetails.openTiming} ⋅ Closes {this.restaurantDetails.closingTimeing}</Text>
             </Text>
 
-            <Text style={[globalStyles.titleText, styles.customText]}>
+            {/* <Text style={[globalStyles.titleText, styles.customText]}>
               Contact:
               <Text style={globalStyles.normalText}> {this.restaurantDetails.contact}</Text>
-            </Text>
+            </Text> */}
 
             <Text style={[globalStyles.titleText, styles.customText]}>
               Ratings: <RatingsComponent rating={this.restaurantDetails.rating}/>
