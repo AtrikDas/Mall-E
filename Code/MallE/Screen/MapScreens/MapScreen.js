@@ -41,6 +41,7 @@ export default function MapScreen() {
     }
 
     var fullData = {};
+    // var pinColors = {};
     const [pinColorsDict, setPinColorsDict] = useState({});
 
 
@@ -86,6 +87,7 @@ export default function MapScreen() {
     }, []);
 
     const getAllMallData = (places) => {
+        console.log("Ran getAllMallData");
         var pinColors = {};
         for (let i=0; i < places.length; i++) { // places.length
             mallParams = {
@@ -94,32 +96,31 @@ export default function MapScreen() {
                 'venue_address': places[i].formatted_address
             }
             fetch('https://besttime.app/api/v1/forecasts?' + new URLSearchParams(mallParams), { method: 'POST' })
-            .then((response) => response.json())
-            .then((json) => {
-                fullData[places[i].name] = json;
-                try {
-                    crowdDensity = fullData[places[i].name].analysis[5].day_raw[6];
-                    if (crowdDensity > 80)
-                    pinColors[places[i].name] = "rgb(255,32,32)";
-                    else if (crowdDensity > 60)
-                    pinColors[places[i].name] = "rgb(128,128,0)";
-                    else
-                    pinColors[places[i].name] = "rgb(0,255,128)";
-                    setPinColorsDict(pinColors);
-                }
-                catch {
-                    // console.log(fullData[places[i].name]);
-                }
-            })
-            .catch(error => console.log('error', error))
-            .finally(() => {
-                if (i == places.length - 1)
-                setLoading(false);
-            });
+                .then((response) => response.json())
+                .then((json) => {
+                    fullData[places[i].name] = json;
+                    try {
+                        crowdDensity = fullData[places[i].name].analysis[5].day_raw[6];
+                        if (crowdDensity > 80)
+                            pinColors[places[i].name] = "rgb(255,32,32)";
+                        else if (crowdDensity > 60)
+                            pinColors[places[i].name] = "rgb(128,128,0)";
+                        else
+                            pinColors[places[i].name] = "rgb(0,255,128)";
+                        setPinColorsDict(pinColors);
+                    }
+                    catch {
+                        // console.log(fullData[places[i].name]);
+                    }
+                })
+                .catch(error => console.log('error', error))
+                .finally(() => {
+                    if (i == places.length - 1)
+                        setLoading(false);
+                });
         }
-        console.log("Ran getAllMallData");
     }
-    
+
     const getMallPopularTimes = (place) => {
         mallParams = {
             'api_key_private': best_time_api_key_private,
@@ -237,7 +238,7 @@ export default function MapScreen() {
                                     <Grid />
                                 </BarChart>
                                 <XAxis
-                                    style={{ marginHorizontal: -5, marginTop: 0, marginBottom: -5, height: xAxisHeight }}
+                                    style={{ marginHorizontal: -5, height: xAxisHeight }}
                                     data={realData.analysis[5].day_raw.slice(4, 17)}
                                     formatLabel={(value, index) => {
                                         if ((index + 9) % 3 == 0) {
@@ -295,7 +296,6 @@ const styles = StyleSheet.create({
 
     moreInfoButton: {
         marginBottom: 5,
-        marginTop: -3,
     },
 
     image: {
