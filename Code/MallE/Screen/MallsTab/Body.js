@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-community/async-storage';
 import React, {navigation} from 'react';
 import {Animated, StyleSheet, Text, View, TouchableOpacity, ScrollView, Dimensions} from 'react-native';
 import {globalStyles} from '../../ThemesAndFonts';
@@ -26,10 +27,6 @@ export default class Body extends React.Component {
           offsetX: 0,
           offsetY: 0,
         };
-      }
-      
-      componentDidMount(){
-          console.log(JSON.stringify(this.props));
       }
 
     handleSlide = type => {
@@ -69,15 +66,20 @@ export default class Body extends React.Component {
     }
 
     componentDidMount(){
+        // AsyncStorage.getItem("mallItem").then((result)=> this.setState({mallDetail: result})).catch((e)=>console.log(e));
+        // console.log(JSON.stringify(this.props))
+        
             var requestOptions = {
             method: 'GET',
             redirect: 'follow'
           };
           
-          fetch(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${this.props.mallItem.place_id}&key=AIzaSyA-XRcHLWd3GVfU0RE6XpbRn86XXG4SsEI`, requestOptions)
+          fetch(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${this.props.route.params.place_id}&key=AIzaSyA-XRcHLWd3GVfU0RE6XpbRn86XXG4SsEI`, requestOptions)
             .then(response => response.json())
-            .then(results => this.setState({mallDetail:results.result}))
-            .catch(error => console.log('error', error))
+            .then(results => this.setState( {mallDetail: results.result}))
+            .catch((e)=> console.log(e));
+
+            console.log(JSON.stringify(this.state))
         }
         
     render() {
@@ -123,7 +125,7 @@ export default class Body extends React.Component {
                     {transform: [{translateX: translateXTabOne}]},]}
                     onLayout = {event => this.setState({offsetX: event.nativeEvent.layout.height})}> 
 
-                        <MallOverview mallDetail={this.state.mallDetail}/>
+                        <MallOverview mallDetail = {this.state.mallDetail}/>
 
                     </Animated.View>
                     
