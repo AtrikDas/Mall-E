@@ -21,7 +21,7 @@ export default class MallOverview extends React.Component {
 
     componentDidMount(){
         // AsyncStorage.getItem("mallDetail").then((result)=> this.setState({mallDetail: JSON.parse(result)})).catch((e)=>console.log(e));
-        console.log("malloverview props: "+JSON.stringify(this.props))
+        // console.log("malloverview props: "+JSON.stringify(this.props))
     }
 
     render() {

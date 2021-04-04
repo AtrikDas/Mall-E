@@ -47,7 +47,6 @@ export default function MallsFragment() {
         />
       ))
       }
-      {console.log("rendered view")}
     </View>
 
     

@@ -21,9 +21,9 @@ export default function MapScreen() {
 
     const navigation = useNavigation();
 
-    componentDidMount = () => {
-        setIsPressed(false);
-    }
+    // componentDidMount = () => {
+    //     setIsPressed(false);
+    // }
 
     const onPressed = async () => {
         let bookmarks = []
