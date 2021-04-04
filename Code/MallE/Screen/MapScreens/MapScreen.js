@@ -10,63 +10,42 @@ import AsyncStorage from '@react-native-community/async-storage';
 import {CheckBox, CardItem, Card} from "native-base"
 
 import NavBar from '../../layouts/NavBar';
-import { LineChart, Grid, XAxis, YAxis } from 'react-native-svg-charts'
-
+import { BarChart, Grid, XAxis, YAxis } from 'react-native-svg-charts'
 
 
 export default function MapScreen() {
     const [isLoading, setLoading] = useState(true);
+    const [isDataLoading, setDataLoading] = useState(true);
+    const [isPlacesLoading, setPlacesLoading] = useState(true);
     const [places, setPlaces] = useState([]);
+    const [realData, setRealData] = useState([]);
+    // const [fullData, setFullData] = useState();
     const [showPopup, setPopupStatus] = useState(false);
     const [chosenMall, setChosenMall] = useState([]);
     const [isPressed, setIsPressed] = useState(false);
     const colors = ['rgb(0, 255, 128)', 'rgb(255, 128, 128)', 'rgb(255, 255, 0)', 'rgb(0, 255, 128)', 'rgb(255, 255, 0)'];
-    const data2 = [50, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80];
-    const data4 =  [70 + Math.random() * (100 - 70),
-                    50 + Math.random() * (80 - 50),
-                    50 + Math.random() * (80 - 50),
-                    50 + Math.random() * (80 - 50),
-                    50 + Math.random() * (80 - 50),
-                    50 + Math.random() * (80 - 50),
-                    50 + Math.random() * (80 - 50),
-                    50 + Math.random() * (80 - 50),
-                    50 + Math.random() * (80 - 50),
-                    50 + Math.random() * (80 - 50),
-                    20 + Math.random() * (50 - 20),
-                    80 + Math.random() * (100 - 80),
-                    80 + Math.random() * (100 - 80),
-                    80 + Math.random() * (100 - 80),
-                    80 + Math.random() * (100 - 80),
-                    60 + Math.random() * (95 - 60)];
+    const data = [80, 85, 55, 40, 60, 50, 30, 25, 35, 50, 80, 85, 90, 70, 60, 10];
     
-    const data3 = [ 80,
-                    85,
-                    55,
-                    40,
-                    60,
-                    50,
-                    30,
-                    25,
-                    35,
-                    50,
-                    80,
-                    85,
-                    90,
-                    70,
-                    60,
-                    10];
-    
-    const axesSvg = { fontSize: 12, fill: 'rgb(32,32,32)' };
-    const verticalContentInset = { top: 10, bottom: 10 }
-    const xAxisHeight = 30
-    
-    
+    const axesSvg = { fontSize: 11, fill: 'rgb(32,32,32)' };
+    const verticalContentInset = { top: 10, bottom: 10 };
+    const xAxisHeight = 30;
     
     const navigation = useNavigation();
 
-    componentDidMount = () => {
-        setIsPressed(false);
+    const best_time_api_key_private = 'pri_c3ae9a3d6cea4bbaa667993561b37256';
+    const best_time_api_key_public = 'pub_ea53baaf28f34149b3caeb66139cd2f7';
+    const params = {
+        'api_key_private': best_time_api_key_private,
+        'venue_name': 'Jurong Point',
+        'venue_address': '1 Jurong West Central 2, Singapore'
     }
+
+    // componentDidMount = () => {
+    //     setIsPressed(false);
+    // }
+
+    var fullData = {};
+    var pinColors = {};
 
     const onPressed = async () => {
         let bookmarks = []
@@ -92,22 +71,6 @@ export default function MapScreen() {
         
     };
 
-    const data = {
-        labels: ["9 am", "12 pm", "3 pm", "6 pm", "9 pm"],
-        datasets: [
-            {
-                data: [70 + Math.random() * (100 - 70),
-                       50 + Math.random() * (80 - 50),
-                       20 + Math.random() * (50 - 20),
-                       80 + Math.random() * (100 - 80),
-                       60 + Math.random() * (95 - 60)],
-                color: (opacity = 1) => `rgba(0, 128, 255, ${opacity})`,
-                strokeWidth: 2
-            }
-        ],
-        legend: ["Crowd Density"]
-    };
-
     useEffect(() => {
         // fetch('https://jsonkeeper.com/b/IGBH')
         //     .then((response) => response.json())
@@ -121,33 +84,88 @@ export default function MapScreen() {
             redirect: 'follow'
           };
           
-          fetch("https://maps.googleapis.com/maps/api/place/textsearch/json?query=Shopping+malls+in+Singapore&key=AIzaSyA-XRcHLWd3GVfU0RE6XpbRn86XXG4SsEI", requestOptions)
+        fetch("https://maps.googleapis.com/maps/api/place/textsearch/json?query=Shopping+malls+in+Singapore&key=AIzaSyA-XRcHLWd3GVfU0RE6XpbRn86XXG4SsEI", requestOptions)
             .then(response => response.json())
             .then(results => {
                 setPlaces(results.results);
                 AsyncStorage.setItem("mallList", JSON.stringify(results.results)).then(() => console.log("set mallList")).catch((e)=> console.log(e));
             })
             .catch(error => console.log('error', error))
-            .finally(() => setLoading(false));
-            
-
-
+            .finally(() => setPlacesLoading(false));
         
-        getMallPopularTimes();
+        if(!isPlacesLoading) {
+            getAllMallData();
+        }
     }, []);
 
-    const getMallPopularTimes = () => {
-        // for(let i = 0; i<places.length; i++){
-        //     places[i].
-        // }
+    // const getCurrentCrowdDensity = (place) => {
+    //     mallParams = {
+    //         'api_key_private': best_time_api_key_private,
+    //         'venue_name': place.name,
+    //         'venue_address': place.formatted_address
+    //     }
+        
+    //     fetch('https://besttime.app/api/v1/forecasts?' + new URLSearchParams(mallParams), { method: 'POST' })
+    //         .then((response) => response.json())
+    //         .then((json) => {
+    //             fullData.push(json);
+    //             crowdDensity = json.analysis[5].day_raw[7];
+    //         });
+    //     return crowdDensity;
+    // }
+
+    const getAllMallData = () => {
+        for (let i=0; i < places.length; i++) { // places.length
+            mallParams = {
+                'api_key_private': best_time_api_key_private,
+                'venue_name': places[i].name,
+                'venue_address': places[i].formatted_address
+            }
+            fetch('https://besttime.app/api/v1/forecasts?' + new URLSearchParams(mallParams), { method: 'POST' })
+                .then((response) => response.json())
+                .then((json) => fullData[places[i].name] = json)
+                .finally(() => {
+                    crowdDensity = fullData[places[i].name].analysis[5].day_raw[6];
+                    console.log(places[i].name)
+                    console.log(crowdDensity)
+                    if (crowdDensity > 80)
+                        pinColors[places[i].name] = "rgb(0,0,255)";
+                    else if (crowdDensity > 60)
+                        pinColors[places[i].name] = "rgb(128,128,0)";
+                    else
+                        pinColors[places[i].name] = "rgb(0,255,128)";
+                });
+        }
+        setLoading(false);
     }
+
+    const getMallPopularTimes = (place) => {
+        mallParams = {
+            'api_key_private': best_time_api_key_private,
+            'venue_name': place.name,
+            'venue_address': place.formatted_address
+        }
+        // setDataLoading(true);
+        fetch('https://besttime.app/api/v1/forecasts?' + new URLSearchParams(mallParams), { method: 'POST' })
+            .then((response) => response.json())
+            .then((json) => setRealData(json))
+            .finally(() => setDataLoading(false));
+        
+        // var day = new Date().getDay();
+        // var date = new Date().getDate();
+        // var hour = new Date().getHours();
+        console.log(pinColors);
+        console.log(fullData);
+        // console.log(date);
+        // console.log(hour);
+    }   
 
     const handleClose = () => {
         setIsPressed(false);
       };
     
     return (
-        <View>
+        <View style={{flex:1}}>
             {isLoading ? <ActivityIndicator /> : (
                 <MapView
                     provider={PROVIDER_GOOGLE}
@@ -168,12 +186,19 @@ export default function MapScreen() {
                             }}
                             title={place.name}
                             description={place.formatted_address}
-                            onPress={() => { setTimeout(() => { setPopupStatus(true);setChosenMall(place);}, 300) }}
-                            pinColor="red"
+                            onPress={() => { setTimeout(() => 
+                                {  
+                                    setChosenMall(place);
+                                    getMallPopularTimes(place);
+                                }, 
+                                300);
+                                setPopupStatus(true); }}
+                            pinColor={pinColors[place.name]}
                         />
                     ))}
                 </MapView>
             )}
+            {isDataLoading ? <ActivityIndicator /> : (
             <Modal
                 transparent={true}
                 visible={showPopup}
@@ -190,7 +215,7 @@ export default function MapScreen() {
                                 name='close'
                                 size={24}
                                 type='material'
-                                onPress={() => { setPopupStatus(false) }}
+                                onPress={() => { setPopupStatus(false); setDataLoading(true) }}
                             />
                         </View>
                         <Text style={styles.popupHeading}>{chosenMall.name}</Text>
@@ -210,10 +235,10 @@ export default function MapScreen() {
                                 />
                             </CardItem>
                         </Card>
-                        <Text style={{ fontWeight: 'bold', marginTop: 8 }}>Today's Crowd Density Trend:</Text>
+                        <Text style={{ fontWeight: 'bold', marginTop: 5, marginBottom:4 }}>Today's Crowd Density Trend:</Text>
                         <View style={{ height: 200, padding: 0, flexDirection: 'row' }}>
                             <YAxis
-                                data={data3}
+                                data={realData.analysis[5].day_raw.slice(3, 17)}
                                 style={{ marginBottom: xAxisHeight }}
                                 contentInset={verticalContentInset}
                                 svg={axesSvg}
@@ -222,32 +247,34 @@ export default function MapScreen() {
                                 // max={100}
                             />
                             <View style={{ flex: 1, marginLeft: 10 }}>
-                                <LineChart
+                                <BarChart
                                     style={{ flex: 1 }}
-                                    data={data3}
+                                    data={realData.analysis[5].day_raw.slice(3, 17)}
                                     contentInset={verticalContentInset}
-                                    svg={{ stroke: 'rgb(0, 128, 255)' }}
+                                    svg={{ fill: 'rgb(0, 155, 255)' }}
+                                    spacingInner={0.3}
+                                    spacingOuter={0}
                                     // gridMin={0}
                                     // gridMax={100}
                                 >
                                     <Grid />
-                                </LineChart>
+                                </BarChart>
                                 <XAxis
-                                    style={{ marginHorizontal: -10, height: xAxisHeight }}
-                                    data={data3}
+                                    style={{ marginHorizontal: -5, height: xAxisHeight }}
+                                    data={realData.analysis[5].day_raw.slice(4, 17)}
                                     formatLabel={(value, index) => {
-                                        if ((index + 8) % 3 == 0) {
-                                            if (index + 8 < 12)
-                                                return `${index + 8} am`;
-                                            else if (index + 8 == 12)
-                                                return `${index + 8} pm`;
+                                        if ((index + 9) % 3 == 0) {
+                                            if (index + 9 < 12)
+                                                return `${index + 9} am`;
+                                            else if (index + 9 == 12)
+                                                return `${index + 9} pm`;
                                             else
-                                                return `${index - 4} pm`;
+                                                return `${index - 3} pm`;
                                         } else {
                                             return;
                                         }
                                     }}
-                                    contentInset={{ left: 10, right: 10 }}
+                                    contentInset={{ left: 15, right: 20 }}
                                     svg={axesSvg}
                                 />
                             </View>
@@ -265,7 +292,8 @@ export default function MapScreen() {
                         </TouchableOpacity>
                     </View>
                 </View>
-            </Modal>        
+            </Modal>
+            )}
         </View>
     );
 }
@@ -355,3 +383,19 @@ const styles = StyleSheet.create({
                             bezier
                             style={styles.MallDensityLineChart}
                         /> */}
+
+// const data_old = {
+//     labels: ["9 am", "12 pm", "3 pm", "6 pm", "9 pm"],
+//     datasets: [
+//         {
+//             data: [70 + Math.random() * (100 - 70),
+//                    50 + Math.random() * (80 - 50),
+//                    20 + Math.random() * (50 - 20),
+//                    80 + Math.random() * (100 - 80),
+//                    60 + Math.random() * (95 - 60)],
+//             color: (opacity = 1) => `rgba(0, 128, 255, ${opacity})`,
+//             strokeWidth: 2
+//         }
+//     ],
+//     legend: ["Crowd Density"]
+// };
