@@ -8,12 +8,14 @@ import {
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 
+import { Header, Item, Icon, Input, Container } from 'native-base';
+
 import MallItemList from './MallItemLayout';
-import { Item } from 'native-base';
 
 export default function MallsFragment() {
   const [mallList, setMallList] = useState([]);
   const [Loading, setLoading] = useState(true);
+  const [mallListFiltered, setMallListFiltered] = useState([]);
 
   useEffect(() => {
 
@@ -27,6 +29,10 @@ export default function MallsFragment() {
 
   },[]);
 
+  searchMall = (textToSearch) => {
+    setMallList(mallList.filter(i => i.name.toLowerCase().includes(textToSearch.toLowerCase())))
+  };
+
   return (
     <View
     style = {styles.ContainerOne}
@@ -37,6 +43,14 @@ export default function MallsFragment() {
       ) :( mallList == null ? (
         <Text>No Malls Found!</Text>
       ) : (
+        <Container>
+        <Header searchBar rounded>
+                <Item>
+                    <Icon name="search"/>
+
+                    <Input placeholder="Search mall" onChangeText={text=>{this.searchMall(text)}}/>
+                </Item>
+            </Header>
         <FlatList
           style={{flex: 1}}
           data={mallList}
@@ -45,6 +59,7 @@ export default function MallsFragment() {
           renderItem={({item, index}) => ( <MallItemList mallItem={item} /> )}
           keyExtractor={(item) => item.place_id}
         />
+        </Container>
       ))
       }
     </View>
