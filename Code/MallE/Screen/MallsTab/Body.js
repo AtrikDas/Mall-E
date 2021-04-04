@@ -1,5 +1,6 @@
+import AsyncStorage from '@react-native-community/async-storage';
 import React, {navigation} from 'react';
-import {Animated, StyleSheet, Text, View, TouchableOpacity, ScrollView, Dimensions} from 'react-native';
+import {Animated, StyleSheet, Text, View, TouchableOpacity, ScrollView, Dimensions, ActivityIndicator} from 'react-native';
 import {globalStyles} from '../../ThemesAndFonts';
 
 import MallOverview from './MallOverview';
@@ -16,6 +17,7 @@ export default class Body extends React.Component {
        
         this.state = {
             mallDetail: {},
+            loading: true,
           active: 0,
           tabOne: 0,
           tabTwo: 0,
@@ -26,10 +28,6 @@ export default class Body extends React.Component {
           offsetX: 0,
           offsetY: 0,
         };
-      }
-      
-      componentDidMount(){
-          console.log(JSON.stringify(this.props));
       }
 
     handleSlide = type => {
@@ -69,15 +67,21 @@ export default class Body extends React.Component {
     }
 
     componentDidMount(){
+        // AsyncStorage.getItem("mallItem").then((result)=> this.setState({mallDetail: result})).catch((e)=>console.log(e));
+        // console.log(JSON.stringify(this.props))
+        
             var requestOptions = {
             method: 'GET',
             redirect: 'follow'
           };
           
-          fetch(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${this.props.mallItem.place_id}&key=AIzaSyA-XRcHLWd3GVfU0RE6XpbRn86XXG4SsEI`, requestOptions)
+          fetch(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${this.props.route.params.place_id}&key=AIzaSyA-XRcHLWd3GVfU0RE6XpbRn86XXG4SsEI`, requestOptions)
             .then(response => response.json())
-            .then(results => this.setState({mallDetail:results.result}))
-            .catch(error => console.log('error', error))
+            .then(results => this.setState( {mallDetail: results.result}))
+            .catch((e)=> console.log(e))
+            .finally(()=> this.setState({loading: false}));
+
+            console.log(JSON.stringify(this.state))
         }
         
     render() {
@@ -123,16 +127,27 @@ export default class Body extends React.Component {
                     {transform: [{translateX: translateXTabOne}]},]}
                     onLayout = {event => this.setState({offsetX: event.nativeEvent.layout.height})}> 
 
-                        <MallOverview mallDetail={this.state.mallDetail}/>
-
+                        {this.state.loading ? (
+                            <View style={[styles.containerActivityIndicator, styles.horizontal]}><ActivityIndicator /></View>
+                        ):(
+                            <MallOverview mallDetail = {this.state.mallDetail}/>
+                        )
+                    }
+                        
                     </Animated.View>
                     
                     {/* Contents of TabTwo */}
                     <Animated.View style = {[styles.tabYContent, 
                     {transform: [{translateX: translateXTabTwo}, {translateY: -offsetX}]}, {marginBottom: -offsetY}]}
                     onLayout = {event => this.setState({offsetY: event.nativeEvent.layout.height})}>
-
-                        <RestarantsFragment/>
+                        
+                        
+                        {this.state.loading ? (
+                            <View style={[styles.containerActivityIndicator, styles.horizontal]}><ActivityIndicator /></View>
+                        ):(
+                            <RestarantsFragment mallDetail = {this.state.mallDetail}/>
+                        )
+                    }
  
                     </Animated.View>
 
@@ -210,5 +225,13 @@ const styles = StyleSheet.create({
         justifyContent:'center', 
         alignItems:'center',
         padding: 5,
-    }
+    },
+
+    containerActivityIndicator: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems:'center',
+        padding: 10,
+      },
+
 })

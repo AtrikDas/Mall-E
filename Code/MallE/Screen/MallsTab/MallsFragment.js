@@ -43,11 +43,10 @@ export default function MallsFragment() {
           ItemSeparatorComponent={renderSeparator}
           initialNumToRender={5}
           renderItem={({item, index}) => ( <MallItemList mallItem={item} /> )}
-          keyExtractor={(item,index)=>index.toString()}
+          keyExtractor={(item) => item.place_id}
         />
       ))
       }
-      {console.log("rendered view")}
     </View>
 
     

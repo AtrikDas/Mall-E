@@ -14,8 +14,8 @@ export default function MallItemList(props) {
 
     const navigation = useNavigation();
     const onPressFunction = () => {
-        navigation.navigate('Body', props.mallItem);
-
+        navigation.navigate('Body',props.mallItem);
+        // AsyncStorage.setItem("mallItem", JSON.stringify(props.mallItem)).then(()=> console.log("set MallDetails")).catch((e)=> console.log(e))
     }
 
     const TimeComponent = () => {

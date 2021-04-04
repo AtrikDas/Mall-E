@@ -32,6 +32,7 @@ export default function MapScreen() {
     
     const navigation = useNavigation();
 
+<<<<<<< HEAD
     const best_time_api_key_private = 'pri_c3ae9a3d6cea4bbaa667993561b37256';
     const best_time_api_key_public = 'pub_ea53baaf28f34149b3caeb66139cd2f7';
     const params = {
@@ -39,6 +40,11 @@ export default function MapScreen() {
         'venue_name': 'Jurong Point',
         'venue_address': '1 Jurong West Central 2, Singapore'
     }
+=======
+    // componentDidMount = () => {
+    //     setIsPressed(false);
+    // }
+>>>>>>> 9e33b776716a9abc41c1603da26741498614ec0c
 
     // componentDidMount = () => {
     //     setIsPressed(false);
