@@ -1,0 +1,362 @@
+{
+    "business_status": "OPERATIONAL",
+    "formatted_address": "604 Sembawang Rd, Singapore 758459",
+    "geometry": {
+        "location": {
+            "lat": 1.4419459,
+            "lng": 103.8250936
+        },
+        "viewport": {
+            "northeast": {
+                "lat": 1.443040479892722,
+                "lng": 103.8261878298927
+            },
+            "southwest": {
+                "lat": 1.440340820107278,
+                "lng": 103.8234881701073
+            }
+        }
+    },
+    "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/shopping-71.png",
+    "name": "Sembawang Shopping Centre",
+    "opening_hours": {
+        "open_now": true
+    },
+    "photos": [
+        {
+            "height": 2916,
+            "html_attributions": [
+                "<a href=\"https://maps.google.com/maps/contrib/112216745376003042680\">Moke Tsing</a>"
+            ],
+            "photo_reference": "ATtYBwLH_F47z-FCs3qBr1ibEPrvJGSnTN2bg0auV5LTe_E-OO8Q3rG_EGdyzeeeifGEvi70oCA78A5jhOpExf7i7H1mxriQ18OnxN9WdtjL6ho-y6Z0MEn84mAZFOx63IEZ3iMm9-WdnQErzy_aJ2LaU9mWdWVUZvDIFmL6NZwh74-2MyEa",
+            "width": 5184
+        }
+    ],
+    "place_id": "ChIJ5-zrBoEU2jERhLnuZ0bgvUw",
+    "plus_code": {
+        "compound_code": "CRRG+Q2 Singapore",
+        "global_code": "6PH5CRRG+Q2"
+    },
+    "rating": 4,
+    "reference": "ChIJ5-zrBoEU2jERhLnuZ0bgvUw",
+    "types": [
+        "shopping_mall",
+        "point_of_interest",
+        "establishment"
+    ],
+    "user_ratings_total": 4146
+}
+
+
+
+{
+    "html_attributions": [],
+    "result": {
+        "address_components": [
+            {
+                "long_name": "1",
+                "short_name": "1",
+                "types": [
+                    "street_number"
+                ]
+            },
+            {
+                "long_name": "Jurong West Central 2",
+                "short_name": "Jurong West Central 2",
+                "types": [
+                    "route"
+                ]
+            },
+            {
+                "long_name": "Jurong West",
+                "short_name": "Jurong West",
+                "types": [
+                    "neighborhood",
+                    "political"
+                ]
+            },
+            {
+                "long_name": "Singapore",
+                "short_name": "Singapore",
+                "types": [
+                    "locality",
+                    "political"
+                ]
+            },
+            {
+                "long_name": "Singapore",
+                "short_name": "SG",
+                "types": [
+                    "country",
+                    "political"
+                ]
+            },
+            {
+                "long_name": "648886",
+                "short_name": "648886",
+                "types": [
+                    "postal_code"
+                ]
+            }
+        ],
+        "adr_address": "<span class=\"street-address\">1 Jurong West Central 2</span>, <span class=\"country-name\">Singapore</span> <span class=\"postal-code\">648886</span>",
+        "business_status": "OPERATIONAL",
+        "formatted_address": "1 Jurong West Central 2, Singapore 648886",
+        "formatted_phone_number": "6950 8134",
+        "geometry": {
+            "location": {
+                "lat": 1.3397443,
+                "lng": 103.7067297
+            },
+            "viewport": {
+                "northeast": {
+                    "lat": 1.3420095,
+                    "lng": 103.7090093
+                },
+                "southwest": {
+                    "lat": 1.3370063,
+                    "lng": 103.7028137
+                }
+            }
+        },
+        "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/shopping-71.png",
+        "international_phone_number": "+65 6950 8134",
+        "name": "Jurong Point",
+        "opening_hours": {
+            "open_now": true,
+            "periods": [
+                {
+                    "close": {
+                        "day": 0,
+                        "time": "2200"
+                    },
+                    "open": {
+                        "day": 0,
+                        "time": "1000"
+                    }
+                },
+                {
+                    "close": {
+                        "day": 1,
+                        "time": "2200"
+                    },
+                    "open": {
+                        "day": 1,
+                        "time": "1000"
+                    }
+                },
+                {
+                    "close": {
+                        "day": 2,
+                        "time": "2200"
+                    },
+                    "open": {
+                        "day": 2,
+                        "time": "1000"
+                    }
+                },
+                {
+                    "close": {
+                        "day": 3,
+                        "time": "2200"
+                    },
+                    "open": {
+                        "day": 3,
+                        "time": "1000"
+                    }
+                },
+                {
+                    "close": {
+                        "day": 4,
+                        "time": "2200"
+                    },
+                    "open": {
+                        "day": 4,
+                        "time": "1000"
+                    }
+                },
+                {
+                    "close": {
+                        "day": 5,
+                        "time": "2200"
+                    },
+                    "open": {
+                        "day": 5,
+                        "time": "1000"
+                    }
+                },
+                {
+                    "close": {
+                        "day": 6,
+                        "time": "2200"
+                    },
+                    "open": {
+                        "day": 6,
+                        "time": "1000"
+                    }
+                }
+            ],
+            "weekday_text": [
+                "Monday: 10:00 AM – 10:00 PM",
+                "Tuesday: 10:00 AM – 10:00 PM",
+                "Wednesday: 10:00 AM – 10:00 PM",
+                "Thursday: 10:00 AM – 10:00 PM",
+                "Friday: 10:00 AM – 10:00 PM",
+                "Saturday: 10:00 AM – 10:00 PM",
+                "Sunday: 10:00 AM – 10:00 PM"
+            ]
+        },
+        "photos": [
+            {
+                "height": 2006,
+                "html_attributions": [
+                    "<a href=\"https://maps.google.com/maps/contrib/114520501314404177965\">H2 O</a>"
+                ],
+                "photo_reference": "ATtYBwKvOJK60kh1lYiVdbFA5nxiz7yILd7cUQwWie1gq42ilFX_pZa9J2VcdAJgsD1OB5bID0N8hVuzfganajX6JqV6v4G8uxldLTpXaTXFgYN-PumFOPJ54ZHbCd_AKE7adS-GICcvy1TUb1y8ogOIcdigg079xFp07M4dLqtJKNupCzk",
+                "width": 4128
+            },
+            {
+                "height": 3464,
+                "html_attributions": [
+                    "<a href=\"https://maps.google.com/maps/contrib/113400295251466070565\">Asi Gangadhar Reddy</a>"
+                ],
+                "photo_reference": "ATtYBwLHjU95iD5kBTanMUqt8_tPWYL0hgq-pOvifD0-LS6q4j4m0KfuRcFEEeSym5FNuOhGl6eK8qVIv80arRem95-SvrXCEwl1hCrYKnUJy0IfjT1CzO8MJURiKl9DDO_spPzjYF_b6t69Xeavlk6KJXEoEwNNOZQaiD_MvpR-KnvBRdSg",
+                "width": 4618
+            },
+            {
+                "height": 4000,
+                "html_attributions": [
+                    "<a href=\"https://maps.google.com/maps/contrib/111280114803956745067\">EDUARD JULIAN ORTIZ</a>"
+                ],
+                "photo_reference": "ATtYBwKZlVOLBeFFDJFOPyAw6iVkpNd38sBdnBCh_UOX-xb9gPkBfa_wSyCh_J3pdFi8ht1U5WtkuTdlrwlPqZn-MrP2_K8fVEBJLkDSK37vorQ09gJSv47s60MqQFcgrdUFABfF1k9Xc7w1QZOpGAoBImsX4ncfhpw35Ld9kg3Q-K05u_i9",
+                "width": 3000
+            },
+            {
+                "height": 1080,
+                "html_attributions": [
+                    "<a href=\"https://maps.google.com/maps/contrib/112595643894912393136\">Felna Bandoquillo</a>"
+                ],
+                "photo_reference": "ATtYBwKGOaiRGKRBmKgo-cON9rRUSWhTO63FoMKKDDsHgn7UKfXoecgfXpIGPRhzpD0bsjLSEx15yy0xZoc74O6CumYyTy_HKvVspk1zRS8ae1GepOLyBzhfOoEE03CqQej1EvQCLaz3L_yxHVZ5MhsnQsQhZavq3_B_AG8jX-_rPzwGSi4e",
+                "width": 1920
+            },
+            {
+                "height": 3024,
+                "html_attributions": [
+                    "<a href=\"https://maps.google.com/maps/contrib/108535088959947816396\">Daniel</a>"
+                ],
+                "photo_reference": "ATtYBwKioeOB38HF5QAXtzEhzC6UUWWNUv8IAsUUuICGUkPv4NrKs7FLleoKCKmlNmAC2rCARrqn_u4doRRlGGeCVkipYCljuL-gUAE8KVt9gGXXLDheuMxjzJzxIAVV9kLBsf3NwTjNJnQRAiSuQqX9ajOxHP1aQ5nfNek2vXWCt5iJqpZ7",
+                "width": 4032
+            },
+            {
+                "height": 1872,
+                "html_attributions": [
+                    "<a href=\"https://maps.google.com/maps/contrib/104999200297900412778\">Udvas Chattopadhyay</a>"
+                ],
+                "photo_reference": "ATtYBwIk5h_PJwkrsFtRA7IgbO5Qp3LEUNHvuPIA2nF6m_LeIviIl19UPlD0TPyiUFSR5Ro7rXMidF0RdMhaVtRAToxLtOOdCkqGeGidr6f1nxCGmdu-EDwQlI7HVvMV_FetHn6Ambr5BnwjzkYELdWZCkajRBL8GIM650QAGSSygZ_zlL4",
+                "width": 3328
+            },
+            {
+                "height": 4608,
+                "html_attributions": [
+                    "<a href=\"https://maps.google.com/maps/contrib/106237403764981846789\">Diana Gao</a>"
+                ],
+                "photo_reference": "ATtYBwLVuUazBGVZs2NfOivZq03tthBXe48h4tq-fR8qVE-yJO_N1AmFY8gCi3GL-QVEL6d2XJQ8ANWdALAgdFDRF7lL2gtzb8-fTkYx3UXBvd4Nzqqc7b84VTmlJyCmKGhGTGse5gFIlIOTc8xuxm6ne0B8K6RM1vwAzrSR3g3f8FMdoRj3",
+                "width": 3456
+            },
+            {
+                "height": 3000,
+                "html_attributions": [
+                    "<a href=\"https://maps.google.com/maps/contrib/111218268846168472981\">Andrew Lin Yikai</a>"
+                ],
+                "photo_reference": "ATtYBwLKWbkC-gohnGJCxl-mvNpuHr5b3AWe9pkHO5Sgr1QLpW0ppUh6Mc4aeXZlLFAG2TPUZy4_WybmYG7wgKumf474SqCt2VdBIX2DCK8mwyMUkXXP5VO7nZIb_jSo3UepuW5f-5tD89OqLwjEPXyBjxJxOCqDrYuNVTHX3GF_B2MOnnLs",
+                "width": 4000
+            },
+            {
+                "height": 2988,
+                "html_attributions": [
+                    "<a href=\"https://maps.google.com/maps/contrib/100562748594110234370\">xu dawei</a>"
+                ],
+                "photo_reference": "ATtYBwLSFNCN_16iERDGsK3ueg_VBDS1Fizdr-jcevlLJxn3PfcQMZcLJ-rESU6Gz_BU_Pew4OTmXB9SlIvEE_1jwCh3VUiNkIfFIiTZEOn3Ty-m1T_3LeAspf3-x4oYw4Qu9nd6inXyLFEkVNEHOYHfX4xfRTl3E3ktHBHCOKKDEc4yCCDv",
+                "width": 5312
+            },
+            {
+                "height": 2988,
+                "html_attributions": [
+                    "<a href=\"https://maps.google.com/maps/contrib/102788769734295908159\">Charmaine Sin</a>"
+                ],
+                "photo_reference": "ATtYBwKIDjSp0zKudlbt6PlWJh2E-JZ08DDN93w-rUiqq7hnRJwMeGR1TERvVaSXY80bAfOOhmBc9kzvTRBqYZT3DrxguadpyrNe43DqsJjdqaVPcCqREGmT8MWHBMktQzPYuOl_vT8KwQYrp3OUcPI6JHGEqZg0WUIxHV33XfLpXRrJNNlo",
+                "width": 5312
+            }
+        ],
+        "place_id": "ChIJa9YM2-wP2jERmOUStQKyiS0",
+        "plus_code": {
+            "compound_code": "8PQ4+VM Singapore",
+            "global_code": "6PH58PQ4+VM"
+        },
+        "rating": 4.4,
+        "reference": "ChIJa9YM2-wP2jERmOUStQKyiS0",
+        "reviews": [
+            {
+                "author_name": "Debabrata Pal (Deb)",
+                "author_url": "https://www.google.com/maps/contrib/108448614968441092701/reviews",
+                "language": "en",
+                "profile_photo_url": "https://lh3.googleusercontent.com/a-/AOh14Gj2clxZvQXMjcNAeoKHCtq0Xs3zeqDJz5Z-s-TN94A=s128-c0x00000000-cc-rp-mo-ba5",
+                "rating": 5,
+                "relative_time_description": "6 months ago",
+                "text": "Wide array of choices in shopping, eating and recreation!",
+                "time": 1600092843
+            },
+            {
+                "author_name": "Lawrence Loo",
+                "author_url": "https://www.google.com/maps/contrib/115476077708634313749/reviews",
+                "language": "en",
+                "profile_photo_url": "https://lh3.googleusercontent.com/a-/AOh14GgoKdQ0xkVXMXm2K2H_F259RblZugsLGrEFjF80yYk=s128-c0x00000000-cc-rp-mo-ba4",
+                "rating": 4,
+                "relative_time_description": "6 months ago",
+                "text": "All under control due to covid-19. All entrance need to be scan in.",
+                "time": 1599492422
+            },
+            {
+                "author_name": "Philip Ang",
+                "author_url": "https://www.google.com/maps/contrib/108056996455173077222/reviews",
+                "language": "en",
+                "profile_photo_url": "https://lh3.googleusercontent.com/a-/AOh14Gg2vCW31es7JUccvOE3Am-jfvJ-TRjqLwfjPzqdug=s128-c0x00000000-cc-rp-mo-ba3",
+                "rating": 5,
+                "relative_time_description": "7 months ago",
+                "text": "Lots of eateries, banks UOB, DBS, a street totally Japanese Crusines, a street totally like Hong Kong street...",
+                "time": 1598337792
+            },
+            {
+                "author_name": "Sisubalan Selvan",
+                "author_url": "https://www.google.com/maps/contrib/105457991823949517042/reviews",
+                "language": "en",
+                "profile_photo_url": "https://lh3.googleusercontent.com/a-/AOh14GjNqS_Lo5m3UfBJegX4gi7lKQilkYR8a4ttblo5=s128-c0x00000000-cc-rp-mo-ba4",
+                "rating": 5,
+                "relative_time_description": "7 months ago",
+                "text": "One of the best mall in sg tbh. Spacious and many varieties of eateries from malaysian foods (malaysian corner), japanese food (japanese walk corner), korean food (seoul garden), fast foods like mcd/kfc and etc. Small fairprice, uob bank and clinic can be found around the entrance from the boonlay int bus station. Crowded yet kept clean. I can safely assume that this mall is dedicated for those love to eat. Worth the money to try all those yummy foods.",
+                "time": 1599072337
+            },
+            {
+                "author_name": "S Siddiqui",
+                "author_url": "https://www.google.com/maps/contrib/117104769730467261105/reviews",
+                "language": "en",
+                "profile_photo_url": "https://lh3.googleusercontent.com/a-/AOh14GhpM9PeJf-4iudfB-0p21RQXImzCagc1Btq-N6dNX8=s128-c0x00000000-cc-rp-mo-ba5",
+                "rating": 3,
+                "relative_time_description": "6 months ago",
+                "text": "Terrible parking and building structure - its impossible to navigate through it without getting hopelessly lost",
+                "time": 1600594726
+            }
+        ],
+        "types": [
+            "shopping_mall",
+            "point_of_interest",
+            "establishment"
+        ],
+        "url": "https://maps.google.com/?cid=3281349528213710232",
+        "user_ratings_total": 17052,
+        "utc_offset": 480,
+        "vicinity": "1 Jurong West Central 2",
+        "website": "https://www.jurongpoint.com.sg/"
+    },
+    "status": "OK"
+}

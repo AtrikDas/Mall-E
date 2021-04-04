@@ -13,6 +13,7 @@ https://oblador.github.io/react-native-vector-icons/
 
 
 To start server for login/register:
+1. change the ipAddress in the cofig.json file to your ip address
 1. Go to server folder 
 2. Type 'npm i'
 3. Type 'npm start'

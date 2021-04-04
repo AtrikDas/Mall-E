@@ -1,5 +1,6 @@
+import AsyncStorage from '@react-native-community/async-storage';
 import React, {navigation} from 'react';
-import {Animated, StyleSheet, Text, View, TouchableOpacity, ScrollView, Dimensions} from 'react-native';
+import {Animated, StyleSheet, Text, View, TouchableOpacity, ScrollView, Dimensions, ActivityIndicator} from 'react-native';
 import {globalStyles} from '../../ThemesAndFonts';
 
 import MallOverview from './MallOverview';
@@ -9,17 +10,25 @@ import RestarantsFragment from "./RestarantsFragment"
 const { width } = Dimensions.get("window");
 
 export default class Body extends React.Component {
-    state = {
-        active: 0,
-        tabOne: 0,
-        tabTwo: 0,
-        translateX: new Animated.Value(0),
-        translateXTabOne: new Animated.Value(0),
-        translateXTabTwo: new Animated.Value(width),
-        translateY: 0,
-        offsetX: 0,
-        offsetY: 0,
-    };
+
+    constructor(props) {
+        super(props);
+        
+       
+        this.state = {
+            mallDetail: {},
+            loading: true,
+          active: 0,
+          tabOne: 0,
+          tabTwo: 0,
+          translateX: new Animated.Value(0),
+          translateXTabOne: new Animated.Value(0),
+          translateXTabTwo: new Animated.Value(width),
+          translateY: 0,
+          offsetX: 0,
+          offsetY: 0,
+        };
+      }
 
     handleSlide = type => {
         let {active, tabOne, tabTwo, translateX, translateXTabOne, translateXTabTwo} = this.state;
@@ -57,7 +66,26 @@ export default class Body extends React.Component {
         }
     }
 
+    componentDidMount(){
+        // AsyncStorage.getItem("mallItem").then((result)=> this.setState({mallDetail: result})).catch((e)=>console.log(e));
+        // console.log(JSON.stringify(this.props))
+        
+            var requestOptions = {
+            method: 'GET',
+            redirect: 'follow'
+          };
+          
+          fetch(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${this.props.route.params.place_id}&key=AIzaSyA-XRcHLWd3GVfU0RE6XpbRn86XXG4SsEI`, requestOptions)
+            .then(response => response.json())
+            .then(results => this.setState( {mallDetail: results.result}))
+            .catch((e)=> console.log(e))
+            .finally(()=> this.setState({loading: false}));
+
+            console.log(JSON.stringify(this.state))
+        }
+        
     render() {
+
         let {active, tabOne, tabTwo, translateX, translateY, translateXTabOne, translateXTabTwo, offsetX, offsetY} = this.state;
         return(
             // Main Container
@@ -99,16 +127,27 @@ export default class Body extends React.Component {
                     {transform: [{translateX: translateXTabOne}]},]}
                     onLayout = {event => this.setState({offsetX: event.nativeEvent.layout.height})}> 
 
-                        <MallOverview/>
-
+                        {this.state.loading ? (
+                            <View style={[styles.containerActivityIndicator, styles.horizontal]}><ActivityIndicator /></View>
+                        ):(
+                            <MallOverview mallDetail = {this.state.mallDetail}/>
+                        )
+                    }
+                        
                     </Animated.View>
                     
                     {/* Contents of TabTwo */}
                     <Animated.View style = {[styles.tabYContent, 
                     {transform: [{translateX: translateXTabTwo}, {translateY: -offsetX}]}, {marginBottom: -offsetY}]}
                     onLayout = {event => this.setState({offsetY: event.nativeEvent.layout.height})}>
-
-                        <RestarantsFragment/>
+                        
+                        
+                        {this.state.loading ? (
+                            <View style={[styles.containerActivityIndicator, styles.horizontal]}><ActivityIndicator /></View>
+                        ):(
+                            <RestarantsFragment mallDetail = {this.state.mallDetail}/>
+                        )
+                    }
  
                     </Animated.View>
 
@@ -186,5 +225,13 @@ const styles = StyleSheet.create({
         justifyContent:'center', 
         alignItems:'center',
         padding: 5,
-    }
+    },
+
+    containerActivityIndicator: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems:'center',
+        padding: 10,
+      },
+
 })

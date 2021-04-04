@@ -6,7 +6,14 @@ import { BarChart } from 'react-native-chart-kit';
 const data = {
     labels: ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'],
     datasets: [
-        { data: [20, 45, 28, 80, 99, 43, 50], },
+        { data: [20 + Math.random() * (30),
+            45 + Math.random() * (30),
+            28 + Math.random() * (30),
+            80 + Math.random() * (30),
+            99 + Math.random() * (30),
+            43 + Math.random() * (20),
+            50 + Math.random() * (10)] }, 
+        ,
     ],
 }
 

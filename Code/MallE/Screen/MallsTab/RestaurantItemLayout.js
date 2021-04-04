@@ -11,11 +11,12 @@ import { Row } from 'native-base';
 export default function RestarantItemList(props) {
 
     const navigation = useNavigation();
-    
+
+   
     const onPressFunction = ()=>{
     
         navigation.navigate('RestaurantsDetail',props.restaurantitem)
-        console.log(`${props.restaurantitem.key} button is pressed`)
+        console.log(`${props.restaurantitem.place_id} button is pressed`)
     }
 
     const DateComponent = ()=>{
@@ -23,11 +24,22 @@ export default function RestarantItemList(props) {
         let closingTimeing = moment(props.restaurantitem.closingTimeing, 'h:mma')
         
         
-        if(openTiming.isBefore() && closingTimeing.isAfter()){
+        // if(openTiming.isBefore() && closingTimeing.isAfter()){
+        //     //shop is open
+        //     return (<View flexDirection = "row">
+        //             <Text style = {textStyles.openText}>{"Open " }</Text>
+        //             <Text style = {textStyles.closeText}>Closes {closingTimeing.format(" h:mma")}</Text>
+        //         </View>)
+        // }else{
+        //     //shop is closed
+        //     return (<Text style = {textStyles.closeText}>Closed</Text>)
+        // }
+
+        if(props.restaurantitem.opening_hours != null) {
             //shop is open
             return (<View flexDirection = "row">
-                    <Text style = {textStyles.openText}>{"Open " }</Text>
-                    <Text style = {textStyles.closeText}>Closes {closingTimeing.format(" h:mma")}</Text>
+                <Text style = {textStyles.openText}>Open</Text>
+                {/* <Text style = {textStyles.closeText}>Closes {closingTimeing.format(" h:mma")}</Text> */}
                 </View>)
         }else{
             //shop is closed
@@ -110,11 +122,11 @@ export default function RestarantItemList(props) {
         return(
             <ScrollView>
             <TouchableWithoutFeedback style={layoutStyles.itemContainer} onPress= {onPressFunction}>
-                <Image source={{uri:props.restaurantitem.imageURL}} style={layoutStyles.image}/>
+                <Image source={{uri:`https://maps.googleapis.com/maps/api/place/photo?key=AIzaSyA-XRcHLWd3GVfU0RE6XpbRn86XXG4SsEI&photoreference=${props.restaurantitem.photos[0].photo_reference}&maxwidth=90`}} style={layoutStyles.image}/>
                 <View style = {layoutStyles.textContainer}>
                     <View style={layoutStyles.headerRow} >
                         <Text style= {textStyles.header}>{props.restaurantitem.name}</Text> 
-                        <CrowedComponent />
+                        {/* <CrowedComponent /> */}
                     </View>
                     <View style={layoutStyles.descriptionRow} >
                         <Text style= {textStyles.descriptionHeader}>Hours: </Text> 
@@ -122,7 +134,7 @@ export default function RestarantItemList(props) {
                     </View>
                     <View style={layoutStyles.descriptionRow} >
                         <Text style= {textStyles.descriptionHeader}>Estimated Waiting Time: </Text> 
-                        <WaitingTimeComponent/>
+                        {/* <WaitingTimeComponent/> */}
                     </View>
                     <View style={layoutStyles.descriptionRow} >
                         <Text style= {textStyles.descriptionHeader}>Ratings: </Text> 
