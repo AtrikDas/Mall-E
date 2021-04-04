@@ -11,7 +11,8 @@ import { Row } from 'native-base';
 export default function RestarantItemList(props) {
 
     const navigation = useNavigation();
-    
+
+   
     const onPressFunction = ()=>{
     
         navigation.navigate('RestaurantsDetail',props.restaurantitem)
