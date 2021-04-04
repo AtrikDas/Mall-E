@@ -44,7 +44,7 @@ const LoginScreen = ({navigation}) => {
     }
     formBody = formBody.join('&');
 
-    fetch('http://192.168.0.185:3000/api/user/login', {
+    fetch('http://192.168.1.145:3000/api/user/login', { //192.168.0.185:3000
       method: 'POST',
       body: formBody,
       headers: {
