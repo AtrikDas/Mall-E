@@ -41,7 +41,6 @@ export default function MapScreen() {
     }
 
     var fullData = {};
-    // var pinColors = {};
     const [pinColorsDict, setPinColorsDict] = useState({});
 
 
@@ -238,7 +237,7 @@ export default function MapScreen() {
                                     <Grid />
                                 </BarChart>
                                 <XAxis
-                                    style={{ marginHorizontal: -5, height: xAxisHeight }}
+                                    style={{ marginHorizontal: -5, marginTop: 0, marginBottom: -5, height: xAxisHeight }}
                                     data={realData.analysis[5].day_raw.slice(4, 17)}
                                     formatLabel={(value, index) => {
                                         if ((index + 9) % 3 == 0) {
@@ -296,6 +295,7 @@ const styles = StyleSheet.create({
 
     moreInfoButton: {
         marginBottom: 5,
+        marginTop: -3,
     },
 
     image: {

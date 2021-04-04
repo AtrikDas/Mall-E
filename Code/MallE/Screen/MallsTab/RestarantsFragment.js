@@ -15,7 +15,7 @@ export default function RestarantsFragment(props) {
             method: 'GET',
             redirect: 'follow',
           };
-          
+          // https://maps.googleapis.com/maps/api/place/textsearch/json?query=Jurong+Point+Restaurants&key=AIzaSyA-XRcHLWd3GVfU0RE6XpbRn86XXG4SsEI
           fetch(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=${props.mallDetail.name.replace(/\s/g, '+')}+Restaurants&key=AIzaSyA-XRcHLWd3GVfU0RE6XpbRn86XXG4SsEI`, requestOptions)
             .then(response => response.json())
             .then(result => setRestaurantsList(result.results))
