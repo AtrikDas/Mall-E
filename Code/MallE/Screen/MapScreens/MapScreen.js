@@ -4,7 +4,6 @@ import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import { Text, ActivityIndicator, StyleSheet, View, Modal, Button, Image, Dimensions } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Icon } from 'react-native-elements';
-// import { LineChart, BarChart } from 'react-native-chart-kit';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage';
 import {CheckBox, CardItem, Card} from "native-base"
@@ -12,6 +11,7 @@ import {CheckBox, CardItem, Card} from "native-base"
 import NavBar from '../../layouts/NavBar';
 import { BarChart, Grid, XAxis, YAxis } from 'react-native-svg-charts'
 
+// import { LineChart, BarChart } from 'react-native-chart-kit';
 
 export default function MapScreen() {
     const [isLoading, setLoading] = useState(true);
@@ -32,7 +32,6 @@ export default function MapScreen() {
     
     const navigation = useNavigation();
 
-<<<<<<< HEAD
     const best_time_api_key_private = 'pri_c3ae9a3d6cea4bbaa667993561b37256';
     const best_time_api_key_public = 'pub_ea53baaf28f34149b3caeb66139cd2f7';
     const params = {
@@ -40,18 +39,11 @@ export default function MapScreen() {
         'venue_name': 'Jurong Point',
         'venue_address': '1 Jurong West Central 2, Singapore'
     }
-=======
-    // componentDidMount = () => {
-    //     setIsPressed(false);
-    // }
->>>>>>> 9e33b776716a9abc41c1603da26741498614ec0c
-
-    // componentDidMount = () => {
-    //     setIsPressed(false);
-    // }
 
     var fullData = {};
-    var pinColors = {};
+    // var pinColors = {};
+    const [pinColorsDict, setPinColorsDict] = useState({});
+
 
     const onPressed = async () => {
         let bookmarks = []
@@ -78,12 +70,6 @@ export default function MapScreen() {
     };
 
     useEffect(() => {
-        // fetch('https://jsonkeeper.com/b/IGBH')
-        //     .then((response) => response.json())
-        //     .then((json) => setPlaces(json.data))
-        //     .catch((error) => console.error(error))
-        //     .finally(() => setLoading(false));
-            
         // using google places api to get all the shopping malls in Singapore
         var requestOptions = {
             method: 'GET',
@@ -94,33 +80,15 @@ export default function MapScreen() {
             .then(response => response.json())
             .then(results => {
                 setPlaces(results.results);
+                getAllMallData(results.results);
                 AsyncStorage.setItem("mallList", JSON.stringify(results.results)).then(() => console.log("set mallList")).catch((e)=> console.log(e));
             })
-            .catch(error => console.log('error', error))
-            .finally(() => setPlacesLoading(false));
-        
-        if(!isPlacesLoading) {
-            getAllMallData();
-        }
+            .catch(error => console.log('error', error));
     }, []);
 
-    // const getCurrentCrowdDensity = (place) => {
-    //     mallParams = {
-    //         'api_key_private': best_time_api_key_private,
-    //         'venue_name': place.name,
-    //         'venue_address': place.formatted_address
-    //     }
-        
-    //     fetch('https://besttime.app/api/v1/forecasts?' + new URLSearchParams(mallParams), { method: 'POST' })
-    //         .then((response) => response.json())
-    //         .then((json) => {
-    //             fullData.push(json);
-    //             crowdDensity = json.analysis[5].day_raw[7];
-    //         });
-    //     return crowdDensity;
-    // }
-
-    const getAllMallData = () => {
+    const getAllMallData = (places) => {
+        console.log("Ran getAllMallData");
+        var pinColors = {};
         for (let i=0; i < places.length; i++) { // places.length
             mallParams = {
                 'api_key_private': best_time_api_key_private,
@@ -129,20 +97,28 @@ export default function MapScreen() {
             }
             fetch('https://besttime.app/api/v1/forecasts?' + new URLSearchParams(mallParams), { method: 'POST' })
                 .then((response) => response.json())
-                .then((json) => fullData[places[i].name] = json)
+                .then((json) => {
+                    fullData[places[i].name] = json;
+                    try {
+                        crowdDensity = fullData[places[i].name].analysis[5].day_raw[6];
+                        if (crowdDensity > 80)
+                            pinColors[places[i].name] = "rgb(255,32,32)";
+                        else if (crowdDensity > 60)
+                            pinColors[places[i].name] = "rgb(128,128,0)";
+                        else
+                            pinColors[places[i].name] = "rgb(0,255,128)";
+                        setPinColorsDict(pinColors);
+                    }
+                    catch {
+                        // console.log(fullData[places[i].name]);
+                    }
+                })
+                .catch(error => console.log('error', error))
                 .finally(() => {
-                    crowdDensity = fullData[places[i].name].analysis[5].day_raw[6];
-                    console.log(places[i].name)
-                    console.log(crowdDensity)
-                    if (crowdDensity > 80)
-                        pinColors[places[i].name] = "rgb(0,0,255)";
-                    else if (crowdDensity > 60)
-                        pinColors[places[i].name] = "rgb(128,128,0)";
-                    else
-                        pinColors[places[i].name] = "rgb(0,255,128)";
+                    if (i == places.length - 1)
+                        setLoading(false);
                 });
         }
-        setLoading(false);
     }
 
     const getMallPopularTimes = (place) => {
@@ -160,8 +136,8 @@ export default function MapScreen() {
         // var day = new Date().getDay();
         // var date = new Date().getDate();
         // var hour = new Date().getHours();
-        console.log(pinColors);
-        console.log(fullData);
+        // console.log(pinColors);
+        // console.log(fullData);
         // console.log(date);
         // console.log(hour);
     }   
@@ -199,7 +175,7 @@ export default function MapScreen() {
                                 }, 
                                 300);
                                 setPopupStatus(true); }}
-                            pinColor={pinColors[place.name]}
+                            pinColor={pinColorsDict[place.name]}
                         />
                     ))}
                 </MapView>
@@ -249,8 +225,6 @@ export default function MapScreen() {
                                 contentInset={verticalContentInset}
                                 svg={axesSvg}
                                 numberOfTicks={5}
-                                // min={0}
-                                // max={100}
                             />
                             <View style={{ flex: 1, marginLeft: 10 }}>
                                 <BarChart
@@ -260,8 +234,6 @@ export default function MapScreen() {
                                     svg={{ fill: 'rgb(0, 155, 255)' }}
                                     spacingInner={0.3}
                                     spacingOuter={0}
-                                    // gridMin={0}
-                                    // gridMax={100}
                                 >
                                     <Grid />
                                 </BarChart>
