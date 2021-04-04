@@ -68,7 +68,7 @@ export default class Graph extends React.Component {
                                 // } else {
                                 //     return;
                                 // }
-                                index;
+                                return index;
                             }}
                             contentInset={{ left: 15, right: 20 }}
                             svg={axesSvg}

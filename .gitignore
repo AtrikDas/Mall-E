@@ -9,6 +9,8 @@ npm-debug.*
 *.orig.*
 web-build/
 Code/node_modules/**/*
+Code/MallE/Screen/config.json
+Code/MallE/package-lock.json
 
 # macOS
 .DS_Store
