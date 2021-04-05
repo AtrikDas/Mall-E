@@ -122,7 +122,7 @@ export default function RestarantItemList(props) {
         return(
             <ScrollView>
             <TouchableWithoutFeedback style={layoutStyles.itemContainer} onPress= {onPressFunction}>
-                <Image source={{uri:`https://maps.googleapis.com/maps/api/place/photo?key=AIzaSyA-XRcHLWd3GVfU0RE6XpbRn86XXG4SsEI&photoreference=${props.restaurantitem.photos[0].photo_reference}&maxwidth=90`}} style={layoutStyles.image}/>
+                {/* <Image source={{uri:`https://maps.googleapis.com/maps/api/place/photo?key=AIzaSyA-XRcHLWd3GVfU0RE6XpbRn86XXG4SsEI&photoreference=${props.restaurantitem.photos[0].photo_reference}&maxwidth=90`}} style={layoutStyles.image}/> */}
                 <View style = {layoutStyles.textContainer}>
                     <View style={layoutStyles.headerRow} >
                         <Text style= {textStyles.header}>{props.restaurantitem.name}</Text> 
