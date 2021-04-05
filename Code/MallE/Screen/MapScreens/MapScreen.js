@@ -13,21 +13,25 @@ import * as RootNavigation from '../../layouts/RootNavigation';
 import NavBar from '../../layouts/NavBar';
 import { BarChart, Grid, XAxis, YAxis } from 'react-native-svg-charts'
 
-// import { LineChart, BarChart } from 'react-native-chart-kit';
-
 export default function MapScreen() {
     const [isLoading, setLoading] = useState(true);
     const [isDataLoading, setDataLoading] = useState(true);
     const [isPlacesLoading, setPlacesLoading] = useState(true);
     const [places, setPlaces] = useState([]);
     const [realData, setRealData] = useState([]);
-    // const [fullData, setFullData] = useState();
+    // const [graphData, setGraphData] = useState([]);
     const [showPopup, setPopupStatus] = useState(false);
     const [chosenMall, setChosenMall] = useState([]);
     const [isPressed, setIsPressed] = useState(false);
     const colors = ['rgb(0, 255, 128)', 'rgb(255, 128, 128)', 'rgb(255, 255, 0)', 'rgb(0, 255, 128)', 'rgb(255, 255, 0)'];
     const data = [80, 85, 55, 40, 60, 50, 30, 25, 35, 50, 80, 85, 90, 70, 60, 10];
     
+    var date = new Date().getDate();
+    var day = new Date().getDay(); // JS: 0 = Sunday, 6 = Saturday
+    var bestTimeDay = (day > 0) ? (day - 1) : (6); // Best-Time: 0 = Monday, 6 = Sunday
+    var hour = new Date().getHours();
+    var bestTimeHour = hour - 6;
+
     const axesSvg = { fontSize: 11, fill: 'rgb(32,32,32)' };
     const verticalContentInset = { top: 10, bottom: 10 };
     const xAxisHeight = 30;
@@ -43,8 +47,25 @@ export default function MapScreen() {
     }
 
     var fullData = {};
-    // var pinColors = {};
+    var graphData = [];
     const [pinColorsDict, setPinColorsDict] = useState({});
+
+    const data1 = [14, -1, 100, -95, -94, -24, -8, 85, -91, 35, -53, 53, -78, 66, 96, 33, -26, -32, 73, 8]
+        .map((value) => ({ value }))
+    const data2 = [24, 28, 93, 77, -42, -62, 52, -87, 21, 53, -78, -62, -72, -6, 89, -70, -94, 10, 86, 84]
+        .map((value) => ({ value }))
+
+    const barData_ = [
+        {
+            data: data1,
+            svg: {
+                fill: 'rgb(134, 65, 244)',
+            },
+        },
+        {
+            data: data2,
+        },
+    ]
 
 
     const onPressed = async () => {
@@ -91,7 +112,7 @@ export default function MapScreen() {
     const getAllMallData = (places) => {
         console.log("Ran getAllMallData");
         var pinColors = {};
-        for (let i=0; i < places.length; i++) { // places.length
+        for (let i=0; i < places.length; i++) {
             mallParams = {
                 'api_key_private': best_time_api_key_private,
                 'venue_name': places[i].name,
@@ -102,7 +123,9 @@ export default function MapScreen() {
                 .then((json) => {
                     fullData[places[i].name] = json;
                     try {
-                        crowdDensity = fullData[places[i].name].analysis[5].day_raw[6];
+                        // console.log(bestTimeDay);
+                        // console.log(bestTimeHour);
+                        crowdDensity = fullData[places[i].name].analysis[bestTimeDay].day_raw[bestTimeHour];
                         if (crowdDensity > 80)
                             pinColors[places[i].name] = "rgb(255,32,32)";
                         else if (crowdDensity > 60)
@@ -124,24 +147,83 @@ export default function MapScreen() {
     }
 
     const getMallPopularTimes = (place) => {
+        // var graphData_ = [];
+        var barData = [];
+        var temp = 0;
+        var beforeCurrHour = [];
+        var currHour = [];
+        var afterCurrHour = [];
         mallParams = {
             'api_key_private': best_time_api_key_private,
             'venue_name': place.name,
             'venue_address': place.formatted_address
         }
-        // setDataLoading(true);
         fetch('https://besttime.app/api/v1/forecasts?' + new URLSearchParams(mallParams), { method: 'POST' })
             .then((response) => response.json())
-            .then((json) => setRealData(json))
+            .then((json) => {
+                setRealData(json);
+                for (let i = 4; i < 17; i++) {
+                    temp = json.analysis[bestTimeDay].day_raw[i];
+                    // console.log(i);
+                    // console.log(temp);
+                    if (i < bestTimeHour)
+                        beforeCurrHour.push(temp);
+                    else if (i == bestTimeHour)
+                        currHour.push(temp);
+                    else 
+                        afterCurrHour.push(temp);
+                }
+                try {
+                    beforeCurrHour = beforeCurrHour.map((value) => ({ value }));
+                    currHour = currHour.map((value) => ({ value }));
+                    afterCurrHour = afterCurrHour.map((value) => ({ value }));
+                }
+                catch {
+                    console.log("error bruh"); 
+                }
+                // console.log(beforeCurrHour);
+                // console.log(currHour);
+                // console.log(afterCurrHour);
+                barData = [
+                    {
+                        data: beforeCurrHour,
+                        svg: {
+                            fill: 'rgb(0, 128, 255)',
+                        },
+                    },
+                    {
+                        data: currHour,
+                        svg: {
+                            fill: 'rgb(255, 64, 64)',
+                        },
+                    },
+                    {
+                        data: afterCurrHour,
+                        svg: {
+                            fill: 'rgb(134, 65, 244)',
+                        },
+                    },
+                ]
+                // console.log(barData);
+                // console.log(beforeCurrHour);
+                // console.log(currHour);
+                // console.log(afterCurrHour);
+                graphData = barData;
+                // setGraphData(barData);
+                console.log(graphData);
+            })
             .finally(() => setDataLoading(false));
+        
         
         // var day = new Date().getDay();
         // var date = new Date().getDate();
         // var hour = new Date().getHours();
-        // console.log(pinColors);
-        // console.log(fullData);
+
         // console.log(date);
+        // console.log(day);
         // console.log(hour);
+        // console.log(bestTimeDay);
+        // console.log(bestTimeHour);
     }   
 
     const handleClose = () => {
@@ -177,7 +259,7 @@ export default function MapScreen() {
                                     getMallPopularTimes(place);
                                 }, 
                                 300);
-                                setPopupStatus(true); }}
+                                setPopupStatus(true);}}
                             pinColor={pinColorsDict[place.name]}
                         />
                     ))}
@@ -204,12 +286,16 @@ export default function MapScreen() {
                             />
                         </View>
                         <Text style={styles.popupHeading}>{chosenMall.name}</Text>
-                        <Image
+                        <Image 
                             style={styles.image}
-                            source={{uri:"https://maps.googleapis.com/maps/api/place/photo?key=AIzaSyA-XRcHLWd3GVfU0RE6XpbRn86XXG4SsEI&photoreference=ATtYBwJxp6E0bfUJTYikTlpVdy4ZXYh3NUW6_H9I2PLgb1gy2lR7kInNqoKKVkbWi9ncu-SJUDzyuskqZ7PvYL2unEgvesm3rHgz_K3RE91luQEfA1mZjuY12o5d0ZbaXcFuX4VV9Sw-XUUClrlHGMkWCYH12kMvltJpPfn7yZ0Ha1tseCsy&maxwidth=400"}}
-                        />
+                            source={{
+                            width: '100%',
+                            height: 300,
+                            uri: `https://maps.googleapis.com/maps/api/place/photo?key=AIzaSyA-XRcHLWd3GVfU0RE6XpbRn86XXG4SsEI&photoreference=${chosenMall.photos[0].photo_reference}&maxheight=400`
+                        }} />
                         <Text style={styles.popupText}><Text style={{ fontWeight: 'bold' }}>Address:</Text> {chosenMall.formatted_address}</Text>
                         <Text style={styles.popupText}><Text style={{ fontWeight: 'bold' }}>Opening Hours:</Text> 10 am - 10 pm</Text>
+                        {/* <Text style={styles.popupText}><Text style={{ fontWeight: 'bold' }}>Opening Hours:</Text> {realData.analysis[bestTimeDay].day_info.venue_open} hrs - {realData.analysis[bestTimeDay].day_info.venue_closed} hrs</Text> */}
                         
                         <Card>
                             <CardItem body>
@@ -220,19 +306,33 @@ export default function MapScreen() {
                                 />
                             </CardItem>
                         </Card>
-                        <Text style={{ fontWeight: 'bold', marginTop: 5, marginBottom:4 }}>Today's Crowd Density Trend:</Text>
+                        <Text style={{ fontWeight: 'bold', marginTop: 8, marginBottom:5 }}>Today's Crowd Density Trend:</Text>
                         <View style={{ height: 200, padding: 0, flexDirection: 'row' }}>
                             <YAxis
-                                data={realData.analysis[5].day_raw.slice(3, 17)}
+                                data={realData.analysis[bestTimeDay].day_raw.slice(3, 17)}
                                 style={{ marginBottom: xAxisHeight }}
                                 contentInset={verticalContentInset}
                                 svg={axesSvg}
                                 numberOfTicks={5}
                             />
                             <View style={{ flex: 1, marginLeft: 10 }}>
+                                {/* <BarChart
+                                    style={{ flex: 1 }}
+                                    data={ graphData }
+                                    yAccessor={({ item }) => item.value}
+                                    svg={{
+                                        fill: 'blue',
+                                    }}
+                                    contentInset={verticalContentInset}
+                                    spacingInner={0.3}
+                                    spacingOuter={0}
+                                    { ...this.props }
+                                >
+                                    <Grid/>
+                                </BarChart> */}
                                 <BarChart
                                     style={{ flex: 1 }}
-                                    data={realData.analysis[5].day_raw.slice(3, 17)}
+                                    data={realData.analysis[bestTimeDay].day_raw.slice(3, 17)}
                                     contentInset={verticalContentInset}
                                     svg={{ fill: 'rgb(0, 155, 255)' }}
                                     spacingInner={0.3}
@@ -242,7 +342,7 @@ export default function MapScreen() {
                                 </BarChart>
                                 <XAxis
                                     style={{ marginHorizontal: -5, height: xAxisHeight }}
-                                    data={realData.analysis[5].day_raw.slice(4, 17)}
+                                    data={realData.analysis[bestTimeDay].day_raw.slice(4, 17)}
                                     formatLabel={(value, index) => {
                                         if ((index + 9) % 3 == 0) {
                                             if (index + 9 < 12)
@@ -303,6 +403,7 @@ const styles = StyleSheet.create({
 
     moreInfoButton: {
         marginBottom: 5,
+        marginTop: -5
     },
 
     image: {

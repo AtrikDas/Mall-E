@@ -36,7 +36,7 @@ export default function AnotherGraph(props) {
             <View styles = {styles.container}>
 
                 {isLoading ? <ActivityIndicator/> : (
-                <View style={{ height: 200, padding: 0, flexDirection: 'row' }}>
+                <View style={{ height: 225, padding: 0, flexDirection: 'row', width: '90%', alignSelf: 'center' }}>
                 <YAxis
                     data={chosenMallFloorData.crowd}
                     style={{ marginBottom: xAxisHeight }}
@@ -49,17 +49,17 @@ export default function AnotherGraph(props) {
                         style={{ flex: 1 }}
                         data={chosenMallFloorData.crowd}
                         contentInset={verticalContentInset}
-                        svg={{ fill: 'rgb(0, 155, 255)' }}
-                        spacingInner={0.3}
+                        svg={{ fill: 'rgb(216, 64, 64)' }}
+                        spacingInner={0.45}
                         spacingOuter={0}
                     >
                         <Grid />
                     </BarChart>
                     <XAxis
-                        style={{ marginHorizontal: 5, marginTop: 0, marginBottom: 5, height: xAxisHeight }}
+                        style={{ marginHorizontal: -2, marginTop: 10, marginBottom: 5, height: xAxisHeight }}
                         data={chosenMallFloorData.crowd}
                         formatLabel={(value, index) => {
-                            return index;
+                            return chosenMallFloorData.level[index];
                         }}
                         contentInset={{ left: 15, right: 20 }}
                         svg={axesSvg}
