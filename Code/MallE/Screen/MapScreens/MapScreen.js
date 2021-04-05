@@ -57,8 +57,8 @@ export default function MapScreen() {
                 bookmarks = []
             }
             let list = []
-            console.log(chosenMall)
-            bookmarks.push(chosenMall);
+            console.log(chosenMall.name)
+            bookmarks.push(chosenMall.name);
             AsyncStorage.setItem('bookmarks', JSON.stringify(bookmarks))
                 .then(() => {
                     console.log(bookmarks)
