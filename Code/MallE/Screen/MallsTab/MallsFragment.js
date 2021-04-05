@@ -13,6 +13,7 @@ import { Header, Item, Icon, Input, Container } from 'native-base';
 import MallItemList from './MallItemLayout';
 
 export default function MallsFragment() {
+
   const [mallList, setMallList] = useState([]);
   const [Loading, setLoading] = useState(true);
   const [mallListFiltered, setMallListFiltered] = useState([]);
@@ -22,15 +23,16 @@ export default function MallsFragment() {
     AsyncStorage.getItem('mallList')
       .then((result) => {; 
         setMallList(JSON.parse(result)); 
+        setMallListFiltered(mallList);
       })
       .then(console.log("mall list length :"+ mallList.length))
       .catch((err) => console.log(err))
       .finally(() => setLoading(false));
 
-  },[]);
+  },[Loading]);
 
   searchMall = (textToSearch) => {
-    setMallList(mallList.filter(i => i.name.toLowerCase().includes(textToSearch.toLowerCase())))
+    setMallListFiltered(mallList.filter(i => i.name.toLowerCase().includes(textToSearch.toLowerCase())))
   };
 
   return (
@@ -40,7 +42,7 @@ export default function MallsFragment() {
       {
       Loading ? (
         <ActivityIndicator />
-      ) :( mallList == null ? (
+      ) :( mallListFiltered == null ? (
         <Text>No Malls Found!</Text>
       ) : (
         <Container>
@@ -53,7 +55,7 @@ export default function MallsFragment() {
             </Header>
         <FlatList
           style={{flex: 1}}
-          data={mallList}
+          data={mallListFiltered}
           ItemSeparatorComponent={renderSeparator}
           initialNumToRender={5}
           renderItem={({item, index}) => ( <MallItemList mallItem={item} /> )}
