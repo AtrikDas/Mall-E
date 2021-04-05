@@ -15,6 +15,7 @@ import MapScreen from '../Screen/MapScreens/MapScreen'
 import Icon from 'react-native-vector-icons/Entypo';
 import MallList from "../Screen/MallsTab/MallsFragment"
 import Profile from "../Screen/ProfileScreens/Profile";
+import { navigationRef } from './RootNavigation';
 
 const Stack = createStackNavigator();
 
@@ -26,7 +27,7 @@ function Home() {
 
 function Malls() {
     return (
-        <NavigationContainer independent={true}>
+        <NavigationContainer independent={true} ref ={navigationRef}>
             <Stack.Navigator initialRouteName="MallList" screenOptions={{
                         headerShown: false
                     }}>

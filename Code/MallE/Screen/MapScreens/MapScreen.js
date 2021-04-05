@@ -8,6 +8,8 @@ import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage';
 import {CheckBox, CardItem, Card} from "native-base"
 
+import * as RootNavigation from '../../layouts/RootNavigation';
+
 import NavBar from '../../layouts/NavBar';
 import { BarChart, Grid, XAxis, YAxis } from 'react-native-svg-charts'
 
@@ -168,9 +170,10 @@ export default function MapScreen() {
                             }}
                             title={place.name}
                             description={place.formatted_address}
-                            onPress={() => { setTimeout(() => 
+                            onPress={() => { 
+                                setChosenMall(place);
+                                setTimeout(() => 
                                 {  
-                                    setChosenMall(place);
                                     getMallPopularTimes(place);
                                 }, 
                                 300);
@@ -262,8 +265,12 @@ export default function MapScreen() {
                             <Button
                                 title="More Information..."
                                 onPress={() => { 
-                                    setPopupStatus(false)
-                                    navigation.navigate("Malls", chosenMall)
+                                    setPopupStatus(false);
+                                    // navigation.navigate("Malls", chosenMall)
+                                    // navigation.navigate('Body',chosenMall);
+                                    navigation.navigate('Malls');
+                                    RootNavigation.navigate("Body",chosenMall);
+                                    console.log("button pressed");
                                  }}
                             >
                             </Button>
