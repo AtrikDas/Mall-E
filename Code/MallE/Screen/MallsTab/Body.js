@@ -21,7 +21,7 @@ export default class Body extends React.Component {
           active: 0,
           tabOne: 0,
           tabTwo: 0,
-          translateX: new Animated.Value(0),
+          translateX: new Animated.Value(20),
           translateXTabOne: new Animated.Value(0),
           translateXTabTwo: new Animated.Value(width),
           translateY: 0,

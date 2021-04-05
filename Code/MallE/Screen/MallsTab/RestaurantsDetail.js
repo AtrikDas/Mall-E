@@ -22,36 +22,79 @@ const data = {
   ],
 };
 
+
 export default class RestarantsFragment extends React.Component {
-  
+  state= {
+    popularTime: null
+  }
   restaurantDetails = this.props.route.params
+
+  DateComponent = ()=>{
+    
+
+    if(this.restaurantDetails.opening_hours != null) {
+        if(this.restaurantDetails.opening_hours.open_now == true){
+             //shop is open
+            return (<View flexDirection = "row">
+                <Text style = {textStyles.openText}>Open</Text>
+                {/* <Text style = {textStyles.closeText}>Closes {closingTimeing.format(" h:mma")}</Text> */}
+                </View>)
+        }else{
+            return (<Text style = {textStyles.closeText}>Closed</Text>)
+        }
+       
+    }else{
+        //shop is closed
+        return (<Text style = {textStyles.closeText}>Closed</Text>)
+    }
+    
+}
   
   componentDidMount(){
     console.log(this.props.route.params)
-      // var myHeaders = new Headers();
-      // myHeaders.append("Cookie", "__cfduid=dc1330063cebaf9c65b9be7a32f19a1651615999201");
-      
-      // var requestOptions = {
-      //   method: 'POST',
-      //   headers: myHeaders,
-      //   redirect: 'follow'
-      // };
-      
-      // fetch("https://BestTime.app/api/v1/forecasts?api_key_private=pri_ec5e87efe7174865a4b557e9c175058e&venue_name=McDonalds&venue_address=Ocean Ave, San Fransisco", requestOptions)
-      //   .then(response => response.text())
-      //   .then(result => console.log(result))
-      //   .catch(error => console.log('error', error));
+    var requestOptions = {
+      method: 'POST',
+      redirect: 'follow'
+    };
+    
+    fetch(`http://10.0.2.2:5000/pythonAPI?place_id=${this.restaurantDetails.place_id}`, requestOptions)
+    .then(response => response.json())
+    .then(results => {
+        this.setState({popularTime: results})
+        console.log("popular times "+ JSON.stringify(this.state.popularTime));
 
-      fetch(`http://${config.ipAddress}:5000/api`)
-            .then(response => response.json())
-            .then(results => {
-                console.log(results);
-            })
-            .catch(error => console.log('error', error));
+        
+    })
+      .catch(error => console.log('error', error));
+      
   }
-  imageURL = "../../Image/" + this.restaurantDetails.imageURL
+
+  imageURL = "../../Image/" + this.restaurantDetails.imageURL;
+
+  calculateWaitingTime = ()=>{
+    if(this.state.popularTime != null){
+        var day = new Date().getDay();
+        var date = new Date().getDate();
+        var hour = new Date().getHours();
+        console.log("day"+day+"date"+date+"hour"+hour);
+
+        let crowdDensity = this.state.popularTime.populartimes[(day-1)%7].data[hour];
+
+        if (crowdDensity >0 && crowdDensity <= 50){
+          return "0-15mins"
+        }else if (crowdDensity >50 && crowdDensity <= 80){
+          return "15-30mins"
+        }else{
+          return "30-45mins"
+        }
+    }
+        
+
+  }
+
   render() {
     return (
+      
       <View style={styles.ContainerOne}>
         <ScrollView>
           {/* restaurant image */}
@@ -75,8 +118,8 @@ export default class RestarantsFragment extends React.Component {
             </Text>
 
             <Text style={[globalStyles.titleText, styles.customText]}>
-              Hours:
-              <Text style={globalStyles.normalText}> Open {this.restaurantDetails.openTiming} ⋅ Closes {this.restaurantDetails.closingTimeing}</Text>
+              Hours:{" "}
+              {this.DateComponent()}
             </Text>
 
             {/* <Text style={[globalStyles.titleText, styles.customText]}>
@@ -90,7 +133,7 @@ export default class RestarantsFragment extends React.Component {
 
             <Text style={[globalStyles.titleText, styles.customText]}>
               Estimated Waiting Time:{' '}
-              <Text style={globalStyles.normalText}> 20-30 Minutes</Text>
+              <Text style={globalStyles.normalText}> {this.calculateWaitingTime()}</Text>
             </Text>
 
             <Separator />
@@ -146,6 +189,8 @@ const styles = StyleSheet.create({
   },
   customText: {
     paddingVertical: 2,
+    alignItems:"center",
+    justifyContent:"center"
 },
 popupHeading: {
   fontSize: 24,
@@ -163,3 +208,36 @@ popupHeading: {
     paddingBottom: 14,
   }
 });
+
+
+
+const textStyles = StyleSheet.create({
+  header:{
+      fontFamily:"Inter" ,
+      fontWeight: 'bold',
+      fontSize: 20
+  },
+
+  descriptionHeader:{
+      fontFamily:"Inter" ,
+      fontWeight: 'bold',
+      fontSize: 16,
+      marginRight:10
+  },
+
+  openText:{
+      fontFamily:"Inter" ,
+      fontWeight: 'bold',
+      fontSize: 20,
+      marginRight:10,
+      color: "green"
+  },
+
+  closeText:{
+      fontFamily:"Inter" ,
+      fontWeight: 'bold',
+      fontSize: 20,
+      marginRight:10,
+      color: "red"
+  },
+})

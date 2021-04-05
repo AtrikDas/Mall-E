@@ -36,11 +36,16 @@ export default function RestarantItemList(props) {
         // }
 
         if(props.restaurantitem.opening_hours != null) {
-            //shop is open
-            return (<View flexDirection = "row">
-                <Text style = {textStyles.openText}>Open</Text>
-                {/* <Text style = {textStyles.closeText}>Closes {closingTimeing.format(" h:mma")}</Text> */}
-                </View>)
+            if(props.restaurantitem.opening_hours.open_now == true){
+                 //shop is open
+                return (<View flexDirection = "row">
+                    <Text style = {textStyles.openText}>Open</Text>
+                    {/* <Text style = {textStyles.closeText}>Closes {closingTimeing.format(" h:mma")}</Text> */}
+                    </View>)
+            }else{
+                return (<Text style = {textStyles.closeText}>Closed</Text>)
+            }
+           
         }else{
             //shop is closed
             return (<Text style = {textStyles.closeText}>Closed</Text>)
@@ -122,7 +127,12 @@ export default function RestarantItemList(props) {
         return(
             <ScrollView>
             <TouchableWithoutFeedback style={layoutStyles.itemContainer} onPress= {onPressFunction}>
-                <Image source={{uri:`https://maps.googleapis.com/maps/api/place/photo?key=AIzaSyA-XRcHLWd3GVfU0RE6XpbRn86XXG4SsEI&photoreference=${props.restaurantitem.photos[0].photo_reference}&maxwidth=90`}} style={layoutStyles.image}/>
+                {
+                    props.restaurantitem.photos != null ? <Image source={{uri:`https://maps.googleapis.com/maps/api/place/photo?key=AIzaSyA-XRcHLWd3GVfU0RE6XpbRn86XXG4SsEI&photoreference=${props.restaurantitem.photos[0].photo_reference}&maxwidth=90`}} style={layoutStyles.image}/> 
+                    : 
+                    <Image source={{uri:`https://www.google.com/url?sa=i&url=https%3A%2F%2Fmiraclesrealty.com%2Fproperty%2Fapplication%2Fmodules%2Fthemes%2Fviews%2Fdefault%2Fassets%2Fimages%2F&psig=AOvVaw0aZ-uSklNufMwLiM4g2ZDZ&ust=1617708720932000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCLizluKA5-8CFQAAAAAdAAAAABAD`}} style={layoutStyles.image}/>
+                }
+                
                 <View style = {layoutStyles.textContainer}>
                     <View style={layoutStyles.headerRow} >
                         <Text style= {textStyles.header}>{props.restaurantitem.name}</Text> 

@@ -34,11 +34,16 @@ export default function MallItemList(props) {
         // }
         
         if(props.mallItem.opening_hours != null) {
-            //shop is open
+            if(props.mallItem.opening_hours.open_now == true){
+                 //shop is open
             return (<View flexDirection = "row">
                 <Text style = {textStyles.openText}>Open</Text>
                 {/* <Text style = {textStyles.closeText}>Closes {closingTimeing.format(" h:mma")}</Text> */}
                 </View>)
+            }else{
+                return (<Text style = {textStyles.closeText}>Closed</Text>)
+            }
+           
         }else{
             //shop is closed
             return (<Text style = {textStyles.closeText}>Closed</Text>)
