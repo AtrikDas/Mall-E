@@ -11,6 +11,7 @@ web-build/
 Code/node_modules/**/*
 Code/MallE/Screen/config.json
 Code/MallE/package-lock.json
+Code/package-lock.json
 Code/MallE/android/gradle.properties
 
 # macOS

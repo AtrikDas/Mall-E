@@ -1,0 +1,406 @@
+{
+    "data": [
+    {
+    "name": "Sembawang Shopping Centre",
+    "level": [
+    "L3",
+    "L2",
+    "L1",
+    "B1",
+    "B2",
+    "B3",
+    "B4"
+    ],
+    "crowd": [
+    59,
+    23,
+    78,
+    24,
+    11,
+    0,
+    2
+    ]
+    },
+    {
+    "name": "VivoCity",
+    "level": [
+    "L3",
+    "L2",
+    "L1",
+    "B1",
+    "B2"
+    ],
+    "crowd": [
+    43,
+    32,
+    65,
+    123,
+    7
+    ]
+    },
+    {
+    "name": "Causeway Point",
+    "level": [
+    "L7",
+    "L6",
+    "L5",
+    "L4",
+    "L3",
+    "L2",
+    "L1",
+    "B1",
+    "B2",
+    "B3"
+    ],
+    "crowd": [
+    30,
+    144,
+    53,
+    59,
+    43,
+    14,
+    24,
+    11,
+    74,
+    22
+    ]
+    },
+    {
+    name: "Singapore Shopping Centre",
+    level: [
+    "L3",
+    "L2",
+    "L1",
+    "B1",
+    "B2"
+    ],
+    crowd: [
+    24,
+    20,
+    11,
+    0,
+    2
+    ]
+    },
+    {
+    name: "IMM",
+    level: [
+    "L3",
+    "L2",
+    "L1",
+    "B1",
+    "B2"
+    ],
+    crowd: [
+    56,
+    74,
+    201,
+    50,
+    20
+    ]
+    },
+    {
+    name: "Paragon Shopping Centre",
+    level: [
+    "L6",
+    "L5",
+    "L4",
+    "L3",
+    "L2",
+    "L1",
+    "B1",
+    "B2",
+    "B3"
+    ],
+    crowd: [
+    144,
+    142,
+    254,
+    62,
+    70,
+    46,
+    11,
+    81,
+    22
+    ]
+    },
+    {
+    name: "City Square Mall",
+    level: [
+    "L9",
+    "L8",
+    "L7",
+    "L6",
+    "L5",
+    "L4",
+    "L3",
+    "L2",
+    "L1",
+    "B1",
+    "B2",
+    "B3"
+    ],
+    crowd: [
+    12,
+    56,
+    32,
+    34,
+    76,
+    43,
+    43,
+    14,
+    24,
+    11,
+    3,
+    22
+    ]
+    },
+    {
+    name: "Northpoint City",
+    level: [
+    "L3",
+    "L2",
+    "L1",
+    "B1",
+    "B2"
+    ],
+    crowd: [
+    37,
+    104,
+    64,
+    46,
+    20
+    ]
+    },
+    {
+    name: "United Square Shopping Mall",
+    level: [
+    "L4",
+    "L3",
+    "L2",
+    "L1",
+    "B1"
+    ],
+    crowd: [
+    91,
+    50,
+    78,
+    59,
+    18
+    ]
+    },
+    {
+    name: "Sun Plaza",
+    level: [
+    "L3",
+    "L2",
+    "L1",
+    "B1",
+    "B2"
+    ],
+    crowd: [
+    41,
+    84,
+    59,
+    87,
+    57
+    ]
+    },
+    {
+    name: "Peninsula Shopping Centre Singapore",
+    level: [
+    "L5",
+    "L4",
+    "L3",
+    "L2",
+    "L1",
+    "B1",
+    "B2"
+    ],
+    crowd: [
+    61,
+    69,
+    67,
+    68,
+    61,
+    24,
+    22
+    ]
+    },
+    {
+    name: "Upper Serangoon Shopping Centre",
+    level: [
+    "L4",
+    "L3",
+    "L2",
+    "L1",
+    "B1",
+    "B2"
+    ],
+    crowd: [
+    19,
+    56,
+    32,
+    34,
+    41,
+    43
+    ]
+    },
+    {
+    name: "Velocity＠Novena Square",
+    level: [
+    "L3",
+    "L2",
+    "L1",
+    "B1"
+    ],
+    crowd: [
+    12,
+    45,
+    145,
+    31
+    ]
+    },
+    {
+    name: "Knightsbridge",
+    level: [
+    "L4",
+    "L3",
+    "L2",
+    "L1",
+    "B1",
+    "B2"
+    ],
+    crowd: [
+    12,
+    51,
+    52,
+    53,
+    54,
+    20
+    ]
+    },
+    {
+    name: "Lot One Shoppers' Mall",
+    level: [
+    "L5",
+    "L4",
+    "L3",
+    "L2",
+    "L1",
+    "B1"
+    ],
+    crowd: [
+    21,
+    31,
+    34,
+    47,
+    83,
+    47
+    ]
+    },
+    {
+    name: "The Seletar Mall",
+    level: [
+    "L6",
+    "L5",
+    "L4",
+    "L3",
+    "L2",
+    "L1",
+    "B1",
+    "B2",
+    "B3"
+    ],
+    crowd: [
+    12,
+    21,
+    32,
+    42,
+    54,
+    20,
+    71,
+    14,
+    24
+    ]
+    },
+    {
+    name: "West Mall",
+    level: [
+    "L5",
+    "L4",
+    "L3",
+    "L2",
+    "L1",
+    "B1"
+    ],
+    crowd: [
+    12,
+    23,
+    46,
+    47,
+    76,
+    54
+    ]
+    },
+    {
+    name: "Queensway Shopping Centre",
+    level: [
+    "L4",
+    "L3",
+    "L2",
+    "L1",
+    "B1"
+    ],
+    crowd: [
+    63,
+    24,
+    147,
+    52,
+    22
+    ]
+    },
+    {
+    name: "Suntec City",
+    level: [
+    "L6",
+    "L5",
+    "L4",
+    "L3",
+    "L2",
+    "L1"
+    ],
+    crowd: [
+    144,
+    323,
+    123,
+    231,
+    154,
+    211
+    ]
+    },
+    {
+    name: "Jurong Point",
+    level: [
+    "L6",
+    "L5",
+    "L4",
+    "L3",
+    "L2",
+    "L1",
+    "B1",
+    "B1A"
+    ],
+    crowd: [
+    23,
+    54,
+    76,
+    46,
+    95,
+    15,
+    43,
+    14
+    ]
+    }
+    ]
+    }

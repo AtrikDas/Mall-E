@@ -120,7 +120,7 @@ export default class Body extends React.Component {
                 </View>
 
                 {/* Scrollable / Content and Details */}
-                <ScrollView styles = {[styles.scrollView]}>
+                {/* <Animated.View styles = {[styles.scrollView]}> */}
                     
                     {/* Contents of TabOne */}
                     <Animated.View style = {[styles.tabXContent,
@@ -151,7 +151,7 @@ export default class Body extends React.Component {
  
                     </Animated.View>
 
-                </ScrollView>
+                {/* </Animated.View> */}
 
             </View>
             )
@@ -164,15 +164,16 @@ const styles = StyleSheet.create({
         height: '100%',
         flex: 1,
         backgroundColor: '#ffffff',
-        padding: 20,
+        // padding: 20,
     },
 
     segmentedControl: {
         flexDirection:'row', 
         marginTop: 10, 
-        marginBottom: 20, 
+        marginBottom: 10, 
         height: 45, 
-        position: 'relative'
+        position: 'relative',
+        paddingHorizontal:20
     },
 
     tabAnimation: {
@@ -211,27 +212,28 @@ const styles = StyleSheet.create({
         flex: 1, 
         justifyContent:'center', 
         alignItems:'center',
+       
     },   
 
     tabXContent: {
         flex: 1, 
         justifyContent:'center', 
         alignItems:'center',
-        padding: 5,
+        // padding: 5,
     },
 
     tabYContent: {
         flex: 1, 
         justifyContent:'center', 
         alignItems:'center',
-        padding: 5,
+        // padding: 5,
     },
 
     containerActivityIndicator: {
         flex: 1,
         justifyContent: "center",
         alignItems:'center',
-        padding: 10,
+        // padding: 10,
       },
 
 })
