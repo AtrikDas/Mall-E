@@ -3,7 +3,7 @@ import { Text, View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import { createStackNavigator } from '@react-navigation/stack';
 import TabsExample from '../Screen/TabScreen'
 
 import DrawerNavigationRoutes from '../Screen/DrawerNavigationRoutes';
@@ -21,31 +21,30 @@ const Stack = createStackNavigator();
 
 function Home() {
     return (
-        <MapScreen/>
+        <MapScreen />
     );
 }
 
 function Malls() {
     return (
-        <NavigationContainer independent={true} ref ={navigationRef}>
+        <NavigationContainer independent={true} ref={navigationRef}>
             <Stack.Navigator initialRouteName="MallList" screenOptions={{
-                        headerShown: false
-                    }}>
-                <Stack.Screen name = "MallList" component = {MallList}/>
+                headerShown: false
+            }}>
+                <Stack.Screen name="MallList" component={MallList} />
                 <Stack.Screen name="Body" component={Body} />
                 <Stack.Screen name="RestaurantsDetail" component={RestaurantsDetail} />
             </Stack.Navigator>
         </NavigationContainer>
-        
+
     );
 }
 
 function ProfileScreen() {
     return (
-        <Profile/>
+        <Profile />
     );
 }
-
 
 const Tab = createBottomTabNavigator();
 

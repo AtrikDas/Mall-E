@@ -1,23 +1,25 @@
 import React, { Component } from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TouchableOpacity
-} from 'react-native';
-import {
-  Avatar,
-  Title,
-  Caption,
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { Avatar, Title, Caption, TouchableRipple, } from 'react-native-paper';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-  TouchableRipple,
-} from 'react-native-paper';
-
-import { Button } from 'native-base';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
+import BookmarkPage from './BookmarkPage'
+
+const Stack = createStackNavigator();
+
+function Bookmark() {
+  return (
+    <BookmarkPage />
+  );
+}
+
+
 export default class Profile extends Component {
+
+
   render() {
     return (
       <View style={styles.container}>
@@ -41,39 +43,52 @@ export default class Profile extends Component {
               <Text style={{ color: "#777777", marginLeft: 20, fontSize: 16 }}>mailid@email.com</Text>
             </View>
           </View>
+
+
           <View style={styles.menuWrapper}>
-            <TouchableOpacity onPress={() => { }}>
+
+            <TouchableOpacity onPress={Bookmark}>
               <View style={styles.menuItem}>
                 <Icon name="bookmark" color="#00BFFF" size={25} />
-                <Text style={styles.menuItemText}>Your Bookmarks</Text>
+                <Text style={styles.menuItemText}>Show BookMarks</Text>
               </View>
             </TouchableOpacity>
+
             <TouchableOpacity onPress={() => { }}>
               <View style={styles.menuItem}>
                 <Icon name="account-edit" color="#00BFFF" size={25} />
                 <Text style={styles.menuItemText}>Edit Profile</Text>
               </View>
             </TouchableOpacity>
+
             <TouchableOpacity onPress={() => { }}>
               <View style={styles.menuItem}>
                 <Icon name="eye" color="#00BFFF" size={25} />
                 <Text style={styles.menuItemText}>Privacy</Text>
               </View>
             </TouchableOpacity>
+
             <TouchableOpacity onPress={() => { }}>
               <View style={styles.menuItem}>
                 <Icon name="cog-outline" color="#00BFFF" size={25} />
                 <Text style={styles.menuItemText}>Settings</Text>
               </View>
             </TouchableOpacity>
+
             <TouchableOpacity onPress={() => { }}>
               <View style={styles.menuItem}>
                 <Icon name="information" color="#00BFFF" size={25} />
                 <Text style={styles.menuItemText}>Help and Support</Text>
               </View>
             </TouchableOpacity>
+
+
           </View>
+
         </View>
+
+
+
       </View>
     );
   }
@@ -180,3 +195,13 @@ const styles = StyleSheet.create({
   },
 }
 );
+
+
+/*
+            <View style={styles.menuItem}>
+              <Stack.Navigator initialRouteName="Bookmark">
+                <Stack.Screen name="Bookmark" component={Bookmark} options={{ title: 'Show BookMarks' }}>
+                </Stack.Screen>
+              </Stack.Navigator>
+            </View>
+            */

@@ -6,7 +6,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Icon } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage';
-import {CheckBox, CardItem, Card} from "native-base"
+import { CheckBox, CardItem, Card } from "native-base"
 
 import * as RootNavigation from '../../layouts/RootNavigation';
 
@@ -27,11 +27,11 @@ export default function MapScreen() {
     const [isPressed, setIsPressed] = useState(false);
     const colors = ['rgb(0, 255, 128)', 'rgb(255, 128, 128)', 'rgb(255, 255, 0)', 'rgb(0, 255, 128)', 'rgb(255, 255, 0)'];
     const data = [80, 85, 55, 40, 60, 50, 30, 25, 35, 50, 80, 85, 90, 70, 60, 10];
-    
+
     const axesSvg = { fontSize: 11, fill: 'rgb(32,32,32)' };
     const verticalContentInset = { top: 10, bottom: 10 };
     const xAxisHeight = 30;
-    
+
     const navigation = useNavigation();
 
     const best_time_api_key_private = 'pri_c3ae9a3d6cea4bbaa667993561b37256';
@@ -49,26 +49,28 @@ export default function MapScreen() {
 
     const onPressed = async () => {
         let bookmarks = []
-        if(!isPressed){
+        if (!isPressed) {
             setIsPressed(true);
             const existingBookmarks = await AsyncStorage.getItem('bookmarks')
             bookmarks = JSON.parse(existingBookmarks);
-            if( !bookmarks ){
+            if (!bookmarks) {
                 bookmarks = []
             }
-            bookmarks.push(chosenMall.name);
+            let list = []
+            console.log(chosenMall)
+            bookmarks.push(chosenMall);
             AsyncStorage.setItem('bookmarks', JSON.stringify(bookmarks))
-            .then( ()=>{
-                console.log(bookmarks)
-                } )
-                .catch( ()=>{
+                .then(() => {
+                    console.log(bookmarks)
+                })
+                .catch(() => {
                     console.log('There was an error')
-                    } );
-        }else{
+                });
+        } else {
             setIsPressed(false);
-        }     
-        
-        
+        }
+
+
     };
 
     useEffect(() => {
@@ -76,14 +78,14 @@ export default function MapScreen() {
         var requestOptions = {
             method: 'GET',
             redirect: 'follow'
-          };
-          
+        };
+
         fetch("https://maps.googleapis.com/maps/api/place/textsearch/json?query=Shopping+malls+in+Singapore&key=AIzaSyA-XRcHLWd3GVfU0RE6XpbRn86XXG4SsEI", requestOptions)
             .then(response => response.json())
             .then(results => {
                 setPlaces(results.results);
                 getAllMallData(results.results);
-                AsyncStorage.setItem("mallList", JSON.stringify(results.results)).then(() => console.log("set mallList")).catch((e)=> console.log(e));
+                AsyncStorage.setItem("mallList", JSON.stringify(results.results)).then(() => console.log("set mallList")).catch((e) => console.log(e));
             })
             .catch(error => console.log('error', error));
     }, []);
@@ -91,7 +93,7 @@ export default function MapScreen() {
     const getAllMallData = (places) => {
         console.log("Ran getAllMallData");
         var pinColors = {};
-        for (let i=0; i < places.length; i++) { // places.length
+        for (let i = 0; i < places.length; i++) { // places.length
             mallParams = {
                 'api_key_private': best_time_api_key_private,
                 'venue_name': places[i].name,
@@ -134,7 +136,7 @@ export default function MapScreen() {
             .then((response) => response.json())
             .then((json) => setRealData(json))
             .finally(() => setDataLoading(false));
-        
+
         // var day = new Date().getDay();
         // var date = new Date().getDate();
         // var hour = new Date().getHours();
@@ -142,14 +144,14 @@ export default function MapScreen() {
         // console.log(fullData);
         // console.log(date);
         // console.log(hour);
-    }   
+    }
 
     const handleClose = () => {
         setIsPressed(false);
-      };
-    
+    };
+
     return (
-        <View style={{flex:1}}>
+        <View style={{ flex: 1 }}>
             {isLoading ? <ActivityIndicator /> : (
                 <MapView
                     provider={PROVIDER_GOOGLE}
@@ -170,114 +172,114 @@ export default function MapScreen() {
                             }}
                             title={place.name}
                             description={place.formatted_address}
-                            onPress={() => { 
+                            onPress={() => {
                                 setChosenMall(place);
-                                setTimeout(() => 
-                                {  
+                                setTimeout(() => {
                                     getMallPopularTimes(place);
-                                }, 
-                                300);
-                                setPopupStatus(true); }}
+                                },
+                                    300);
+                                setPopupStatus(true);
+                            }}
                             pinColor={pinColorsDict[place.name]}
                         />
                     ))}
                 </MapView>
             )}
             {isDataLoading ? <ActivityIndicator /> : (
-            <Modal
-                transparent={true}
-                visible={showPopup}
-                animationType='slide'
-                onRequestClose={() => {
-                    handleClose();
-                    setPopupStatus(!showPopup);
-                  }}
-            >
-                <View style={styles.outsidePopup}>
-                    <View style={styles.insidePopup}>
-                        <View style={styles.closeIcon}>
-                            <Icon
-                                name='close'
-                                size={24}
-                                type='material'
-                                onPress={() => { setPopupStatus(false); setDataLoading(true) }}
-                            />
-                        </View>
-                        <Text style={styles.popupHeading}>{chosenMall.name}</Text>
-                        <Image
-                            style={styles.image}
-                            source={{uri:"https://maps.googleapis.com/maps/api/place/photo?key=AIzaSyA-XRcHLWd3GVfU0RE6XpbRn86XXG4SsEI&photoreference=ATtYBwJxp6E0bfUJTYikTlpVdy4ZXYh3NUW6_H9I2PLgb1gy2lR7kInNqoKKVkbWi9ncu-SJUDzyuskqZ7PvYL2unEgvesm3rHgz_K3RE91luQEfA1mZjuY12o5d0ZbaXcFuX4VV9Sw-XUUClrlHGMkWCYH12kMvltJpPfn7yZ0Ha1tseCsy&maxwidth=400"}}
-                        />
-                        <Text style={styles.popupText}><Text style={{ fontWeight: 'bold' }}>Address:</Text> {chosenMall.formatted_address}</Text>
-                        <Text style={styles.popupText}><Text style={{ fontWeight: 'bold' }}>Opening Hours:</Text> 10 am - 10 pm</Text>
-                        
-                        <Card>
-                            <CardItem body>
-                                <Text style={{marginLeft:20}}>Bookmark: </Text>
-                                <CheckBox checked={isPressed} 
-                                    style={{marginLeft:30}}
-                                    onPress={() => onPressed()}
-                                />
-                            </CardItem>
-                        </Card>
-                        <Text style={{ fontWeight: 'bold', marginTop: 5, marginBottom:4 }}>Today's Crowd Density Trend:</Text>
-                        <View style={{ height: 200, padding: 0, flexDirection: 'row' }}>
-                            <YAxis
-                                data={realData.analysis[5].day_raw.slice(3, 17)}
-                                style={{ marginBottom: xAxisHeight }}
-                                contentInset={verticalContentInset}
-                                svg={axesSvg}
-                                numberOfTicks={5}
-                            />
-                            <View style={{ flex: 1, marginLeft: 10 }}>
-                                <BarChart
-                                    style={{ flex: 1 }}
-                                    data={realData.analysis[5].day_raw.slice(3, 17)}
-                                    contentInset={verticalContentInset}
-                                    svg={{ fill: 'rgb(0, 155, 255)' }}
-                                    spacingInner={0.3}
-                                    spacingOuter={0}
-                                >
-                                    <Grid />
-                                </BarChart>
-                                <XAxis
-                                    style={{ marginHorizontal: -5, height: xAxisHeight }}
-                                    data={realData.analysis[5].day_raw.slice(4, 17)}
-                                    formatLabel={(value, index) => {
-                                        if ((index + 9) % 3 == 0) {
-                                            if (index + 9 < 12)
-                                                return `${index + 9} am`;
-                                            else if (index + 9 == 12)
-                                                return `${index + 9} pm`;
-                                            else
-                                                return `${index - 3} pm`;
-                                        } else {
-                                            return;
-                                        }
-                                    }}
-                                    contentInset={{ left: 15, right: 20 }}
-                                    svg={axesSvg}
+                <Modal
+                    transparent={true}
+                    visible={showPopup}
+                    animationType='slide'
+                    onRequestClose={() => {
+                        handleClose();
+                        setPopupStatus(!showPopup);
+                    }}
+                >
+                    <View style={styles.outsidePopup}>
+                        <View style={styles.insidePopup}>
+                            <View style={styles.closeIcon}>
+                                <Icon
+                                    name='close'
+                                    size={24}
+                                    type='material'
+                                    onPress={() => { setPopupStatus(false); setDataLoading(true) }}
                                 />
                             </View>
+                            <Text style={styles.popupHeading}>{chosenMall.name}</Text>
+                            <Image
+                                style={styles.image}
+                                source={{ uri: "https://maps.googleapis.com/maps/api/place/photo?key=AIzaSyA-XRcHLWd3GVfU0RE6XpbRn86XXG4SsEI&photoreference=ATtYBwJxp6E0bfUJTYikTlpVdy4ZXYh3NUW6_H9I2PLgb1gy2lR7kInNqoKKVkbWi9ncu-SJUDzyuskqZ7PvYL2unEgvesm3rHgz_K3RE91luQEfA1mZjuY12o5d0ZbaXcFuX4VV9Sw-XUUClrlHGMkWCYH12kMvltJpPfn7yZ0Ha1tseCsy&maxwidth=400" }}
+                            />
+                            <Text style={styles.popupText}><Text style={{ fontWeight: 'bold' }}>Address:</Text> {chosenMall.formatted_address}</Text>
+                            <Text style={styles.popupText}><Text style={{ fontWeight: 'bold' }}>Opening Hours:</Text> 10 am - 10 pm</Text>
+
+                            <Card>
+                                <CardItem body>
+                                    <Text style={{ marginLeft: 20 }}>Bookmark: </Text>
+                                    <CheckBox checked={isPressed}
+                                        style={{ marginLeft: 30 }}
+                                        onPress={() => onPressed()}
+                                    />
+                                </CardItem>
+                            </Card>
+                            <Text style={{ fontWeight: 'bold', marginTop: 5, marginBottom: 4 }}>Today's Crowd Density Trend:</Text>
+                            <View style={{ height: 200, padding: 0, flexDirection: 'row' }}>
+                                <YAxis
+                                    data={realData.analysis[5].day_raw.slice(3, 17)}
+                                    style={{ marginBottom: xAxisHeight }}
+                                    contentInset={verticalContentInset}
+                                    svg={axesSvg}
+                                    numberOfTicks={5}
+                                />
+                                <View style={{ flex: 1, marginLeft: 10 }}>
+                                    <BarChart
+                                        style={{ flex: 1 }}
+                                        data={realData.analysis[5].day_raw.slice(3, 17)}
+                                        contentInset={verticalContentInset}
+                                        svg={{ fill: 'rgb(0, 155, 255)' }}
+                                        spacingInner={0.3}
+                                        spacingOuter={0}
+                                    >
+                                        <Grid />
+                                    </BarChart>
+                                    <XAxis
+                                        style={{ marginHorizontal: -5, height: xAxisHeight }}
+                                        data={realData.analysis[5].day_raw.slice(4, 17)}
+                                        formatLabel={(value, index) => {
+                                            if ((index + 9) % 3 == 0) {
+                                                if (index + 9 < 12)
+                                                    return `${index + 9} am`;
+                                                else if (index + 9 == 12)
+                                                    return `${index + 9} pm`;
+                                                else
+                                                    return `${index - 3} pm`;
+                                            } else {
+                                                return;
+                                            }
+                                        }}
+                                        contentInset={{ left: 15, right: 20 }}
+                                        svg={axesSvg}
+                                    />
+                                </View>
+                            </View>
+
+                            <TouchableOpacity style={styles.moreInfoButton}>
+                                <Button
+                                    title="More Information..."
+                                    onPress={() => {
+                                        setPopupStatus(false);
+                                        // navigation.navigate("Malls", chosenMall)
+                                        // navigation.navigate('Body',chosenMall);
+                                        navigation.navigate('Malls');
+                                        RootNavigation.navigate("Body", chosenMall);
+                                        console.log("button pressed");
+                                    }}
+                                >
+                                </Button>
+                            </TouchableOpacity>
                         </View>
-                        
-                        <TouchableOpacity style={styles.moreInfoButton}>
-                            <Button
-                                title="More Information..."
-                                onPress={() => { 
-                                    setPopupStatus(false);
-                                    // navigation.navigate("Malls", chosenMall)
-                                    // navigation.navigate('Body',chosenMall);
-                                    navigation.navigate('Malls');
-                                    RootNavigation.navigate("Body",chosenMall);
-                                    console.log("button pressed");
-                                 }}
-                            >
-                            </Button>
-                        </TouchableOpacity>
                     </View>
-                </View>
-            </Modal>
+                </Modal>
             )}
         </View>
     );

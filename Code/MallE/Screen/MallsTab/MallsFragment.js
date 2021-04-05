@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   Text,
@@ -21,15 +21,16 @@ export default function MallsFragment() {
   useEffect(() => {
 
     AsyncStorage.getItem('mallList')
-      .then((result) => {; 
-        setMallList(JSON.parse(result)); 
+      .then((result) => {
+        ;
+        setMallList(JSON.parse(result));
         setMallListFiltered(mallList);
       })
-      .then(console.log("mall list length :"+ mallList.length))
+      .then(console.log("mall list length :" + mallList.length))
       .catch((err) => console.log(err))
       .finally(() => setLoading(false));
 
-  },[Loading]);
+  }, [Loading]);
 
   searchMall = (textToSearch) => {
     setMallListFiltered(mallList.filter(i => i.name.toLowerCase().includes(textToSearch.toLowerCase())))
@@ -37,36 +38,34 @@ export default function MallsFragment() {
 
   return (
     <View
-    style = {styles.ContainerOne}
+      style={styles.ContainerOne}
     >
       {
-      Loading ? (
-        <ActivityIndicator />
-      ) :( mallListFiltered == null ? (
-        <Text>No Malls Found!</Text>
-      ) : (
-        <Container>
-        <Header searchBar rounded>
-                <Item>
-                    <Icon name="search"/>
+        Loading ? (
+          <ActivityIndicator />
+        ) : (mallListFiltered == null ? (
+          <Text>No Malls Found!</Text>
+        ) : (
+          <Container>
+            <Header searchBar rounded>
+              <Item>
+                <Icon name="search" />
 
-                    <Input placeholder="Search mall" onChangeText={text=>{this.searchMall(text)}}/>
-                </Item>
+                <Input placeholder="Search mall" onChangeText={text => { this.searchMall(text) }} />
+              </Item>
             </Header>
-        <FlatList
-          style={{flex: 1,  paddingHorizontal:10}}
-          data={mallListFiltered}
-          ItemSeparatorComponent={renderSeparator}
-          initialNumToRender={5}
-          renderItem={({item, index}) => ( <MallItemList mallItem={item} /> )}
-          keyExtractor={(item) => item.place_id}
-        />
-        </Container>
-      ))
+            <FlatList
+              style={{ flex: 1, paddingHorizontal: 10 }}
+              data={mallListFiltered}
+              ItemSeparatorComponent={renderSeparator}
+              initialNumToRender={5}
+              renderItem={({ item, index }) => (<MallItemList mallItem={item} />)}
+              keyExtractor={(item) => item.place_id}
+            />
+          </Container>
+        ))
       }
     </View>
-
-    
   );
 }
 
