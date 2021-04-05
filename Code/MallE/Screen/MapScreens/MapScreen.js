@@ -19,6 +19,7 @@ export default function MapScreen() {
     const [isPlacesLoading, setPlacesLoading] = useState(true);
     const [places, setPlaces] = useState([]);
     const [realData, setRealData] = useState([]);
+    // const [graphData, setGraphData] = useState([]);
     const [showPopup, setPopupStatus] = useState(false);
     const [chosenMall, setChosenMall] = useState([]);
     const [isPressed, setIsPressed] = useState(false);
@@ -46,6 +47,7 @@ export default function MapScreen() {
     }
 
     var fullData = {};
+    var graphData = [];
     const [pinColorsDict, setPinColorsDict] = useState({});
 
 
@@ -128,6 +130,12 @@ export default function MapScreen() {
     }
 
     const getMallPopularTimes = (place) => {
+        // var graphData_ = [];
+        var barData = [];
+        var temp = 0;
+        var beforeCurrHour = [];
+        var currHour = 0;
+        var afterCurrHour = [];
         mallParams = {
             'api_key_private': best_time_api_key_private,
             'venue_name': place.name,
@@ -135,8 +143,49 @@ export default function MapScreen() {
         }
         fetch('https://besttime.app/api/v1/forecasts?' + new URLSearchParams(mallParams), { method: 'POST' })
             .then((response) => response.json())
-            .then((json) => setRealData(json))
+            .then((json) => {
+                setRealData(json);
+                for (let i = 4; i < 17; i++) {
+                    temp = json.analysis[bestTimeDay].day_raw[i];
+                    // console.log(i);
+                    // console.log(temp);
+                    if (i < bestTimeHour)
+                        beforeCurrHour.push(temp);
+                    else if (i == bestTimeHour)
+                        currHour = temp;
+                    else 
+                        afterCurrHour.push(temp);
+                }
+                // console.log(beforeCurrHour);
+                // console.log(currHour);
+                // console.log(afterCurrHour);
+                barData = [
+                    {
+                        data: beforeCurrHour,
+                        svg: {
+                            fill: 'rgb(0, 128, 255)',
+                        },
+                    },
+                    {
+                        data: currHour,
+                        svg: {
+                            fill: 'rgb(255, 64, 64)',
+                        },
+                    },
+                    {
+                        data: afterCurrHour,
+                        svg: {
+                            fill: 'rgb(134, 65, 244)',
+                        },
+                    },
+                ]
+                // console.log(barData);
+                graphData = barData;
+                // setGraphData(barData);
+                // console.log(graphData);
+            })
             .finally(() => setDataLoading(false));
+        
         
         // var day = new Date().getDay();
         // var date = new Date().getDate();
@@ -182,7 +231,7 @@ export default function MapScreen() {
                                     getMallPopularTimes(place);
                                 }, 
                                 300);
-                                setPopupStatus(true); }}
+                                setPopupStatus(true);}}
                             pinColor={pinColorsDict[place.name]}
                         />
                     ))}
@@ -209,10 +258,13 @@ export default function MapScreen() {
                             />
                         </View>
                         <Text style={styles.popupHeading}>{chosenMall.name}</Text>
-                        <Image
+                        <Image 
                             style={styles.image}
-                            source={{uri:"https://maps.googleapis.com/maps/api/place/photo?key=AIzaSyA-XRcHLWd3GVfU0RE6XpbRn86XXG4SsEI&photoreference=ATtYBwJxp6E0bfUJTYikTlpVdy4ZXYh3NUW6_H9I2PLgb1gy2lR7kInNqoKKVkbWi9ncu-SJUDzyuskqZ7PvYL2unEgvesm3rHgz_K3RE91luQEfA1mZjuY12o5d0ZbaXcFuX4VV9Sw-XUUClrlHGMkWCYH12kMvltJpPfn7yZ0Ha1tseCsy&maxwidth=400"}}
-                        />
+                            source={{
+                            width: '100%',
+                            height: 300,
+                            uri: `https://maps.googleapis.com/maps/api/place/photo?key=AIzaSyA-XRcHLWd3GVfU0RE6XpbRn86XXG4SsEI&photoreference=${chosenMall.photos[0].photo_reference}&maxheight=400`
+                        }} />
                         <Text style={styles.popupText}><Text style={{ fontWeight: 'bold' }}>Address:</Text> {chosenMall.formatted_address}</Text>
                         <Text style={styles.popupText}><Text style={{ fontWeight: 'bold' }}>Opening Hours:</Text> 10 am - 10 pm</Text>
                         
@@ -236,6 +288,22 @@ export default function MapScreen() {
                             />
                             <View style={{ flex: 1, marginLeft: 10 }}>
                                 <BarChart
+                                    style={ { height: 200 } }
+                                    // style={{ flex: 1 }}
+                                    data={ graphData }
+                                    // yAccessor={({ item }) => { item;}}
+                                    yAccessor={({ item }) => item.value}
+                                    svg={{
+                                        fill: 'green',
+                                    }}
+                                    contentInset={verticalContentInset}
+                                    spacingInner={0.3}
+                                    spacingOuter={0}
+                                    { ...this.props }
+                                >
+                                    <Grid/>
+                                </BarChart>
+                                {/* <BarChart
                                     style={{ flex: 1 }}
                                     data={realData.analysis[bestTimeDay].day_raw.slice(3, 17)}
                                     contentInset={verticalContentInset}
@@ -244,7 +312,7 @@ export default function MapScreen() {
                                     spacingOuter={0}
                                 >
                                     <Grid />
-                                </BarChart>
+                                </BarChart> */}
                                 <XAxis
                                     style={{ marginHorizontal: -5, height: xAxisHeight }}
                                     data={realData.analysis[bestTimeDay].day_raw.slice(4, 17)}
