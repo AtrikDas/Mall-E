@@ -80,13 +80,23 @@ export default class RestarantsFragment extends React.Component {
 
         let crowdDensity = this.state.popularTime.populartimes[(day-1)%7].data[hour];
 
-        if (crowdDensity >0 && crowdDensity <= 50){
-          return "0-15mins"
-        }else if (crowdDensity >50 && crowdDensity <= 80){
-          return "15-30mins"
-        }else{
-          return "30-45mins"
+      if (this.restaurantDetails.opening_hours != null) {
+        if (this.restaurantDetails.opening_hours.open_now == true) {
+          if (crowdDensity > 0 && crowdDensity <= 30) {
+            return "< 5 minutes"
+          } else if (crowdDensity > 30 && crowdDensity <= 50) {
+            return "5 to 15 minutes"
+          } else if (crowdDensity > 50 && crowdDensity <= 80) {
+            return "15 to 30 minutes"
+          } else {
+            return "30 to 45 minutes"
+          }
+        } else {
+          return "N/A"
         }
+      } else {
+        return "N/A"
+      }
     }
         
 
