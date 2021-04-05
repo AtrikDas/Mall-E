@@ -103,7 +103,7 @@ export default class MallOverview extends React.Component {
                     {marginTop: 10, marginBottom: 10, textDecorationLine: 'underline'}]}>
                         Floor Crowd Density</Text>
                 
-                <View style = {[styles.seperatorLine]}><AnotherGraph/></View>
+                <View style = {[styles.seperatorLine]}><AnotherGraph mallDetail={this.props.mallDetail} /></View>
 
             </View>
         );
