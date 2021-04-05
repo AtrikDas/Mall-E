@@ -1,14 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import {
   StyleSheet,
-  Text,
   View,
   FlatList,
   ActivityIndicator,
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 
-import { Header, Item, Icon, Input, Container } from 'native-base';
+import { Header, Item, Icon, Input, Container, Button, Text } from 'native-base';
 
 import MallItemList from './MallItemLayout';
 
@@ -17,6 +16,7 @@ export default function MallsFragment() {
   const [mallList, setMallList] = useState([]);
   const [Loading, setLoading] = useState(true);
   const [mallListFiltered, setMallListFiltered] = useState([]);
+  const [name, setName] = useState([]);
 
   useEffect(() => {
 
@@ -30,6 +30,15 @@ export default function MallsFragment() {
       .finally(() => setLoading(false));
 
   },[Loading]);
+
+  onPressReload = async () => {
+    var value = await AsyncStorage.getItem('bookmarks');
+    value = value.replace(/[\[\]"]+/g, '');
+    var array = value.split(",")
+    setName(array)
+    console.log(name)
+    name.map(place => { searchMall(place) })
+  };
 
   searchMall = (textToSearch) => {
     setMallListFiltered(mallList.filter(i => i.name.toLowerCase().includes(textToSearch.toLowerCase())))
@@ -47,10 +56,15 @@ export default function MallsFragment() {
       ) : (
         <Container>
         <Header searchBar rounded>
-                <Item>
+                <Item style={{flex: 11}}>
                     <Icon name="search"/>
 
                     <Input placeholder="Search mall" onChangeText={text=>{this.searchMall(text)}}/>
+                </Item>
+                <Item style={{flex: 2}}>                    
+                    <Button onPress={onPressReload}>
+                      <Icon name="book-outline" color="#00BFFF"/>
+                    </Button>
                 </Item>
             </Header>
         <FlatList
