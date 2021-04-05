@@ -35,10 +35,10 @@ export default class MallOverview extends React.Component {
                 </View>
 
             
-                {/* <Image source={{
+                <Image source={{
                     width: '100%',
                     height: 300,
-                    uri:`https://maps.googleapis.com/maps/api/place/photo?key=AIzaSyA-XRcHLWd3GVfU0RE6XpbRn86XXG4SsEI&photoreference=${this.props.mallDetail.photos[0].photo_reference}&maxheight=300`}} /> */}
+                    uri:`https://maps.googleapis.com/maps/api/place/photo?key=AIzaSyA-XRcHLWd3GVfU0RE6XpbRn86XXG4SsEI&photoreference=${this.props.mallDetail.photos[0].photo_reference}&maxheight=300`}} />
                 
 
                 <View style={styles.textDetailContainer}>
