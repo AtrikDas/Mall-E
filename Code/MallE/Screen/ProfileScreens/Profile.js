@@ -25,7 +25,7 @@ export default class Profile extends Component {
         <Image style={styles.avatar} source={{ uri: 'https://bootdey.com/img/Content/avatar/avatar6.png' }} />
         <View style={styles.body}>
           <View style={styles.bodyContent}>
-            <Text style={styles.name}>USER NAME</Text>
+            <Text style={styles.name}>Abhinandan</Text>
           </View>
           <View style={styles.userInfoSection}>
             <View style={styles.row}>
@@ -34,11 +34,11 @@ export default class Profile extends Component {
             </View>
             <View style={styles.row}>
               <Icon name="phone" color="#777777" size={25} />
-              <Text style={{ color: "#777777", marginLeft: 20, fontSize: 16, }}>+65 ---- ----</Text>
+              <Text style={{ color: "#777777", marginLeft: 20, fontSize: 16, }}>+65 8661 2141</Text>
             </View>
             <View style={styles.row}>
               <Icon name="email" color="#777777" size={25} />
-              <Text style={{ color: "#777777", marginLeft: 20, fontSize: 16 }}>mailid@email.com</Text>
+              <Text style={{ color: "#777777", marginLeft: 20, fontSize: 16 }}>abhinandan@gmail.com</Text>
             </View>
           </View>
           <View style={styles.menuWrapper}>

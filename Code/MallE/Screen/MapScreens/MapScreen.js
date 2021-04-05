@@ -297,17 +297,20 @@ export default function MapScreen() {
                         <Text style={styles.popupText}><Text style={{ fontWeight: 'bold' }}>Opening Hours:</Text> 10 am - 10 pm</Text>
                         {/* <Text style={styles.popupText}><Text style={{ fontWeight: 'bold' }}>Opening Hours:</Text> {realData.analysis[bestTimeDay].day_info.venue_open} hrs - {realData.analysis[bestTimeDay].day_info.venue_closed} hrs</Text> */}
                         
-                        <Card>
-                            <CardItem body>
-                                <Text style={{marginLeft:20}}>Bookmark: </Text>
-                                <CheckBox checked={isPressed} 
-                                    style={{marginLeft:30}}
+                            <View style={{ justifyContent: 'center'}}>
+                                <Text style={{ marginLeft: 0, marginRight: 10, fontSize: 14, fontWeight: 'bold', alignItems: 'center', textAlignVertical: 'center' }}>Bookmark: <Text >  </Text><CheckBox checked={isPressed}
+                                    style={{ paddingLeft: 0 }}
                                     onPress={() => onPressed()}
-                                />
+                                /></Text>
+                            </View>
+                            
+                        {/* <Card>
+                            <CardItem body>
+                                
                             </CardItem>
-                        </Card>
+                        </Card> */}
                         <Text style={{ fontWeight: 'bold', marginTop: 8, marginBottom:5 }}>Today's Crowd Density Trend:</Text>
-                        <View style={{ height: 200, padding: 0, flexDirection: 'row' }}>
+                        <View style={{ height: 216, padding: 0, flexDirection: 'row' }}>
                             <YAxis
                                 data={realData.analysis[bestTimeDay].day_raw.slice(3, 17)}
                                 style={{ marginBottom: xAxisHeight }}
@@ -416,14 +419,14 @@ const styles = StyleSheet.create({
         fontSize: 18,
         alignSelf: 'center',
         marginBottom: 10,
-        marginTop: -5,
+        marginTop: 0,
         marginHorizontal: -10,
         fontWeight: 'bold',
     },
 
     popupText: {
         fontSize: 14,
-        marginBottom: 2,
+        marginBottom: 5,
     },
 
     closeIcon: {

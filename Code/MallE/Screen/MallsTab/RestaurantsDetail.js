@@ -35,7 +35,7 @@ export default class RestarantsFragment extends React.Component {
     if(this.restaurantDetails.opening_hours != null) {
         if(this.restaurantDetails.opening_hours.open_now == true){
              //shop is open
-            return (<View flexDirection = "row">
+            return (<View>
                 <Text style = {textStyles.openText}>Open</Text>
                 {/* <Text style = {textStyles.closeText}>Closes {closingTimeing.format(" h:mma")}</Text> */}
                 </View>)
@@ -113,7 +113,7 @@ export default class RestarantsFragment extends React.Component {
             source={{uri:`https://maps.googleapis.com/maps/api/place/photo?key=AIzaSyA-XRcHLWd3GVfU0RE6XpbRn86XXG4SsEI&photoreference=${this.restaurantDetails.photos[0].photo_reference}&maxheight=200`}}
           />
           {/* restaurant details */}
-          <Text style={[globalStyles.titleText, styles.popupHeading]}> {this.restaurantDetails.name}</Text>
+          <Text style={[globalStyles.titleText, styles.popupHeading]}>{this.restaurantDetails.name}</Text>
           <View style={styles.TextDetailContainer}>
             {/* <Text style={[globalStyles.titleText, styles.customText]}>
               Website:
@@ -148,9 +148,9 @@ export default class RestarantsFragment extends React.Component {
 
             <Separator />
 
-            <Text style={[globalStyles.titleText, styles.popupHeading, {fontSize: 20}]}>Today's Waiting Times</Text>
+            {/* <Text style={[globalStyles.titleText, styles.popupHeading, {fontSize: 20}]}>Today's Waiting Times</Text> */}
           </View>
-          <LineChart
+          {/* <LineChart
             data={data}
             width={Dimensions.get('window').width * 0.6}
             height={200}
@@ -172,7 +172,7 @@ export default class RestarantsFragment extends React.Component {
             fromZero={true}
             bezier
             style={styles.MallDensityLineChart}
-          />
+          /> */}
         </ScrollView>
       </View>
     );
@@ -185,12 +185,13 @@ const styles = StyleSheet.create({
     height: '100%',    
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#ffffff'
+    backgroundColor: '#ffffff',
   },
   TextDetailContainer: {
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
     padding: 5,
+    marginHorizontal: 20,
   },
   separator: {
     marginVertical: 8,
@@ -200,14 +201,16 @@ const styles = StyleSheet.create({
   customText: {
     paddingVertical: 2,
     alignItems:"center",
-    justifyContent:"center"
+    justifyContent:"center",
+    fontSize: 18,
 },
 popupHeading: {
-  fontSize: 24,
+  fontSize: 20,
   alignSelf: 'center',
   marginBottom: 10,
   marginTop: 10,
   fontWeight: 'bold',
+  marginHorizontal: 20,
 },
 
   MallDensityLineChart: {
@@ -238,16 +241,17 @@ const textStyles = StyleSheet.create({
   openText:{
       fontFamily:"Inter" ,
       fontWeight: 'bold',
-      fontSize: 20,
+      fontSize: 18,
       marginRight:10,
-      color: "green"
+      color: "green",
+      marginBottom: -5
   },
 
   closeText:{
       fontFamily:"Inter" ,
       fontWeight: 'bold',
-      fontSize: 20,
+      fontSize: 18,
       marginRight:10,
-      color: "red"
+      color: "rgb(240, 64, 64)",
   },
 })

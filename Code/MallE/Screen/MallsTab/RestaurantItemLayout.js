@@ -138,13 +138,9 @@ export default function RestarantItemList(props) {
                         <Text style= {textStyles.header}>{props.restaurantitem.name}</Text> 
                         {/* <CrowedComponent /> */}
                     </View>
-                    <View style={layoutStyles.descriptionRow} >
+                        <View style={layoutStyles.descriptionRow } >
                         <Text style= {textStyles.descriptionHeader}>Hours: </Text> 
                         <DateComponent />
-                    </View>
-                    <View style={layoutStyles.descriptionRow} >
-                        <Text style= {textStyles.descriptionHeader}>Estimated Waiting Time: </Text> 
-                        {/* <WaitingTimeComponent/> */}
                     </View>
                     <View style={layoutStyles.descriptionRow} >
                         <Text style= {textStyles.descriptionHeader}>Ratings: </Text> 
@@ -176,6 +172,7 @@ const layoutStyles = StyleSheet.create({
     },
 
     textContainer:{
+        height: "90%",
         flex:1,
         marginLeft:10,
         marginRight:10,
