@@ -138,7 +138,7 @@ def detectByPathImage(path, output_path):
         cv2.imwrite(output_path, result_image)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
-    
+
 def argsParser():
     arg_parse = argparse.ArgumentParser()
     arg_parse.add_argument("-v", "--video", default=None, help="path to Video File ")
@@ -147,3 +147,9 @@ def argsParser():
     arg_parse.add_argument("-o", "--output", type=str, help="path to optional output video file")
     args = vars(arg_parse.parse_args())
     return args
+
+if __name__ == "__main__":
+    HOGCV = cv2.HOGDescriptor()
+    HOGCV.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
+    args = argsParser()
+    humanDetector(args)
