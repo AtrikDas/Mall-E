@@ -1,5 +1,5 @@
 // Import React and Component
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   ActivityIndicator,
   View,
@@ -10,7 +10,7 @@ import {
 
 import AsyncStorage from '@react-native-community/async-storage';
 
-const SplashScreen = ({ navigation }) => {
+const SplashScreen = ({navigation}) => {
   //State for ActivityIndicator animation
   const [animating, setAnimating] = useState(true);
 
@@ -32,7 +32,7 @@ const SplashScreen = ({ navigation }) => {
     <View style={styles.container}>
       <Image
         source={require('../Image/aboutreact.png')}
-        style={{ width: '90%', resizeMode: 'contain', margin: 30 }}
+        style={{width: '90%', resizeMode: 'contain', margin: 30}}
       />
       <Text>Your All-in-One Mall Companion App!</Text>
       <ActivityIndicator
@@ -44,9 +44,6 @@ const SplashScreen = ({ navigation }) => {
     </View>
   );
 };
-
-const userObject = AsyncStorage.getItem('user_id');
-console.log('xxxx user id xxxxx : ' + JSON.stringify(userObject));
 
 export default SplashScreen;
 

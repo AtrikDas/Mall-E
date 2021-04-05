@@ -1,6 +1,6 @@
 // Import React and Component
 import React from 'react';
-import { View, Text, Alert, StyleSheet } from 'react-native';
+import {View, Text, Alert, StyleSheet} from 'react-native';
 
 import {
   DrawerContentScrollView,
@@ -15,7 +15,7 @@ const CustomSidebarMenu = (props) => {
     <View style={stylesSidebar.sideMenuContainer}>
       <View style={stylesSidebar.profileHeader}>
         <View style={stylesSidebar.profileHeaderPicCircle}>
-          <Text style={{ fontSize: 25, color: '#307ecc' }}>
+          <Text style={{fontSize: 25, color: '#307ecc'}}>
             {'Mall-E'.charAt(0)}
           </Text>
         </View>
@@ -27,8 +27,8 @@ const CustomSidebarMenu = (props) => {
 
       <DrawerContentScrollView {...props}>
         <DrawerItem
-          label={({ color }) =>
-            <Text style={{ color: '#d8d8d8' }}>
+          label={({color}) => 
+            <Text style={{color: '#d8d8d8'}}>
               Logout
             </Text>
           }
@@ -52,7 +52,7 @@ const CustomSidebarMenu = (props) => {
                   },
                 },
               ],
-              { cancelable: false },
+              {cancelable: false},
             );
           }}
         />
