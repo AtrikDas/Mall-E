@@ -9,7 +9,7 @@ export default function AnotherGraph(props) {
 
     useEffect(() => {
 
-        fetch('https://jsonkeeper.com/b/NDI8')
+        fetch('https://jsonkeeper.com/b/1N6P')
             .then((response) => response.json())
             .then((result) => {
 
