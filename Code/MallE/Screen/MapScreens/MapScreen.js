@@ -13,21 +13,24 @@ import * as RootNavigation from '../../layouts/RootNavigation';
 import NavBar from '../../layouts/NavBar';
 import { BarChart, Grid, XAxis, YAxis } from 'react-native-svg-charts'
 
-// import { LineChart, BarChart } from 'react-native-chart-kit';
-
 export default function MapScreen() {
     const [isLoading, setLoading] = useState(true);
     const [isDataLoading, setDataLoading] = useState(true);
     const [isPlacesLoading, setPlacesLoading] = useState(true);
     const [places, setPlaces] = useState([]);
     const [realData, setRealData] = useState([]);
-    // const [fullData, setFullData] = useState();
     const [showPopup, setPopupStatus] = useState(false);
     const [chosenMall, setChosenMall] = useState([]);
     const [isPressed, setIsPressed] = useState(false);
     const colors = ['rgb(0, 255, 128)', 'rgb(255, 128, 128)', 'rgb(255, 255, 0)', 'rgb(0, 255, 128)', 'rgb(255, 255, 0)'];
     const data = [80, 85, 55, 40, 60, 50, 30, 25, 35, 50, 80, 85, 90, 70, 60, 10];
     
+    var date = new Date().getDate();
+    var day = new Date().getDay(); // JS: 0 = Sunday, 6 = Saturday
+    var bestTimeDay = (day > 0) ? (day - 1) : (6); // Best-Time: 0 = Monday, 6 = Sunday
+    var hour = new Date().getHours();
+    var bestTimeHour = hour - 6;
+
     const axesSvg = { fontSize: 11, fill: 'rgb(32,32,32)' };
     const verticalContentInset = { top: 10, bottom: 10 };
     const xAxisHeight = 30;
@@ -43,7 +46,6 @@ export default function MapScreen() {
     }
 
     var fullData = {};
-    // var pinColors = {};
     const [pinColorsDict, setPinColorsDict] = useState({});
 
 
@@ -91,7 +93,7 @@ export default function MapScreen() {
     const getAllMallData = (places) => {
         console.log("Ran getAllMallData");
         var pinColors = {};
-        for (let i=0; i < places.length; i++) { // places.length
+        for (let i=0; i < places.length; i++) {
             mallParams = {
                 'api_key_private': best_time_api_key_private,
                 'venue_name': places[i].name,
@@ -102,7 +104,9 @@ export default function MapScreen() {
                 .then((json) => {
                     fullData[places[i].name] = json;
                     try {
-                        crowdDensity = fullData[places[i].name].analysis[5].day_raw[6];
+                        // console.log(bestTimeDay);
+                        // console.log(bestTimeHour);
+                        crowdDensity = fullData[places[i].name].analysis[bestTimeDay].day_raw[bestTimeHour];
                         if (crowdDensity > 80)
                             pinColors[places[i].name] = "rgb(255,32,32)";
                         else if (crowdDensity > 60)
@@ -129,7 +133,6 @@ export default function MapScreen() {
             'venue_name': place.name,
             'venue_address': place.formatted_address
         }
-        // setDataLoading(true);
         fetch('https://besttime.app/api/v1/forecasts?' + new URLSearchParams(mallParams), { method: 'POST' })
             .then((response) => response.json())
             .then((json) => setRealData(json))
@@ -138,10 +141,12 @@ export default function MapScreen() {
         // var day = new Date().getDay();
         // var date = new Date().getDate();
         // var hour = new Date().getHours();
-        // console.log(pinColors);
-        // console.log(fullData);
+
         // console.log(date);
+        // console.log(day);
         // console.log(hour);
+        // console.log(bestTimeDay);
+        // console.log(bestTimeHour);
     }   
 
     const handleClose = () => {
@@ -223,7 +228,7 @@ export default function MapScreen() {
                         <Text style={{ fontWeight: 'bold', marginTop: 5, marginBottom:4 }}>Today's Crowd Density Trend:</Text>
                         <View style={{ height: 200, padding: 0, flexDirection: 'row' }}>
                             <YAxis
-                                data={realData.analysis[5].day_raw.slice(3, 17)}
+                                data={realData.analysis[bestTimeDay].day_raw.slice(3, 17)}
                                 style={{ marginBottom: xAxisHeight }}
                                 contentInset={verticalContentInset}
                                 svg={axesSvg}
@@ -232,7 +237,7 @@ export default function MapScreen() {
                             <View style={{ flex: 1, marginLeft: 10 }}>
                                 <BarChart
                                     style={{ flex: 1 }}
-                                    data={realData.analysis[5].day_raw.slice(3, 17)}
+                                    data={realData.analysis[bestTimeDay].day_raw.slice(3, 17)}
                                     contentInset={verticalContentInset}
                                     svg={{ fill: 'rgb(0, 155, 255)' }}
                                     spacingInner={0.3}
@@ -242,7 +247,7 @@ export default function MapScreen() {
                                 </BarChart>
                                 <XAxis
                                     style={{ marginHorizontal: -5, height: xAxisHeight }}
-                                    data={realData.analysis[5].day_raw.slice(4, 17)}
+                                    data={realData.analysis[bestTimeDay].day_raw.slice(4, 17)}
                                     formatLabel={(value, index) => {
                                         if ((index + 9) % 3 == 0) {
                                             if (index + 9 < 12)
