@@ -4,6 +4,8 @@ import {StyleSheet, Text, View, Image, ScrollView, Dimensions } from 'react-nati
 import {globalStyles} from '../../ThemesAndFonts';
 import RatingsComponent from "../MallsTab/ratingsComponent";
 import { LineChart, BarChart } from 'react-native-chart-kit';
+import config from "../config.json"
+
 const Separator = () => <View style={styles.separator} />;
 const data = {
   labels: ["9 am", "12 pm", "3 pm", "6 pm", "9 pm"],
@@ -39,6 +41,13 @@ export default class RestarantsFragment extends React.Component {
       //   .then(response => response.text())
       //   .then(result => console.log(result))
       //   .catch(error => console.log('error', error));
+
+      fetch(`http://${config.ipAddress}:5000/api`)
+            .then(response => response.json())
+            .then(results => {
+                console.log(results);
+            })
+            .catch(error => console.log('error', error));
   }
   imageURL = "../../Image/" + this.restaurantDetails.imageURL
   render() {

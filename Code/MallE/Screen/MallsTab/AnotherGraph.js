@@ -8,7 +8,7 @@ export default function AnotherGraph() {
     const [test, setData] = useState([]);
 
     useEffect(() => {
-        fetch('https://jsonkeeper.com/b/W0L1')
+        fetch('https://jsonkeeper.com/b/MS3Z')
             .then((response) => response.json())
             .then((json) => setData(json.data)) 
             .catch((error) => console.error(error))
