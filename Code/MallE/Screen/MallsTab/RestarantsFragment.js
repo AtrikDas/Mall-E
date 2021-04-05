@@ -50,7 +50,7 @@ export default function RestarantsFragment(props) {
                 </Item>
             </Header>
         <FlatList
-                style={{ flex: 1 }}
+                style={{ flex: 1, paddingHorizontal:10 }}
                 data = {restaurantsListFiltered}
                 ItemSeparatorComponent = {renderSeparator}
                 initialNumToRender={5}
