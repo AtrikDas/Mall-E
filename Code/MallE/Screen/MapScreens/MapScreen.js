@@ -50,6 +50,23 @@ export default function MapScreen() {
     var graphData = [];
     const [pinColorsDict, setPinColorsDict] = useState({});
 
+    const data1 = [14, -1, 100, -95, -94, -24, -8, 85, -91, 35, -53, 53, -78, 66, 96, 33, -26, -32, 73, 8]
+        .map((value) => ({ value }))
+    const data2 = [24, 28, 93, 77, -42, -62, 52, -87, 21, 53, -78, -62, -72, -6, 89, -70, -94, 10, 86, 84]
+        .map((value) => ({ value }))
+
+    const barData_ = [
+        {
+            data: data1,
+            svg: {
+                fill: 'rgb(134, 65, 244)',
+            },
+        },
+        {
+            data: data2,
+        },
+    ]
+
 
     const onPressed = async () => {
         let bookmarks = []
@@ -134,7 +151,7 @@ export default function MapScreen() {
         var barData = [];
         var temp = 0;
         var beforeCurrHour = [];
-        var currHour = 0;
+        var currHour = [];
         var afterCurrHour = [];
         mallParams = {
             'api_key_private': best_time_api_key_private,
@@ -152,9 +169,17 @@ export default function MapScreen() {
                     if (i < bestTimeHour)
                         beforeCurrHour.push(temp);
                     else if (i == bestTimeHour)
-                        currHour = temp;
+                        currHour.push(temp);
                     else 
                         afterCurrHour.push(temp);
+                }
+                try {
+                    beforeCurrHour = beforeCurrHour.map((value) => ({ value }));
+                    currHour = currHour.map((value) => ({ value }));
+                    afterCurrHour = afterCurrHour.map((value) => ({ value }));
+                }
+                catch {
+                    console.log("error bruh"); 
                 }
                 // console.log(beforeCurrHour);
                 // console.log(currHour);
@@ -180,9 +205,12 @@ export default function MapScreen() {
                     },
                 ]
                 // console.log(barData);
+                // console.log(beforeCurrHour);
+                // console.log(currHour);
+                // console.log(afterCurrHour);
                 graphData = barData;
                 // setGraphData(barData);
-                // console.log(graphData);
+                console.log(graphData);
             })
             .finally(() => setDataLoading(false));
         
@@ -267,6 +295,7 @@ export default function MapScreen() {
                         }} />
                         <Text style={styles.popupText}><Text style={{ fontWeight: 'bold' }}>Address:</Text> {chosenMall.formatted_address}</Text>
                         <Text style={styles.popupText}><Text style={{ fontWeight: 'bold' }}>Opening Hours:</Text> 10 am - 10 pm</Text>
+                        {/* <Text style={styles.popupText}><Text style={{ fontWeight: 'bold' }}>Opening Hours:</Text> {realData.analysis[bestTimeDay].day_info.venue_open} hrs - {realData.analysis[bestTimeDay].day_info.venue_closed} hrs</Text> */}
                         
                         <Card>
                             <CardItem body>
@@ -277,7 +306,7 @@ export default function MapScreen() {
                                 />
                             </CardItem>
                         </Card>
-                        <Text style={{ fontWeight: 'bold', marginTop: 5, marginBottom:4 }}>Today's Crowd Density Trend:</Text>
+                        <Text style={{ fontWeight: 'bold', marginTop: 8, marginBottom:5 }}>Today's Crowd Density Trend:</Text>
                         <View style={{ height: 200, padding: 0, flexDirection: 'row' }}>
                             <YAxis
                                 data={realData.analysis[bestTimeDay].day_raw.slice(3, 17)}
@@ -287,14 +316,12 @@ export default function MapScreen() {
                                 numberOfTicks={5}
                             />
                             <View style={{ flex: 1, marginLeft: 10 }}>
-                                <BarChart
-                                    style={ { height: 200 } }
-                                    // style={{ flex: 1 }}
+                                {/* <BarChart
+                                    style={{ flex: 1 }}
                                     data={ graphData }
-                                    // yAccessor={({ item }) => { item;}}
                                     yAccessor={({ item }) => item.value}
                                     svg={{
-                                        fill: 'green',
+                                        fill: 'blue',
                                     }}
                                     contentInset={verticalContentInset}
                                     spacingInner={0.3}
@@ -302,8 +329,8 @@ export default function MapScreen() {
                                     { ...this.props }
                                 >
                                     <Grid/>
-                                </BarChart>
-                                {/* <BarChart
+                                </BarChart> */}
+                                <BarChart
                                     style={{ flex: 1 }}
                                     data={realData.analysis[bestTimeDay].day_raw.slice(3, 17)}
                                     contentInset={verticalContentInset}
@@ -312,7 +339,7 @@ export default function MapScreen() {
                                     spacingOuter={0}
                                 >
                                     <Grid />
-                                </BarChart> */}
+                                </BarChart>
                                 <XAxis
                                     style={{ marginHorizontal: -5, height: xAxisHeight }}
                                     data={realData.analysis[bestTimeDay].day_raw.slice(4, 17)}
@@ -376,6 +403,7 @@ const styles = StyleSheet.create({
 
     moreInfoButton: {
         marginBottom: 5,
+        marginTop: -5
     },
 
     image: {
