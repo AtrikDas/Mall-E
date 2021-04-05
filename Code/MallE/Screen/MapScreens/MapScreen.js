@@ -99,7 +99,7 @@ export default function MapScreen() {
             redirect: 'follow'
           };
           
-        fetch("https://maps.googleapis.com/maps/api/place/textsearch/json?query=Shopping+malls+in+Singapore&key=AIzaSyA-XRcHLWd3GVfU0RE6XpbRn86XXG4SsEI", requestOptions)
+        fetch("https://maps.googleapis.com/maps/api/place/textsearch/json?query=Shopping+malls+in+Singapore&radius=7500&key=AIzaSyA-XRcHLWd3GVfU0RE6XpbRn86XXG4SsEI", requestOptions)
             .then(response => response.json())
             .then(results => {
                 setPlaces(results.results);
