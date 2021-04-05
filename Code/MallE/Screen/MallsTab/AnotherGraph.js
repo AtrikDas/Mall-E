@@ -59,7 +59,7 @@ export default function AnotherGraph(props) {
                         style={{ marginHorizontal: 5, marginTop: 0, marginBottom: 5, height: xAxisHeight }}
                         data={chosenMallFloorData.crowd}
                         formatLabel={(value, index) => {
-                            return index;
+                            return chosenMallFloorData.level[index];
                         }}
                         contentInset={{ left: 15, right: 20 }}
                         svg={axesSvg}

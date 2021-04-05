@@ -8,7 +8,7 @@ export const globalStyles = StyleSheet.create({
     },
     normalText: {
         fontFamily: "poppins",
-        fontSize: 20, 
+        fontSize: 18, 
         fontWeight: 'normal'
     }
 });
